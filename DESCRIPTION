@@ -2,10 +2,11 @@ Package: polya
 Type: Package
 Title: Bayesian Hypothesis Testing for Multinomial Goodness-Of-Fit
 Version: 0.0.0.9000
-Authors@R: person("Pedro", "Fonseca", "Teles", email = "pedro.teles.fonseca@outlook.com", role = c("aut", "cre"))
+Authors@R: person("Pedro", "Fonseca", "Teles da", email = "pedro.teles.fonseca@outlook.com", role = c("aut", "cre"))
 Description: Computes Bayes factors and posterior probabilities in the context of the Multinomial-Dirichlet and Binomial-Beta models.
   also known as Polya urn model.
 License: GPL-3 | file LICENSE
+URL: https://github.com/pedro-teles-fonseca/polya
 BugReports: https://github.com/pedro-teles-fonseca/polya/issues
 Encoding: UTF-8
 LazyData: true
