@@ -1,0 +1,9 @@
+Package: polya
+Type: Package
+Title: Bayesian Hypothesis Testing 
+Version: 0.1.0
+Authors@R: person("Pedro", "Fonseca", "Teles", email = "pedro.teles.fonseca@outlook.com", role = c("aut", "cre"))
+Description: Computes Bayes factors and posterior probabilities in the context of the Multinomial-Dirichlet model
+  also known as Polya urn model.
+Encoding: UTF-8
+LazyData: true
