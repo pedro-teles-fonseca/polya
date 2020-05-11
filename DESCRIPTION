@@ -6,7 +6,6 @@ Authors@R: c(
   person("Pedro", "Fonseca", "Teles da", email = "pedro.teles.fonseca@outlook.com", role = c("aut", "cre")),
   person("Rui", "Paulo", "Miguel Batista", email = " rui@iseg.ulisboa.pt", role = "ctb"))
 Description: Computes Bayes factors and posterior probabilities in the context of the Multinomial-Dirichlet and Binomial-Beta models.
-  also known as Polya urn model.
 License: GPL-3 | file LICENSE
 URL: https://github.com/pedro-teles-fonseca/polya
 BugReports: https://github.com/pedro-teles-fonseca/polya/issues
