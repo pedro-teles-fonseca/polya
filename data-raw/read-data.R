@@ -3,33 +3,13 @@ library(usethis)
 library(digit.analysis)
 
 data <- read.delim("data-raw/data.txt")
-source("R/auxiliary-functions.R")
-
-datalist <- list()
 
 for (c in 1:ncol(data)) {
-  assign(names(data)[c], data[, c])
   assign(paste0(names(data)[c], ".bl1"), msdigit(data[, c]))
   assign(paste0(names(data)[c], ".bl2"), smsdigit(data[, c]))
-  datalist[[c]] <- data[, c]
 }
 
-rm(c, datalist)
-
 usethis::use_data(
-  data,
-  Austria,
-  Belgium,
-  Finland,
-  France,
-  Germany,
-  Greece,
-  Ireland,
-  Italy,
-  Luxembourg,
-  Netherlands,
-  Portugal,
-  Spain,
   Austria.bl1,
   Belgium.bl1,
   Finland.bl1,
