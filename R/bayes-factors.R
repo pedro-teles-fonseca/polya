@@ -1,7 +1,8 @@
 
 # Bayes factor
 # ------------------------------------------
-bayes.factor <- function(data,
+bayes.factor <- function(
+  data,
   null.par,
   model = "multinomial",
   hyper.par = if (model == "multinomial") {
@@ -38,6 +39,8 @@ bayes.factor <- function(data,
     }
   }
 
+  data <- data[!is.na(data)]
+
   if (model == "multinomial") {
     counts <- as.numeric(table(data))
     exp(sum(counts * log(null.par)) + sum(lgamma(hyper.par)) + lgamma(sum(hyper.par + counts)) -
@@ -46,8 +49,8 @@ bayes.factor <- function(data,
   } else if (model == "binomial") {
     n <- length(data)
     x <- as.numeric(rev(table(data))[1])
-    a <- hyper.par[1]
-    b <- hyper.par[2]
+    a <- hyper.par[[1]]
+    b <- hyper.par[[2]]
 
     exp(
       x * log(null.par) + (n - x) * log(1 - null.par) + lgamma(a) + lgamma(b) + lgamma(n + a + b) -
