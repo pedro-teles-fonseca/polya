@@ -3,8 +3,8 @@ Type: Package
 Title: Bayesian Hypothesis Testing for Multinomial Goodness-Of-Fit
 Version: 0.0.0.9000
 Authors@R: c(
-  person("Pedro", "Fonseca", "Teles da", email = "pedro.teles.fonseca@outlook.com", role = c("aut", "cre")),
-  person("Rui", "Paulo", "Miguel Batista", email = " rui@iseg.ulisboa.pt", role = "ctb"))
+  person("Pedro", "Fonseca", email = "pedro.teles.fonseca@outlook.com", role = c("aut", "cre")),
+  person("Rui", "Paulo", email = " rui@iseg.ulisboa.pt", role = "ctb"))
 Description: Computes Bayes factors and posterior probabilities in the context of the Multinomial-Dirichlet and Binomial-Beta models.
 License: GPL-3 | file LICENSE
 URL: https://github.com/pedro-teles-fonseca/polya
