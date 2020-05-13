@@ -45,31 +45,31 @@ test.point.null <- function(
 test.binomial.hypotheses <- function( # Function to compute Binomial-Beta model results (BL1 or BL2)
   data,
   null.par,
-  pi_null = rep.int(0.5, length(null.par)),
-  hyper.par = list(rep(1, length(null.par)), rep(1, length(null.par))),
+  sucess = unique(data),
+  pi_null = .5,
+  a = 1,
+  b = 1,
   log10 = TRUE,
   bf.round = 2,
   probs.round = 3){
 
-    x <- as.numeric(table(msdigit(data)))
-    n <- length(msdigit(data))
-    obs_prop <- as.numeric(rev(table(data))[1])/n
+  data <- data[!is.na(data)]
+  x <- as.numeric(table(data))
+  n <- length(data)
+
+  # if(length(pi_null == 1) && length(null.par) > 1){
+  #   pi_null <- rep.int(pi_null, length(null.par))
+  # }
+
+    obs_prop <- as.numeric(table(data)[1])/n
     z_stats <- (abs(obs_prop-null.par)-(1/(2*n)))/sqrt((null.par*(1-null.par))/n)
     p_values <- 2 * (1-pnorm(abs(z_stats), 0, 1))
 
     digits <- 1:9
 
-    bf <- function(x, theta_null, a, b){
-      exp(
-        x * log(theta_null) + (n - x) * log(1-theta_null) + lgamma(a) + lgamma(b) + lgamma(n + a + b) -
-          (lgamma(a + b) + lgamma(n + a - x) + lgamma(x + a))
-      )
-    }
-
-    bf <- mapply(bf, x, null.par, hyper.par[[1]], hyper.par[[2]])
-
-
-  PostProb.H0 <- mapply(FUN = posterior.prob, pi_null = pi_null, bf = bf)
+    bf <- mapply(FUN = bfactor.binomial, null.par = null.par, sucess = sucess,  a = a, b = b,
+      MoreArgs = list(data = data))
+    pp <- mapply(FUN = bfactor.to.prob, pi_null = pi_null, bf = bf)
 
   result <- data.frame(
     "Digit" = digits,
@@ -80,7 +80,7 @@ test.binomial.hypotheses <- function( # Function to compute Binomial-Beta model 
           ifelse(bf < 100, "Strong",
             "Decisive")))
     ),
-    "PostProb.H0" = round(PostProb.H0, probs.round),
+    "PostProb.H0" = round(pp, probs.round),
     "LB.PostProb.H0" = round(pcal(p_values), probs.round),
     "P.value" = p_values
   )
@@ -88,14 +88,8 @@ test.binomial.hypotheses <- function( # Function to compute Binomial-Beta model 
   if(log10 == TRUE){names(result) <- gsub("BayesFactors", "log10(BayesFactors)", names(result))}
   return(result)
 
-}
-
-# test.binomial.hypotheses(Portugal.bl1, theta_benford(1))
-# bayes.factor(Portugal.bl1, theta_benford, model = "binomial")
+  }
 
 
-
-
-
-
+test.binomial.hypotheses(Austria.bl1, theta_benford(1))
 
