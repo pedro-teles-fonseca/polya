@@ -81,7 +81,6 @@ test.binomial.hypotheses <- function( # Function to compute Binomial-Beta model 
             "Decisive")))
     ),
     "PostProb.H0" = round(pp, probs.round),
-    "LB.PostProb.H0" = round(pcal(p_values), probs.round),
     "P.value" = p_values
   )
 
@@ -91,5 +90,5 @@ test.binomial.hypotheses <- function( # Function to compute Binomial-Beta model 
   }
 
 
-test.binomial.hypotheses(Austria.bl1, theta_benford(1))
+# test.binomial.hypotheses(Austria.bl1, theta_benford(1))
 
