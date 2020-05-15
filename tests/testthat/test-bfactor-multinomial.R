@@ -3,15 +3,16 @@ library(digit.analysis)
 
 context("Bayes factors - Multinomial model")
 
-# BL1, alpha = \bm{1}
-#---------------------------
+# ------------------------------------------------
+# BL1 - Bayes factors and posterior probabilities
+# ------------------------------------------------
 
-testthat::test_that("log10 BF, mu-dir model with unif prior", {
+testthat::test_that("log10(BF), uniform prior", {
   expect_equal(
     round(
       sapply(
         X = datalist.bl1,
-        FUN = bfactor.multinomial,
+        FUN = bfactor_multinomial,
         null.par = theta_benford(1),
         alpha = 1,
         transf = "log10"
@@ -35,14 +36,14 @@ testthat::test_that("log10 BF, mu-dir model with unif prior", {
   )
 })
 
-testthat::test_that("Posterior probs, mu-dir model with unif prior", {
+testthat::test_that("PPs, uniform prior", {
   expect_equal(
     round(as.numeric(
       mapply(
-        FUN = bfactor.to.prob,
+        FUN = bfactor_to_prob,
         bf = sapply(
           X = datalist.bl1,
-          FUN = bfactor.multinomial,
+          FUN = bfactor_multinomial,
           null.par = theta_benford(1),
           alpha = 1
         )
@@ -65,15 +66,12 @@ testthat::test_that("Posterior probs, mu-dir model with unif prior", {
   )
 })
 
-# BL1, alpha = \bm{\thetha_0}
-#---------------------------
-
-testthat::test_that("log10 BF, mu-dir model, prior centred on thetha_0", {
+testthat::test_that("log10(BF), centred Dir prior c=1", {
   expect_equal(
     round(
       sapply(
         X = datalist.bl1,
-        FUN = bfactor.multinomial,
+        FUN = bfactor_multinomial,
         null.par = theta_benford(1),
         alpha = theta_benford(1),
         transf = "log10"
@@ -97,14 +95,14 @@ testthat::test_that("log10 BF, mu-dir model, prior centred on thetha_0", {
   )
 })
 
-testthat::test_that("Posterior probs, mu-dir, prior centred on thetha_0", {
+testthat::test_that("PPs, centred Dir prior c=1", {
   expect_equal(
     round(as.numeric(
       mapply(
-        FUN = bfactor.to.prob,
+        FUN = bfactor_to_prob,
         bf = sapply(
           X = datalist.bl1,
-          FUN = bfactor.multinomial,
+          FUN = bfactor_multinomial,
           null.par = theta_benford(1),
           alpha = theta_benford(1)
         )
@@ -127,15 +125,12 @@ testthat::test_that("Posterior probs, mu-dir, prior centred on thetha_0", {
   )
 })
 
-# BL1, alpha = \bm{22\thetha_0}
-#---------------------------
-
-testthat::test_that("log10 BF, mu-dir model, unimodal prior", {
+testthat::test_that("log10(BF), centred Dir prior c=22", {
   expect_equal(
     round(
       sapply(
         X = datalist.bl1,
-        FUN = bfactor.multinomial,
+        FUN = bfactor_multinomial,
         null.par = theta_benford(1),
         alpha = 22 * theta_benford(1),
         transf = "log10"
@@ -159,14 +154,14 @@ testthat::test_that("log10 BF, mu-dir model, unimodal prior", {
   )
 })
 
-testthat::test_that("Posterior probs, mu-dir, unimodal prior", {
+testthat::test_that("PPs, centred Dir prior c=22", {
   expect_equal(
     round(as.numeric(
       mapply(
-        FUN = bfactor.to.prob,
+        FUN = bfactor_to_prob,
         bf = sapply(
           X = datalist.bl1,
-          FUN = bfactor.multinomial,
+          FUN = bfactor_multinomial,
           null.par = theta_benford(1),
           alpha = 22 * theta_benford(1)
         )
@@ -190,15 +185,16 @@ testthat::test_that("Posterior probs, mu-dir, unimodal prior", {
 
 })
 
-# BL2, alpha = \bm{1}
-#---------------------------
+# ------------------------------------------------
+# BL2 - Bayes factors and posterior probabilities
+# ------------------------------------------------
 
-testthat::test_that("log10 BF, mu-dir model with unif prior", {
+testthat::test_that("log10(BF), uniform prior", {
   expect_equal(
     round(
       sapply(
         X = datalist.bl2,
-        FUN = bfactor.multinomial,
+        FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = 1,
         transf = "log10"
@@ -222,13 +218,13 @@ testthat::test_that("log10 BF, mu-dir model with unif prior", {
   )
 })
 
-testthat::test_that("Posterior probs, mu-dir model with unif prior", {
+testthat::test_that("PPs, uniform prior", {
   expect_equal(round(as.numeric(
     mapply(
-      FUN = bfactor.to.prob,
+      FUN = bfactor_to_prob,
       bf = sapply(
         X = datalist.bl2,
-        FUN = bfactor.multinomial,
+        FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = 1
       )
@@ -237,15 +233,12 @@ testthat::test_that("Posterior probs, mu-dir model with unif prior", {
     c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
 })
 
-# BL2, alpha = \bm{\thetha_0}
-#---------------------------
-
-testthat::test_that("log10 BF, mu-dir model, prior centred on thetha_0", {
+testthat::test_that("log10(BF), centred Dir prior c=1", {
   expect_equal(
     round(
       sapply(
         X = datalist.bl2,
-        FUN = bfactor.multinomial,
+        FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = theta_benford(2),
         transf = "log10"
@@ -269,13 +262,13 @@ testthat::test_that("log10 BF, mu-dir model, prior centred on thetha_0", {
   )
 })
 
-testthat::test_that("Posterior probs, mu-dir, prior centred on thetha_0", {
+testthat::test_that("PPs, centred Dir prior c=1", {
   expect_equal(round(as.numeric(
     mapply(
-      FUN = bfactor.to.prob,
+      FUN = bfactor_to_prob,
       bf = sapply(
         X = datalist.bl2,
-        FUN = bfactor.multinomial,
+        FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = theta_benford(2)
       )
@@ -284,15 +277,12 @@ testthat::test_that("Posterior probs, mu-dir, prior centred on thetha_0", {
     c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
 })
 
-# BL2, alpha = \bm{22\thetha_0}
-#---------------------------
-
-testthat::test_that("log10 BF, mu-dir model, unimodal prior", {
+testthat::test_that("log10(BF), centred Dir prior c=12", {
   expect_equal(
     round(
       sapply(
         X = datalist.bl2,
-        FUN = bfactor.multinomial,
+        FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = 12 * theta_benford(2),
         transf = "log10"
@@ -316,14 +306,14 @@ testthat::test_that("log10 BF, mu-dir model, unimodal prior", {
   )
 })
 
-testthat::test_that("Posterior probs, mu-dir, unimodal prior", {
+testthat::test_that("PPs, centred Dir prior c=12", {
   expect_equal(
     round(as.numeric(
       mapply(
-        FUN = bfactor.to.prob,
+        FUN = bfactor_to_prob,
         bf = sapply(
           X = datalist.bl2,
-          FUN = bfactor.multinomial,
+          FUN = bfactor_multinomial,
           null.par = theta_benford(2),
           alpha = 12 * theta_benford(2)
         )
