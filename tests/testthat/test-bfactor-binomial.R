@@ -11,7 +11,7 @@ testthat::test_that("Austria log10(BF), unif prior", {
   expect_equal(
     round(
       mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         MoreArgs = list(
@@ -40,7 +40,7 @@ testthat::test_that("Austria PP, unif prior", {
   expect_equal(
     as.numeric(round(sapply(
       X = mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         MoreArgs = list(
@@ -48,7 +48,7 @@ testthat::test_that("Austria PP, unif prior", {
           a = 1,
           b = 1)
       ),
-      FUN = bfactor.to.prob),
+      FUN = bfactor_to_prob),
       3
     )),
     c(0.542, 0.951, 0.954, 0.194, 0.016, 0.973, 0.001, 0.947, 0.968)
@@ -59,7 +59,7 @@ testthat::test_that("Austria log10(BF), Dir prior c=1", {
   expect_equal(
     as.numeric(round(
       mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         a = theta_benford(1),
@@ -77,7 +77,7 @@ testthat::test_that("Austria PP, Dir prior c=1", {
   expect_equal(
     as.numeric(round(sapply(
       X = mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         a = theta_benford(1),
@@ -85,7 +85,7 @@ testthat::test_that("Austria PP, Dir prior c=1", {
         MoreArgs = list(
           x = austria.bl1)
       ),
-      FUN = bfactor.to.prob),
+      FUN = bfactor_to_prob),
       3
     )),
     c(0.949, 0.999, 1.000, 0.985, 0.861, 1.000, 0.104, 1.000, 1.000)
@@ -96,7 +96,7 @@ testthat::test_that("Austria log10(BF), Dir prior c=22", {
   expect_equal(
     as.numeric(round(
       mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         a = 22 * theta_benford(1),
@@ -114,14 +114,14 @@ testthat::test_that("Austria PP, Dir prior c=22", {
   expect_equal(as.numeric(round(
     sapply(
       X = mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         a = 22 * theta_benford(1),
         b = 22 - 22 * theta_benford(1),
         MoreArgs = list(x = austria.bl1)
       ),
-      FUN = bfactor.to.prob
+      FUN = bfactor_to_prob
     ),
     3
   )),
@@ -136,7 +136,7 @@ testthat::test_that("Belgium log10(BF), unif prior", {
   expect_equal(
     as.numeric(round(
       mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         MoreArgs = list(
@@ -156,7 +156,7 @@ testthat::test_that("Belgium PP, unif prior", {
   expect_equal(
     as.numeric(round(sapply(
       X = mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         MoreArgs = list(
@@ -164,7 +164,7 @@ testthat::test_that("Belgium PP, unif prior", {
           a = 1,
           b = 1)
       ),
-      FUN = bfactor.to.prob),
+      FUN = bfactor_to_prob),
       3
     )),
     c(0.003, 0.028, 0.008, 0.963, 0.940, 0.960, 0.977, 0.957, 0.920)
@@ -175,7 +175,7 @@ testthat::test_that("Belgium log10(BF), Dir prior c=1", {
   expect_equal(
     as.numeric(round(
       mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         a = theta_benford(1),
@@ -193,7 +193,7 @@ testthat::test_that("Belgium PP, Dir prior c=1", {
   expect_equal(
     as.numeric(round(sapply(
       X = mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         a = theta_benford(1),
@@ -201,7 +201,7 @@ testthat::test_that("Belgium PP, Dir prior c=1", {
         MoreArgs = list(
           x = belgium.bl1)
       ),
-      FUN = bfactor.to.prob),
+      FUN = bfactor_to_prob),
       3
     )),
     c( 0.036, 0.723, 0.601, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000)
@@ -212,7 +212,7 @@ testthat::test_that("Belgium log10(BF), Dir prior c=22", {
   expect_equal(
     as.numeric(round(
       mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         a = 22 * theta_benford(1),
@@ -230,7 +230,7 @@ testthat::test_that("Belgium PP, Dir prior c=22", {
   expect_equal(
     as.numeric(round(sapply(
       X = mapply(
-        bfactor.binomial,
+        bfactor_binomial,
         null.par = theta_benford(1),
         sucess = 1:9,
         a = 22 * theta_benford(1),
@@ -238,7 +238,7 @@ testthat::test_that("Belgium PP, Dir prior c=22", {
         MoreArgs = list(
           x = belgium.bl1)
       ),
-      FUN = bfactor.to.prob),
+      FUN = bfactor_to_prob),
       3
     )),
     rep(1, times = 9)  )
