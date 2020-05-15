@@ -11,7 +11,7 @@ testthat::test_that("log10(BF), uniform prior", {
   expect_equal(
     round(
       sapply(
-        X = datalist.bl1,
+        X = datalist_bl1,
         FUN = bfactor_multinomial,
         null.par = theta_benford(1),
         alpha = 1,
@@ -42,7 +42,7 @@ testthat::test_that("PPs, uniform prior", {
       mapply(
         FUN = bfactor_to_prob,
         bf = sapply(
-          X = datalist.bl1,
+          X = datalist_bl1,
           FUN = bfactor_multinomial,
           null.par = theta_benford(1),
           alpha = 1
@@ -70,7 +70,7 @@ testthat::test_that("log10(BF), centred Dir prior c=1", {
   expect_equal(
     round(
       sapply(
-        X = datalist.bl1,
+        X = datalist_bl1,
         FUN = bfactor_multinomial,
         null.par = theta_benford(1),
         alpha = theta_benford(1),
@@ -101,7 +101,7 @@ testthat::test_that("PPs, centred Dir prior c=1", {
       mapply(
         FUN = bfactor_to_prob,
         bf = sapply(
-          X = datalist.bl1,
+          X = datalist_bl1,
           FUN = bfactor_multinomial,
           null.par = theta_benford(1),
           alpha = theta_benford(1)
@@ -129,7 +129,7 @@ testthat::test_that("log10(BF), centred Dir prior c=22", {
   expect_equal(
     round(
       sapply(
-        X = datalist.bl1,
+        X = datalist_bl1,
         FUN = bfactor_multinomial,
         null.par = theta_benford(1),
         alpha = 22 * theta_benford(1),
@@ -160,7 +160,7 @@ testthat::test_that("PPs, centred Dir prior c=22", {
       mapply(
         FUN = bfactor_to_prob,
         bf = sapply(
-          X = datalist.bl1,
+          X = datalist_bl1,
           FUN = bfactor_multinomial,
           null.par = theta_benford(1),
           alpha = 22 * theta_benford(1)
@@ -193,7 +193,7 @@ testthat::test_that("log10(BF), uniform prior", {
   expect_equal(
     round(
       sapply(
-        X = datalist.bl2,
+        X = datalist_bl2,
         FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = 1,
@@ -223,7 +223,7 @@ testthat::test_that("PPs, uniform prior", {
     mapply(
       FUN = bfactor_to_prob,
       bf = sapply(
-        X = datalist.bl2,
+        X = datalist_bl2,
         FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = 1
@@ -237,7 +237,7 @@ testthat::test_that("log10(BF), centred Dir prior c=1", {
   expect_equal(
     round(
       sapply(
-        X = datalist.bl2,
+        X = datalist_bl2,
         FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = theta_benford(2),
@@ -267,7 +267,7 @@ testthat::test_that("PPs, centred Dir prior c=1", {
     mapply(
       FUN = bfactor_to_prob,
       bf = sapply(
-        X = datalist.bl2,
+        X = datalist_bl2,
         FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = theta_benford(2)
@@ -281,7 +281,7 @@ testthat::test_that("log10(BF), centred Dir prior c=12", {
   expect_equal(
     round(
       sapply(
-        X = datalist.bl2,
+        X = datalist_bl2,
         FUN = bfactor_multinomial,
         null.par = theta_benford(2),
         alpha = 12 * theta_benford(2),
@@ -312,7 +312,7 @@ testthat::test_that("PPs, centred Dir prior c=12", {
       mapply(
         FUN = bfactor_to_prob,
         bf = sapply(
-          X = datalist.bl2,
+          X = datalist_bl2,
           FUN = bfactor_multinomial,
           null.par = theta_benford(2),
           alpha = 12 * theta_benford(2)
@@ -336,3 +336,4 @@ testthat::test_that("PPs, centred Dir prior c=12", {
   )
 
 })
+

@@ -15,7 +15,7 @@ testthat::test_that("Austria log10(BF), unif prior", {
         null.par = theta_benford(1),
         sucess = 1:9,
         MoreArgs = list(
-          x = austria.bl1,
+          x = austria_bl1,
           a = 1,
           b = 1,
           transf = "log10"
@@ -44,7 +44,7 @@ testthat::test_that("Austria PP, unif prior", {
         null.par = theta_benford(1),
         sucess = 1:9,
         MoreArgs = list(
-          x = austria.bl1,
+          x = austria_bl1,
           a = 1,
           b = 1)
       ),
@@ -65,7 +65,7 @@ testthat::test_that("Austria log10(BF), Dir prior c=1", {
         a = theta_benford(1),
         b = 1 - theta_benford(1),
         MoreArgs = list(
-          x = austria.bl1,
+          x = austria_bl1,
           transf = "log10")
       ),
       2)),
@@ -83,7 +83,7 @@ testthat::test_that("Austria PP, Dir prior c=1", {
         a = theta_benford(1),
         b = 1 - theta_benford(1),
         MoreArgs = list(
-          x = austria.bl1)
+          x = austria_bl1)
       ),
       FUN = bfactor_to_prob),
       3
@@ -102,7 +102,7 @@ testthat::test_that("Austria log10(BF), Dir prior c=22", {
         a = 22 * theta_benford(1),
         b = 22 - 22*theta_benford(1),
         MoreArgs = list(
-          x = austria.bl1,
+          x = austria_bl1,
           transf = "log10")
       ),
       2)),
@@ -119,7 +119,7 @@ testthat::test_that("Austria PP, Dir prior c=22", {
         sucess = 1:9,
         a = 22 * theta_benford(1),
         b = 22 - 22 * theta_benford(1),
-        MoreArgs = list(x = austria.bl1)
+        MoreArgs = list(x = austria_bl1)
       ),
       FUN = bfactor_to_prob
     ),
@@ -140,7 +140,7 @@ testthat::test_that("Belgium log10(BF), unif prior", {
         null.par = theta_benford(1),
         sucess = 1:9,
         MoreArgs = list(
-          x = belgium.bl1,
+          x = belgium_bl1,
           a = 1,
           b = 1,
           transf = "log10"
@@ -160,7 +160,7 @@ testthat::test_that("Belgium PP, unif prior", {
         null.par = theta_benford(1),
         sucess = 1:9,
         MoreArgs = list(
-          x = belgium.bl1,
+          x = belgium_bl1,
           a = 1,
           b = 1)
       ),
@@ -181,7 +181,7 @@ testthat::test_that("Belgium log10(BF), Dir prior c=1", {
         a = theta_benford(1),
         b = 1 - theta_benford(1),
         MoreArgs = list(
-          x = belgium.bl1,
+          x = belgium_bl1,
           transf = "log10")
       ),
       2)),
@@ -199,7 +199,7 @@ testthat::test_that("Belgium PP, Dir prior c=1", {
         a = theta_benford(1),
         b = 1 - theta_benford(1),
         MoreArgs = list(
-          x = belgium.bl1)
+          x = belgium_bl1)
       ),
       FUN = bfactor_to_prob),
       3
@@ -218,7 +218,7 @@ testthat::test_that("Belgium log10(BF), Dir prior c=22", {
         a = 22 * theta_benford(1),
         b = 22 - 22*theta_benford(1),
         MoreArgs = list(
-          x = belgium.bl1,
+          x = belgium_bl1,
           transf = "log10")
       ),
       2)),
@@ -236,10 +236,11 @@ testthat::test_that("Belgium PP, Dir prior c=22", {
         a = 22 * theta_benford(1),
         b = 22 - 22*theta_benford(1),
         MoreArgs = list(
-          x = belgium.bl1)
+          x = belgium_bl1)
       ),
       FUN = bfactor_to_prob),
       3
     )),
     rep(1, times = 9)  )
 })
+
