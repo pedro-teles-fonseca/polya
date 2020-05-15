@@ -67,9 +67,9 @@ test.binomial.hypotheses <- function( # Function to compute Binomial-Beta model 
 
     digits <- 1:9
 
-    bf <- mapply(FUN = bfactor.binomial, null.par = null.par, sucess = sucess,  a = a, b = b,
+    bf <- mapply(FUN = bfactor_binomial, null.par = null.par, sucess = sucess,  a = a, b = b,
       MoreArgs = list(data = data))
-    pp <- mapply(FUN = bfactor.to.prob, pi_null = pi_null, bf = bf)
+    pp <- mapply(FUN = bfactor_to_prob, pi_null = pi_null, bf = bf)
 
   result <- data.frame(
     "Digit" = digits,
