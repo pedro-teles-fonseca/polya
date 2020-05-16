@@ -13,6 +13,7 @@ testthat::test_that("log10(BF), uniform prior", {
       sapply(
         X = datalist_bl1,
         FUN = bfactor_multinomial,
+        categories = 1:9,
         null.par = theta_benford(1),
         alpha = 1,
         transf = "log10"
@@ -44,6 +45,7 @@ testthat::test_that("PPs, uniform prior", {
         bf = sapply(
           X = datalist_bl1,
           FUN = bfactor_multinomial,
+          categories = 1:9,
           null.par = theta_benford(1),
           alpha = 1
         )
@@ -72,6 +74,7 @@ testthat::test_that("log10(BF), centred Dir prior c=1", {
       sapply(
         X = datalist_bl1,
         FUN = bfactor_multinomial,
+        categories = 1:9,
         null.par = theta_benford(1),
         alpha = theta_benford(1),
         transf = "log10"
@@ -103,6 +106,7 @@ testthat::test_that("PPs, centred Dir prior c=1", {
         bf = sapply(
           X = datalist_bl1,
           FUN = bfactor_multinomial,
+          categories = 1:9,
           null.par = theta_benford(1),
           alpha = theta_benford(1)
         )
@@ -131,6 +135,7 @@ testthat::test_that("log10(BF), centred Dir prior c=22", {
       sapply(
         X = datalist_bl1,
         FUN = bfactor_multinomial,
+        categories = 1:9,
         null.par = theta_benford(1),
         alpha = 22 * theta_benford(1),
         transf = "log10"
@@ -162,6 +167,7 @@ testthat::test_that("PPs, centred Dir prior c=22", {
         bf = sapply(
           X = datalist_bl1,
           FUN = bfactor_multinomial,
+          categories = 1:9,
           null.par = theta_benford(1),
           alpha = 22 * theta_benford(1)
         )
@@ -195,6 +201,7 @@ testthat::test_that("log10(BF), uniform prior", {
       sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
+        categories = 0:9,
         null.par = theta_benford(2),
         alpha = 1,
         transf = "log10"
@@ -225,6 +232,7 @@ testthat::test_that("PPs, uniform prior", {
       bf = sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
+        categories = 0:9,
         null.par = theta_benford(2),
         alpha = 1
       )
@@ -239,6 +247,7 @@ testthat::test_that("log10(BF), centred Dir prior c=1", {
       sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
+        categories = 0:9,
         null.par = theta_benford(2),
         alpha = theta_benford(2),
         transf = "log10"
@@ -269,6 +278,7 @@ testthat::test_that("PPs, centred Dir prior c=1", {
       bf = sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
+        categories = 0:9,
         null.par = theta_benford(2),
         alpha = theta_benford(2)
       )
@@ -283,6 +293,7 @@ testthat::test_that("log10(BF), centred Dir prior c=12", {
       sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
+        categories = 0:9,
         null.par = theta_benford(2),
         alpha = 12 * theta_benford(2),
         transf = "log10"
@@ -314,6 +325,7 @@ testthat::test_that("PPs, centred Dir prior c=12", {
         bf = sapply(
           X = datalist_bl2,
           FUN = bfactor_multinomial,
+          categories = 0:9,
           null.par = theta_benford(2),
           alpha = 12 * theta_benford(2)
         )
