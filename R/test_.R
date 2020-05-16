@@ -1,7 +1,44 @@
 
 # Testing Multinomial and Binomial point null hypotheses
 # ------------------------------------------
-test.point.null <- function(
+
+test.null.binomial <- function(
+  x,
+  null.par,
+  sucess,
+  hyper.par = c(1, 1),
+  pi_null = 0.5,
+  transf = "level",
+  bf_round = 2,
+  probs_round = 3){
+
+  x <- as.vector(x[!is.na(x)])
+  bf <- unname(bfactor_binomial(x, null.par, sucess, hyper.par[1], hyper.par[2], transf))
+
+  results <- data.frame(
+    "sample" = deparse(substitute(x)),
+    "BF" = bf,
+    "Evidence" = bfactor_interpret(bf),
+    "P(H0|X)" = bfactor_to_prob(bf)
+  )
+
+ if(isTRUE(log.10)){names(results) <- gsub("BF(X)", "log10(BF(x))", names(results))}
+
+  results
+}
+
+# rbind(
+#   test.null.binomial(ifelse(austria_bl1==1, 1, 0), null.par = theta_benford(1)[1], sucess = 1),
+#   test.null.binomial(austria_bl1==0, null.par = theta_benford(2)[1])
+# )
+#
+# rbind(
+#   test.null.binomial(austria_bl1==1, null.par = theta_benford(1)[1]),
+#   test.null.binomial(austria_bl1==0, null.par = theta_benford(2)[1])
+# )
+#
+
+test.null.multinomial <- function(
   data,
   null.par,
   pi_null = 0.5,
@@ -38,6 +75,22 @@ test.point.null <- function(
   if(isTRUE(log.10)){names(results) <- gsub("BayesFactor(X)", "log10(BayesFactor(x))", names(results))}
 
   results
+}
+
+test_chisq_multinomial <- function(x, null.par, categories){
+
+  x <- x[!is.na(x)]
+  categories <- factor(categories, levels = categories , ordered = TRUE)
+  counts <- table(x[!is.na(x)])[levels(categories)]
+
+  tst <- chisq.test(counts,  p = null.par)
+
+  data.frame(
+    "X-squared" = tst$statistic,
+    "df" = tst$parameter,
+    "p_value" = tst$p.value,
+    row.names = NULL
+  )
 }
 
 # Testing many binomial point null hypotheses
