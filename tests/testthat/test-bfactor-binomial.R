@@ -10,12 +10,11 @@ testthat::test_that("Austria log10(BF), unif prior", {
     round(
       mapply(
         bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
+        null_par = theta_benford(1),
+        success = 1:9,
         MoreArgs = list(
           x = austria_bl1,
-          a = 1,
-          b = 1,
+          hyper_par = c(1, 1),
           transf = "log10"
         )
       ),
@@ -39,12 +38,11 @@ testthat::test_that("Austria PP, unif prior", {
     as.numeric(round(sapply(
       X = mapply(
         bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
+        null_par = theta_benford(1),
+        success = 1:9,
         MoreArgs = list(
           x = austria_bl1,
-          a = 1,
-          b = 1)
+          hyper_par = c(1, 1))
       ),
       FUN = bfactor_to_prob),
       3
@@ -55,74 +53,73 @@ testthat::test_that("Austria PP, unif prior", {
 
 testthat::test_that("Austria log10(BF), Dir prior c=1", {
   expect_equal(
-    as.numeric(round(
-      mapply(
-        bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
-        a = theta_benford(1),
-        b = 1 - theta_benford(1),
-        MoreArgs = list(
-          x = austria_bl1,
-          transf = "log10")
-      ),
-      2)),
+    unname(c(
+      round(bfactor_binomial(x = austria_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(theta_benford(1)[1], 1 - theta_benford(1)[1]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(theta_benford(1)[2], 1 - theta_benford(1)[2]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 3, null_par = theta_benford(1)[3], hyper_par = c(theta_benford(1)[3], 1 - theta_benford(1)[3]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 4, null_par = theta_benford(1)[4], hyper_par = c(theta_benford(1)[4], 1 - theta_benford(1)[4]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 5, null_par = theta_benford(1)[5], hyper_par = c(theta_benford(1)[5], 1 - theta_benford(1)[5]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 6, null_par = theta_benford(1)[6], hyper_par = c(theta_benford(1)[6], 1 - theta_benford(1)[6]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 7, null_par = theta_benford(1)[7], hyper_par = c(theta_benford(1)[7], 1 - theta_benford(1)[7]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 8, null_par = theta_benford(1)[8], hyper_par = c(theta_benford(1)[8], 1 - theta_benford(1)[8]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 9, null_par = theta_benford(1)[9], hyper_par = c(theta_benford(1)[9], 1 - theta_benford(1)[9]), transf = "log10"), 2)
+    )),
     c(1.27,  3.20,  3.45,  1.81,  0.79,  4.04, -0.94,  3.69,  4.12)
   )
 })
 
 testthat::test_that("Austria PP, Dir prior c=1", {
   expect_equal(
-    as.numeric(round(sapply(
-      X = mapply(
-        bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
-        a = theta_benford(1),
-        b = 1 - theta_benford(1),
-        MoreArgs = list(
-          x = austria_bl1)
-      ),
-      FUN = bfactor_to_prob),
-      3
-    )),
+    round(
+      unname(
+        bfactor_to_prob(
+          c(
+            bfactor_binomial(x = austria_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(theta_benford(1)[1], 1 - theta_benford(1)[1])),
+            bfactor_binomial(x = austria_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(theta_benford(1)[2], 1 - theta_benford(1)[2])),
+            bfactor_binomial(x = austria_bl1, success = 3, null_par = theta_benford(1)[3], hyper_par = c(theta_benford(1)[3], 1 - theta_benford(1)[3])),
+            bfactor_binomial(x = austria_bl1, success = 4, null_par = theta_benford(1)[4], hyper_par = c(theta_benford(1)[4], 1 - theta_benford(1)[4])),
+            bfactor_binomial(x = austria_bl1, success = 5, null_par = theta_benford(1)[5], hyper_par = c(theta_benford(1)[5], 1 - theta_benford(1)[5])),
+            bfactor_binomial(x = austria_bl1, success = 6, null_par = theta_benford(1)[6], hyper_par = c(theta_benford(1)[6], 1 - theta_benford(1)[6])),
+            bfactor_binomial(x = austria_bl1, success = 7, null_par = theta_benford(1)[7], hyper_par = c(theta_benford(1)[7], 1 - theta_benford(1)[7])),
+            bfactor_binomial(x = austria_bl1, success = 8, null_par = theta_benford(1)[8], hyper_par = c(theta_benford(1)[8], 1 - theta_benford(1)[8])),
+            bfactor_binomial(x = austria_bl1, success = 9, null_par = theta_benford(1)[9], hyper_par = c(theta_benford(1)[9], 1 - theta_benford(1)[9])))
+          )
+        )
+      , 3),
     c(0.949, 0.999, 1.000, 0.985, 0.861, 1.000, 0.104, 1.000, 1.000)
   )
 })
 
 testthat::test_that("Austria log10(BF), Dir prior c=22", {
   expect_equal(
-    as.numeric(round(
-      mapply(
-        bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
-        a = 22 * theta_benford(1),
-        b = 22 - 22*theta_benford(1),
-        MoreArgs = list(
-          x = austria_bl1,
-          transf = "log10")
-      ),
-      2)),
+    unname(c(
+      round(bfactor_binomial(x = austria_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(22*theta_benford(1)[1], 22 - 22*theta_benford(1)[1]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(22*theta_benford(1)[2], 22 - 22*theta_benford(1)[2]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 3, null_par = theta_benford(1)[3], hyper_par = c(22*theta_benford(1)[3], 22 - 22*theta_benford(1)[3]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 4, null_par = theta_benford(1)[4], hyper_par = c(22*theta_benford(1)[4], 22 - 22*theta_benford(1)[4]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 5, null_par = theta_benford(1)[5], hyper_par = c(22*theta_benford(1)[5], 22 - 22*theta_benford(1)[5]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 6, null_par = theta_benford(1)[6], hyper_par = c(22*theta_benford(1)[6], 22 - 22*theta_benford(1)[6]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 7, null_par = theta_benford(1)[7], hyper_par = c(22*theta_benford(1)[7], 22 - 22*theta_benford(1)[7]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 8, null_par = theta_benford(1)[8], hyper_par = c(22*theta_benford(1)[8], 22 - 22*theta_benford(1)[8]), transf = "log10"), 2),
+      round(bfactor_binomial(x = austria_bl1, success = 9, null_par = theta_benford(1)[9], hyper_par = c(22*theta_benford(1)[9], 22 - 22*theta_benford(1)[9]), transf = "log10"), 2)
+    )),
     c(22.88, 39.27, 45.90, 47.33, 48.46, 53.47, 50.17, 55.21, 56.11)
   )
 })
 
 testthat::test_that("Austria PP, Dir prior c=22", {
-  expect_equal(as.numeric(round(
-    sapply(
-      X = mapply(
-        bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
-        a = 22 * theta_benford(1),
-        b = 22 - 22 * theta_benford(1),
-        MoreArgs = list(x = austria_bl1)
-      ),
-      FUN = bfactor_to_prob
-    ),
-    3
-  )),
+  expect_equal(
+    round(unname(bfactor_to_prob(c(
+      bfactor_binomial(x = austria_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(22*theta_benford(1)[1], 22 - 22*theta_benford(1)[1])),
+      bfactor_binomial(x = austria_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(22*theta_benford(1)[2], 22 - 22*theta_benford(1)[2])),
+      bfactor_binomial(x = austria_bl1, success = 3, null_par = theta_benford(1)[3], hyper_par = c(22*theta_benford(1)[3], 22 - 22*theta_benford(1)[3])),
+      bfactor_binomial(x = austria_bl1, success = 4, null_par = theta_benford(1)[4], hyper_par = c(22*theta_benford(1)[4], 22 - 22*theta_benford(1)[4])),
+      bfactor_binomial(x = austria_bl1, success = 5, null_par = theta_benford(1)[5], hyper_par = c(22*theta_benford(1)[5], 22 - 22*theta_benford(1)[5])),
+      bfactor_binomial(x = austria_bl1, success = 6, null_par = theta_benford(1)[6], hyper_par = c(22*theta_benford(1)[6], 22 - 22*theta_benford(1)[6])),
+      bfactor_binomial(x = austria_bl1, success = 7, null_par = theta_benford(1)[7], hyper_par = c(22*theta_benford(1)[7], 22 - 22*theta_benford(1)[7])),
+      bfactor_binomial(x = austria_bl1, success = 8, null_par = theta_benford(1)[8], hyper_par = c(22*theta_benford(1)[8], 22 - 22*theta_benford(1)[8])),
+      bfactor_binomial(x = austria_bl1, success = 9, null_par = theta_benford(1)[9], hyper_par = c(22*theta_benford(1)[9], 22 - 22*theta_benford(1)[9])))
+    )), 3),
     rep(1, times = 9))
 })
 
@@ -135,12 +132,11 @@ testthat::test_that("Belgium log10(BF), unif prior", {
     as.numeric(round(
       mapply(
         bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
+        null_par = theta_benford(1),
+        success = 1:9,
         MoreArgs = list(
           x = belgium_bl1,
-          a = 1,
-          b = 1,
+          hyper_par = c(1, 1),
           transf = "log10"
         )
       ),
@@ -155,12 +151,12 @@ testthat::test_that("Belgium PP, unif prior", {
     as.numeric(round(sapply(
       X = mapply(
         bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
+        null_par = theta_benford(1),
+        success = 1:9,
         MoreArgs = list(
           x = belgium_bl1,
-          a = 1,
-          b = 1)
+          hyper_par = c(1, 1)
+        )
       ),
       FUN = bfactor_to_prob),
       3
@@ -171,74 +167,68 @@ testthat::test_that("Belgium PP, unif prior", {
 
 testthat::test_that("Belgium log10(BF), Dir prior c=1", {
   expect_equal(
-    as.numeric(round(
-      mapply(
-        bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
-        a = theta_benford(1),
-        b = 1 - theta_benford(1),
-        MoreArgs = list(
-          x = belgium_bl1,
-          transf = "log10")
-      ),
-      2)),
+    unname(c(
+      round(bfactor_binomial(x = belgium_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(theta_benford(1)[1], 1 - theta_benford(1)[1]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(theta_benford(1)[2], 1 - theta_benford(1)[2]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 3, null_par = theta_benford(1)[3], hyper_par = c(theta_benford(1)[3], 1 - theta_benford(1)[3]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 4, null_par = theta_benford(1)[4], hyper_par = c(theta_benford(1)[4], 1 - theta_benford(1)[4]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 5, null_par = theta_benford(1)[5], hyper_par = c(theta_benford(1)[5], 1 - theta_benford(1)[5]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 6, null_par = theta_benford(1)[6], hyper_par = c(theta_benford(1)[6], 1 - theta_benford(1)[6]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 7, null_par = theta_benford(1)[7], hyper_par = c(theta_benford(1)[7], 1 - theta_benford(1)[7]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 8, null_par = theta_benford(1)[8], hyper_par = c(theta_benford(1)[8], 1 - theta_benford(1)[8]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 9, null_par = theta_benford(1)[9], hyper_par = c(theta_benford(1)[9], 1 - theta_benford(1)[9]), transf = "log10"), 2)
+    )),
     c(-1.43,  0.42,  0.18,  3.68,  3.52,  3.77,  4.13,  3.96,  3.48)
   )
 })
 
 testthat::test_that("Belgium PP, Dir prior c=1", {
-  expect_equal(
-    as.numeric(round(sapply(
-      X = mapply(
-        bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
-        a = theta_benford(1),
-        b = 1 - theta_benford(1),
-        MoreArgs = list(
-          x = belgium_bl1)
-      ),
-      FUN = bfactor_to_prob),
-      3
-    )),
+  expect_equal(round(unname(bfactor_to_prob(
+    c(
+      bfactor_binomial(x = belgium_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(theta_benford(1)[1], 1 - theta_benford(1)[1])),
+      bfactor_binomial(x = belgium_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(theta_benford(1)[2], 1 - theta_benford(1)[2])),
+      bfactor_binomial(x = belgium_bl1, success = 3, null_par = theta_benford(1)[3], hyper_par = c(theta_benford(1)[3], 1 - theta_benford(1)[3])),
+      bfactor_binomial(x = belgium_bl1, success = 4, null_par = theta_benford(1)[4], hyper_par = c(theta_benford(1)[4], 1 - theta_benford(1)[4])),
+      bfactor_binomial(x = belgium_bl1, success = 5, null_par = theta_benford(1)[5], hyper_par = c(theta_benford(1)[5], 1 - theta_benford(1)[5])),
+      bfactor_binomial(x = belgium_bl1, success = 6, null_par = theta_benford(1)[6], hyper_par = c(theta_benford(1)[6], 1 - theta_benford(1)[6])),
+      bfactor_binomial(x = belgium_bl1, success = 7, null_par = theta_benford(1)[7], hyper_par = c(theta_benford(1)[7], 1 - theta_benford(1)[7])),
+      bfactor_binomial(x = belgium_bl1, success = 8, null_par = theta_benford(1)[8], hyper_par = c(theta_benford(1)[8], 1 - theta_benford(1)[8])),
+      bfactor_binomial(x = belgium_bl1, success = 9, null_par = theta_benford(1)[9], hyper_par = c(theta_benford(1)[9], 1 - theta_benford(1)[9])))
+    )), 3),
     c( 0.036, 0.723, 0.601, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000)
   )
 })
 
 testthat::test_that("Belgium log10(BF), Dir prior c=22", {
   expect_equal(
-    as.numeric(round(
-      mapply(
-        bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
-        a = 22 * theta_benford(1),
-        b = 22 - 22*theta_benford(1),
-        MoreArgs = list(
-          x = belgium_bl1,
-          transf = "log10")
-      ),
-      2)),
+    unname(c(
+      round(bfactor_binomial(x = belgium_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(22*theta_benford(1)[1], 22 - 22*theta_benford(1)[1]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(22*theta_benford(1)[2], 22 - 22*theta_benford(1)[2]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 3, null_par = theta_benford(1)[3], hyper_par = c(22*theta_benford(1)[3], 22 - 22*theta_benford(1)[3]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 4, null_par = theta_benford(1)[4], hyper_par = c(22*theta_benford(1)[4], 22 - 22*theta_benford(1)[4]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 5, null_par = theta_benford(1)[5], hyper_par = c(22*theta_benford(1)[5], 22 - 22*theta_benford(1)[5]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 6, null_par = theta_benford(1)[6], hyper_par = c(22*theta_benford(1)[6], 22 - 22*theta_benford(1)[6]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 7, null_par = theta_benford(1)[7], hyper_par = c(22*theta_benford(1)[7], 22 - 22*theta_benford(1)[7]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 8, null_par = theta_benford(1)[8], hyper_par = c(22*theta_benford(1)[8], 22 - 22*theta_benford(1)[8]), transf = "log10"), 2),
+      round(bfactor_binomial(x = belgium_bl1, success = 9, null_par = theta_benford(1)[9], hyper_par = c(22*theta_benford(1)[9], 22 - 22*theta_benford(1)[9]), transf = "log10"), 2)
+    )),
     c(20.35, 36.08, 42.02, 49.36, 51.42, 53.14, 54.49, 55.08, 55.49)
   )
 })
 
 testthat::test_that("Belgium PP, Dir prior c=22", {
-  expect_equal(
-    as.numeric(round(sapply(
-      X = mapply(
-        bfactor_binomial,
-        null.par = theta_benford(1),
-        sucess = 1:9,
-        a = 22 * theta_benford(1),
-        b = 22 - 22*theta_benford(1),
-        MoreArgs = list(
-          x = belgium_bl1)
-      ),
-      FUN = bfactor_to_prob),
-      3
-    )),
-    rep(1, times = 9)  )
+  expect_equal(round(unname(bfactor_to_prob(
+    c(
+      bfactor_binomial(x = belgium_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = 22*c(theta_benford(1)[1], 22 - 22*theta_benford(1)[1])),
+      bfactor_binomial(x = belgium_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = 22*c(theta_benford(1)[2], 22 - 22*theta_benford(1)[2])),
+      bfactor_binomial(x = belgium_bl1, success = 3, null_par = theta_benford(1)[3], hyper_par = 22*c(theta_benford(1)[3], 22 - 22*theta_benford(1)[3])),
+      bfactor_binomial(x = belgium_bl1, success = 4, null_par = theta_benford(1)[4], hyper_par = 22*c(theta_benford(1)[4], 22 - 22*theta_benford(1)[4])),
+      bfactor_binomial(x = belgium_bl1, success = 5, null_par = theta_benford(1)[5], hyper_par = 22*c(theta_benford(1)[5], 22 - 22*theta_benford(1)[5])),
+      bfactor_binomial(x = belgium_bl1, success = 6, null_par = theta_benford(1)[6], hyper_par = 22*c(theta_benford(1)[6], 22 - 22*theta_benford(1)[6])),
+      bfactor_binomial(x = belgium_bl1, success = 7, null_par = theta_benford(1)[7], hyper_par = 22*c(theta_benford(1)[7], 22 - 22*theta_benford(1)[7])),
+      bfactor_binomial(x = belgium_bl1, success = 8, null_par = theta_benford(1)[8], hyper_par = 22*c(theta_benford(1)[8], 22 - 22*theta_benford(1)[8])),
+      bfactor_binomial(x = belgium_bl1, success = 9, null_par = theta_benford(1)[9], hyper_par = 22*c(theta_benford(1)[9], 22 - 22*theta_benford(1)[9])))
+  )), 3),
+    rep(1, times = 9))
 })
 

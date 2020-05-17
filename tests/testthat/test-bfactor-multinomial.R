@@ -12,8 +12,8 @@ testthat::test_that("log10(BF), uniform prior", {
         X = datalist_bl1,
         FUN = bfactor_multinomial,
         categories = 1:9,
-        null.par = theta_benford(1),
-        alpha = 1,
+        null_par = theta_benford(1),
+        hyper_par = 1,
         transf = "log10"
       ),
       2
@@ -44,8 +44,8 @@ testthat::test_that("PPs, uniform prior", {
           X = datalist_bl1,
           FUN = bfactor_multinomial,
           categories = 1:9,
-          null.par = theta_benford(1),
-          alpha = 1
+          null_par = theta_benford(1),
+          hyper_par = 1
         )
       )
     ), 3),
@@ -73,8 +73,8 @@ testthat::test_that("log10(BF), centred Dir prior c=1", {
         X = datalist_bl1,
         FUN = bfactor_multinomial,
         categories = 1:9,
-        null.par = theta_benford(1),
-        alpha = theta_benford(1),
+        null_par = theta_benford(1),
+        hyper_par = theta_benford(1),
         transf = "log10"
       ),
       2
@@ -105,8 +105,8 @@ testthat::test_that("PPs, centred Dir prior c=1", {
           X = datalist_bl1,
           FUN = bfactor_multinomial,
           categories = 1:9,
-          null.par = theta_benford(1),
-          alpha = theta_benford(1)
+          null_par = theta_benford(1),
+          hyper_par = theta_benford(1)
         )
       )
     ), 3),
@@ -134,8 +134,8 @@ testthat::test_that("log10(BF), centred Dir prior c=22", {
         X = datalist_bl1,
         FUN = bfactor_multinomial,
         categories = 1:9,
-        null.par = theta_benford(1),
-        alpha = 22 * theta_benford(1),
+        null_par = theta_benford(1),
+        hyper_par = 22 * theta_benford(1),
         transf = "log10"
       ),
       2
@@ -166,8 +166,8 @@ testthat::test_that("PPs, centred Dir prior c=22", {
           X = datalist_bl1,
           FUN = bfactor_multinomial,
           categories = 1:9,
-          null.par = theta_benford(1),
-          alpha = 22 * theta_benford(1)
+          null_par = theta_benford(1),
+          hyper_par = 22 * theta_benford(1)
         )
       )
     ), 3),
@@ -200,8 +200,8 @@ testthat::test_that("log10(BF), uniform prior", {
         X = datalist_bl2,
         FUN = bfactor_multinomial,
         categories = 0:9,
-        null.par = theta_benford(2),
-        alpha = 1,
+        null_par = theta_benford(2),
+        hyper_par = 1,
         transf = "log10"
       ),
       2
@@ -231,8 +231,8 @@ testthat::test_that("PPs, uniform prior", {
         X = datalist_bl2,
         FUN = bfactor_multinomial,
         categories = 0:9,
-        null.par = theta_benford(2),
-        alpha = 1
+        null_par = theta_benford(2),
+        hyper_par = 1
       )
     )
   ), 3),
@@ -246,8 +246,8 @@ testthat::test_that("log10(BF), centred Dir prior c=1", {
         X = datalist_bl2,
         FUN = bfactor_multinomial,
         categories = 0:9,
-        null.par = theta_benford(2),
-        alpha = theta_benford(2),
+        null_par = theta_benford(2),
+        hyper_par = theta_benford(2),
         transf = "log10"
       ),
       2
@@ -277,8 +277,8 @@ testthat::test_that("PPs, centred Dir prior c=1", {
         X = datalist_bl2,
         FUN = bfactor_multinomial,
         categories = 0:9,
-        null.par = theta_benford(2),
-        alpha = theta_benford(2)
+        null_par = theta_benford(2),
+        hyper_par = theta_benford(2)
       )
     )
   ), 3),
@@ -292,8 +292,8 @@ testthat::test_that("log10(BF), centred Dir prior c=12", {
         X = datalist_bl2,
         FUN = bfactor_multinomial,
         categories = 0:9,
-        null.par = theta_benford(2),
-        alpha = 12 * theta_benford(2),
+        null_par = theta_benford(2),
+        hyper_par = 12 * theta_benford(2),
         transf = "log10"
       ),
       2
@@ -324,8 +324,8 @@ testthat::test_that("PPs, centred Dir prior c=12", {
           X = datalist_bl2,
           FUN = bfactor_multinomial,
           categories = 0:9,
-          null.par = theta_benford(2),
-          alpha = 12 * theta_benford(2)
+          null_par = theta_benford(2),
+          hyper_par = 12 * theta_benford(2)
         )
       )
     ), 3),

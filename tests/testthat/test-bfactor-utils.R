@@ -4,7 +4,7 @@ context("*_to_prob() and *_interpret()")
 testthat::test_that("test bfactor_to_prob", {
   expect_equal(
     round(
-      bfactor_to_prob(bfactor_multinomial(x = austria_bl1, categories = 1:9, null.par = theta_benford(1), transf = "log10")),
+      bfactor_to_prob(bfactor_multinomial(x = austria_bl1, categories = 1:9, null_par = theta_benford(1), transf = "log10")),
       3
     ),
     c("P(H0|X)" = 1.477)
@@ -14,7 +14,7 @@ testthat::test_that("test bfactor_to_prob", {
 testthat::test_that("test bfactor_to_prob name", {
   expect_equal(
     round(
-      bfactor_to_prob(bfactor_multinomial(x = austria_bl1, categories = 1:9, null.par = theta_benford(1), transf = "log10")),
+      bfactor_to_prob(bfactor_multinomial(x = austria_bl1, categories = 1:9, null_par = theta_benford(1), transf = "log10")),
       3
     ),
     c("P(H0|X)" = 1.477)
@@ -28,8 +28,8 @@ testthat::test_that("test bfactor_interpret 1", {
         X = datalist_bl1,
         FUN = bfactor_multinomial,
         categories = 1:9,
-        null.par = theta_benford(1),
-        alpha = 1
+        null_par = theta_benford(1),
+        hyper_par = 1
       ),
       2
     )
@@ -58,8 +58,8 @@ testthat::test_that("test bfactor_interpret 2", {
         X = datalist_bl2,
         FUN = bfactor_multinomial,
         categories = 0:9,
-        null.par = theta_benford(2),
-        alpha = 1
+        null_par = theta_benford(2),
+        hyper_par = 1
       ),
       2
     )
@@ -88,8 +88,8 @@ testthat::test_that("test bfactor_interpret 3", {
         X = datalist_bl1,
         FUN = bfactor_multinomial,
         categories = 1:9,
-        null.par = theta_benford(1),
-        alpha = theta_benford(1)
+        null_par = theta_benford(1),
+        hyper_par = theta_benford(1)
       ),
       2
     )
@@ -118,8 +118,8 @@ testthat::test_that("test bfactor_interpret 4", {
         X = datalist_bl2,
         FUN = bfactor_multinomial,
         categories = 0:9,
-        null.par = theta_benford(2),
-        alpha = theta_benford(2)
+        null_par = theta_benford(2),
+        hyper_par = theta_benford(2)
       ),
       2
     )
@@ -148,8 +148,8 @@ testthat::test_that("test bfactor_log_interpret log", {
         X = datalist_bl1,
         FUN = bfactor_multinomial,
         categories = 1:9,
-        null.par = theta_benford(1),
-        alpha = theta_benford(1),
+        null_par = theta_benford(1),
+        hyper_par = theta_benford(1),
         transf = "log"
       ),
       2
@@ -179,8 +179,8 @@ testthat::test_that("test bfactor_log_interpret log 10", {
         X = datalist_bl2,
         FUN = bfactor_multinomial,
         categories = 0:9,
-        null.par = theta_benford(2),
-        alpha = theta_benford(2),
+        null_par = theta_benford(2),
+        hyper_par = theta_benford(2),
         transf = "log10"
       ),
       2
