@@ -1,5 +1,5 @@
 
-# Function to compute the mode of a vector.
+#' The mode of a vector.
 
 getmode <- function(v) {
   uniqv <- unique(v)
@@ -7,3 +7,43 @@ getmode <- function(v) {
   uniqv[which.max(tabulate(match(v, uniqv)))]
 
 }
+
+#' The mantissae of the input numbers
+
+mantissa <- function(x){
+
+  x <- abs(x)
+  e <- ifelse(x == 0, 0, floor(log10(x)))
+  m <- x / 10^e
+  round(m, 10)
+}
+
+#' The most significant digit for each element in the input vector
+
+msdigit <- function(x){
+
+  x <- x[x != 0]
+  x <- floor(mantissa(x))
+  return(x)
+}
+
+#' Teturns the second most significant digit for each element in the input vector
+
+smsdigit <- function(x){
+
+  x <- x[x != 0 & (x %% 10 == 0 | mantissa(x) != floor(mantissa(x)))]
+  x <- floor((mantissa(x)*10)) %% 10
+  return(x)
+}
+
+theta_benford <- function(d){
+
+  if (d == 1){
+    theta_benford <- sapply(1:9, function(x){log10(1+1/(x))})
+  } else if (d == 2){
+    theta_benford <- sapply(0:9, function(x){sum(log10(1+1/(10*(1:9)+x)))})
+  }
+  return(theta_benford)
+}
+
+
