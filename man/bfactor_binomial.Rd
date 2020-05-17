@@ -4,12 +4,12 @@
 \alias{bfactor_binomial}
 \title{Bayes Factors for Binomial point null hypotheses}
 \usage{
-bfactor_binomial(x, sucess, null.par, a = 1, b = 1, transf = "level")
+bfactor_binomial(x, success, null.par, a = 1, b = 1, transf = "level")
 }
 \arguments{
 \item{x}{Atomic vector of the type integer, double or character.}
 
-\item{sucess}{Number or character indicating which level of \code{x} corresponds to a sucess.}
+\item{success}{Number or character indicating which level of \code{x} corresponds to a success.}
 
 \item{null.par}{The parameter of the Binomial distribution under the null hipothesis.}
 
