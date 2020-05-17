@@ -3,18 +3,21 @@
 #'
 #' Computes Bayes factors in favour of a point null hypothesis in the context of a Binomial statistical model with a Beta prior.
 #' @param x Atomic vector of the type integer, double or character.
-#' @param sucess Number or character indicating which level of \code{x} corresponds to a sucess.
-#' @param null.par The parameter of the Binomial distribution under the null hipothesis.
+#' @param success Number or character indicating which level of \code{x} corresponds to a success.
+#' @param null_par The parameter of the Binomial distribution under the null hipothesis.
 #' @param a, b Shape parameters of the Beta prior. Both must be greater than zero
+#'
+#' @examples
+#'
+#' bfactor_binomial(austria_bl1, 1, theta_benford(1)[1])
 #'
 #' @export
 
 bfactor_binomial <- function(
   x,
-  sucess,
-  null.par,
-  a = 1,
-  b = 1,
+  success,
+  null_par,
+  hyper_par = c(1, 1),
   transf = "level") {
 
   if(any(!is.atomic(x), !is.vector(x), is.null(x))){
@@ -23,40 +26,44 @@ bfactor_binomial <- function(
   if(isFALSE(typeof(x) %in% c("integer", "double", "character"))){
     stop("Invalid argument: 'x' must be of type 'integer', 'double' or 'character'.")
   }
-  if(any(is.na(sucess), is.null(sucess))){
-    stop("Invalid argument: 'sucess'  cant be missing nor null")
+  if(any(is.na(success), is.null(success))){
+    stop("Invalid argument: 'success'  cant be missing nor null")
   }
-  if(isFALSE(sucess %in% unique(x))){
-    stop("Invalid argument: 'sucess %in% unique(x)' must be TRUE.")
+  if(isFALSE(success %in% unique(x))){
+    stop("Invalid argument: 'success %in% unique(x)' must be TRUE.")
   }
-  if(any(isFALSE(length(null.par) == 1), isFALSE(length(sucess) == 1))){
-    stop("Invalid argument: 'null.par' and 'sucess' must be of length 1")
+  if(any(isFALSE(length(null_par) == 1), isFALSE(length(success) == 1))){
+    stop("Invalid argument: 'null_par' and 'success' must be of length 1")
   }
-  if (any(!is.atomic(null.par), !is.vector(null.par))){
-    stop("Invalid argument: 'null.par' must be an atomic vector.")
+  if (any(!is.atomic(null_par), !is.vector(null_par))){
+    stop("Invalid argument: 'null_par' must be an atomic vector.")
   }
-  if(any(!is.numeric(null.par), null.par >= 1, null.par <= 0, is.na(null.par), is.null(null.par))) {
-    stop("Invalid argument: all 'null.par' values must be between 0 and 1.")
+  if(any(!is.numeric(null_par), null_par >= 1, null_par <= 0, is.na(null_par), is.null(null_par))) {
+    stop("Invalid argument: all 'null_par' values must be between 0 and 1.")
   }
-  if(any(!is.atomic(a), !is.vector(a), !is.atomic(b), !is.vector(b))){
-    stop("Invalid argument: 'a' and 'b' must be atomic vectors.")
+  if(any(hyper_par <= 0, is.na(hyper_par), is.null(hyper_par))){
+    stop("Invalid argument: elements of 'hyper_par' must be greather than 0.")
   }
-  if(any(isFALSE(length(a) == 1), isFALSE(length(b) == 1))){
-    stop("Invalid argument: 'a' and 'b' must be of length 1.")
-    }
-  if(any(a <= 0, is.na(a), is.null(a), b <= 0, is.na(b), is.null(b))){
-    stop("Invalid argument: 'a' and 'b' must be greather than 0.")
+  if(any(!is.atomic(hyper_par), !is.vector(hyper_par))){
+    stop("Invalid argument: 'hyper_par' must be an atomic vector.")
+  }
+  if(any(isFALSE(length(hyper_par) %in% c(1, 2)))){
+    stop("Invalid argument: 'hyper_par' must be of length 1 or 2.")
   }
   if(isFALSE(transf %in% c("level", "log", "log10"))){
     stop("Invalid argument: 'transf' must be either 'level', 'log' or 'log10'.")
   }
 
-  x <- x[!is.na(x)]
-  n <- length(x)
-  sucesses <- as.numeric(table(x == sucess)["TRUE"])
+  if(length(hyper_par == 1)){hyper_par <- rep.int(hyper_par, 2)}
 
-  log.bfactor <- sucesses * log(null.par) + (n - sucesses) * log(1 - null.par) + lgamma(a) + lgamma(b) + lgamma(n + a + b) -
-      (lgamma(a + b) + lgamma(n + a - sucesses) + lgamma(sucesses + a))
+  x <- x[!is.na(x)]
+  successes <- as.numeric(table(x == success)["TRUE"])
+  n <- length(x)
+  a <- hyper_par[1]
+  b <- hyper_par[2]
+
+  log.bfactor <- successes * log(null_par) + (n - successes) * log(1 - null_par) + lgamma(a) + lgamma(b) + lgamma(n + a + b) -
+      (lgamma(a + b) + lgamma(n + a - successes) + lgamma(successes + a))
 
   bfactor <- exp(log.bfactor)
 
@@ -78,8 +85,8 @@ bfactor_binomial <- function(
 bfactor_multinomial <- function(
   x,
   categories,
-  null.par,
-  alpha = 1,
+  null_par,
+  hyper_par = 1,
   transf = "level") {
 
   if(any(!is.atomic(x), !is.vector(x))){
@@ -88,11 +95,11 @@ bfactor_multinomial <- function(
   if(isFALSE(typeof(x) %in% c("double", "integer", "character"))){
     stop("Invalid argument: typeof(x) must be 'integer', 'double' or 'character'.")
   }
-  if (any(!is.atomic(null.par), !is.vector(null.par))){
-    stop("Invalid argument: 'null.par' must be an atomic vector.")
+  if (any(!is.atomic(null_par), !is.vector(null_par))){
+    stop("Invalid argument: 'null_par' must be an atomic vector.")
   }
-  if(any(!is.numeric(null.par), null.par >= 1, null.par <= 0, is.na(null.par), is.null(null.par))) {
-    stop("Invalid argument: all 'null.par' values must be between 0 and 1.")
+  if(any(!is.numeric(null_par), null_par >= 1, null_par <= 0, is.na(null_par), is.null(null_par))) {
+    stop("Invalid argument: all 'null_par' values must be between 0 and 1.")
   }
   if(any(is.na(categories), is.null(categories))){
     stop("Invalid argument: 'categories' must be a vector of the same lenght as 'x'")
@@ -103,20 +110,20 @@ bfactor_multinomial <- function(
   if(any(sort(unique(x)) != sort(unique(categories)))){
       stop("Invalid argument: the unique values of 'x' and 'categories' must be the same.")
   }
-  if(any(!is.atomic(alpha), !is.vector(alpha))){
-    stop("Invalid argument: 'alpha' must be an atomic vector.")
+  if(any(!is.atomic(hyper_par), !is.vector(hyper_par))){
+    stop("Invalid argument: 'hyper_par' must be an atomic vector.")
   }
-  if(any(!is.numeric(alpha), alpha < 0, is.na(alpha), is.null(alpha))){
-    stop("Invalid argument: 'alpha' must be non-negative.")
+  if(any(!is.numeric(hyper_par), hyper_par < 0, is.na(hyper_par), is.null(hyper_par))){
+    stop("Invalid argument: 'hyper_par' must be non-negative.")
   }
   if(isFALSE(transf %in% c("level", "log", "log10"))){
     stop("Invalid argument: 'transf' must be either 'level', 'log' or 'log10'.")
   }
-  if (length(null.par) < length(alpha)) {
+  if (length(null_par) < length(hyper_par)) {
       stop("Invalid model specification: more hyper-parameters than null parameter values.")
-    } else if (length(alpha) == 1){
-          alpha <- rep.int(alpha, length(null.par))
-    } else if(length(null.par) > length(alpha)) {
+    } else if (length(hyper_par) == 1){
+          hyper_par <- rep.int(hyper_par, length(null_par))
+    } else if(length(null_par) > length(hyper_par)) {
       stop(
           "Invalid specification: more null parameter values than hyper parameters."
         )
@@ -125,20 +132,20 @@ bfactor_multinomial <- function(
   categories <- factor(categories, levels = categories)
   counts <- table(x[!is.na(x)])[levels(categories)]
 
-  bfactor <- function(counts, null.par, alpha) {
+  bfactor <- function(counts, null_par, hyper_par) {
 
-      log.bfactor <- sum(counts * log(null.par)) + sum(lgamma(alpha)) + lgamma(sum(alpha + counts)) -
-        lgamma(sum(alpha)) - sum(lgamma(alpha + counts))
+      log.bfactor <- sum(counts * log(null_par)) + sum(lgamma(hyper_par)) + lgamma(sum(hyper_par + counts)) -
+        lgamma(sum(hyper_par)) - sum(lgamma(hyper_par + counts))
 
       exp(log.bfactor)
     }
 
     if(transf == "log"){
-      c("log(BF)" =  log(bfactor(counts, null.par, alpha)))
+      c("log(BF)" =  log(bfactor(counts, null_par, hyper_par)))
     } else if(transf == "log10"){
-      c("log10(BF)" =  log10(bfactor(counts, null.par, alpha)))
+      c("log10(BF)" =  log10(bfactor(counts, null_par, hyper_par)))
     } else {
-      c("BF" =  bfactor(counts, null.par, alpha))
+      c("BF" =  bfactor(counts, null_par, hyper_par))
     }
 }
 
@@ -164,7 +171,7 @@ bfactor_interpret <- function(bf) {
 }
 
 # ----------------------------------------------------------------------------------------
-# Function to interpret the evidence provided by the data in favour of the null hypothesis
+# Function to interpret the evidence provided by the data in favor of the null hypothesis
 # ----------------------------------------------------------------------------------------
 
 bfactor_log_interpret <- function(l_bf, base = exp(1)) {
@@ -209,9 +216,5 @@ bfactor_to_prob <- function(bf, pi_null = .5) {
   c("P(H0|X)" =  ((1 + ((1 - pi_null) / pi_null) * (1 / unname(bf)))) ^ (-1))
 
 }
-
-
-bfactor_to_prob(.5, pi_null = .1)
-.5/1.5
 
 
