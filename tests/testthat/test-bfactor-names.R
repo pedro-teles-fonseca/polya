@@ -1,4 +1,3 @@
-library(digit.analysis)
 
 context("Bayes factors - bfactor_* names")
 

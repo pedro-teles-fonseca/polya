@@ -1,6 +1,4 @@
 
-library(digit.analysis)
-
 context("Bayes factors - Binomial model")
 
 # ------------------------------------------------

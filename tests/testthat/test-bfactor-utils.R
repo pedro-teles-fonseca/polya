@@ -1,6 +1,4 @@
 
-library(digit.analysis)
-
 context("*_to_prob() and *_interpret()")
 
 testthat::test_that("test bfactor_to_prob", {
@@ -205,3 +203,4 @@ testthat::test_that("test bfactor_log_interpret log 10", {
     )
   )
 })
+

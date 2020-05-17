@@ -1,6 +1,4 @@
 
-library(digit.analysis)
-
 context("Bayes factors - Bin vs Multinom match")
 
 testthat::test_that("Austria log10(BF), unif prior", {
