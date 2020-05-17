@@ -1,6 +1,13 @@
-# ----------------------------------------------------------------------------------------
-# Binomial - Beta model: Bayes factor
-# ----------------------------------------------------------------------------------------
+
+#' Bayes Factors for Binomial point null hypotheses
+#'
+#' Computes Bayes factors in favour of a point null hypothesis in the context of a Binomial statistical model with a Beta prior.
+#' @param x Atomic vector of the type integer, double or character.
+#' @param sucess Number or character indicating which level of \code{x} corresponds to a sucess.
+#' @param null.par The parameter of the Binomial distribution under the null hipothesis.
+#' @param a, b Shape parameters of the Beta prior. Both must be greater than zero
+#'
+#' @export
 
 bfactor_binomial <- function(
   x,
@@ -62,9 +69,11 @@ bfactor_binomial <- function(
   }
 }
 
-# ----------------------------------------------------------------------------------------
-# Multinomial - Dirichlet model: Bayes factor
-# ----------------------------------------------------------------------------------------
+#' Bayes Factors for Multinomial point null hypotheses
+#'
+#' Computes Bayes factors in favour of a point null hypothesis in the context of a Multinomial statistical model with a Dirichlet prior.
+#'
+#' @export
 
 bfactor_multinomial <- function(
   x,
@@ -137,6 +146,8 @@ bfactor_multinomial <- function(
 # Function to interpret the evidence provided by the data in favour of the null hypothesis
 # ----------------------------------------------------------------------------------------
 
+#' @export
+
 bfactor_interpret <- function(bf) {
 
   bf <- unname(bf)
@@ -171,9 +182,14 @@ bfactor_log_interpret <- function(l_bf, base = exp(1)) {
   c("Evidence" = evidence)
 }
 
-# ----------------------------------------------------------------------------------------
-# Function to transform Bayes factors into posterior probabilities of the null hipothesis
-# ----------------------------------------------------------------------------------------
+
+#' Use Bayes factors to Update Prior Probabilities to Posterior Probabilities
+#'
+#' @param bf a Bayes factor
+#' @param pi_null The prior probability of the null hypothesis.
+
+
+#' @export
 
 bfactor_to_prob <- function(bf, pi_null = .5) {
 
@@ -195,7 +211,7 @@ bfactor_to_prob <- function(bf, pi_null = .5) {
 }
 
 
-
-
+bfactor_to_prob(.5, pi_null = .1)
+.5/1.5
 
 
