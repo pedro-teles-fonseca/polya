@@ -68,11 +68,11 @@ bfactor_binomial <- function(
   bfactor <- exp(log.bfactor)
 
   if(transf == "log"){
-    c("log(BF)" = log.bfactor)
+    log.bfactor
   } else if(transf == "log10"){
-    c("log10(BF)" = log10(bfactor))
+    log10(bfactor)
   } else {
-    c("BF" = bfactor)
+    bfactor
   }
 }
 
@@ -141,17 +141,13 @@ bfactor_multinomial <- function(
     }
 
     if(transf == "log"){
-      c("log(BF)" =  log(bfactor(counts, null_par, hyper_par)))
+      log(bfactor(counts, null_par, hyper_par))
     } else if(transf == "log10"){
-      c("log10(BF)" =  log10(bfactor(counts, null_par, hyper_par)))
+      log10(bfactor(counts, null_par, hyper_par))
     } else {
-      c("BF" =  bfactor(counts, null_par, hyper_par))
+      bfactor(counts, null_par, hyper_par)
     }
 }
-
-# ----------------------------------------------------------------------------------------
-# Function to interpret the evidence provided by the data in favour of the null hypothesis
-# ----------------------------------------------------------------------------------------
 
 #' @export
 
@@ -159,26 +155,21 @@ bfactor_interpret <- function(bf) {
 
   bf <- unname(bf)
 
-  evidence <- ifelse(bf < 1, "Negative",
-                ifelse(bf < 3.2, "Weak",
-                  ifelse(bf < 10, "Substantial",
-                    ifelse(bf < 100, "Strong",
-                      "Decisive")
+  ifelse(bf < 1, "Negative",
+         ifelse(bf < 3.2, "Weak",
+                ifelse(bf < 10, "Substantial",
+                       ifelse(bf < 100, "Strong",
+                              "Decisive")
       )
     )
   )
-  c("Evidence" = evidence)
 }
-
-# ----------------------------------------------------------------------------------------
-# Function to interpret the evidence provided by the data in favor of the null hypothesis
-# ----------------------------------------------------------------------------------------
 
 bfactor_log_interpret <- function(l_bf, base = exp(1)) {
 
   l_bf <- unname(l_bf)
 
-  evidence <- ifelse(l_bf < log(1, base = base), "Negative",
+  ifelse(l_bf < log(1, base = base), "Negative",
     ifelse(l_bf < log(3.2, base = base), "Weak",
       ifelse(l_bf < log(10, base = base), "Substantial",
         ifelse(l_bf < log(100, base = base), "Strong",
@@ -186,7 +177,6 @@ bfactor_log_interpret <- function(l_bf, base = exp(1)) {
       )
     )
   )
-  c("Evidence" = evidence)
 }
 
 
@@ -213,7 +203,7 @@ bfactor_to_prob <- function(bf, pi_null = .5) {
     stop("Error: 'pi_null' must be between zero and one.")
   }
 
-  c("P(H0|X)" =  ((1 + ((1 - pi_null) / pi_null) * (1 / unname(bf)))) ^ (-1))
+  ((1 + ((1 - pi_null) / pi_null) * (1 / bf))) ^ (-1)
 
 }
 
