@@ -78,49 +78,43 @@ test.null.multinomial <- function(
 
 # Testing many binomial point null hypotheses
 # ------------------------------------------
-test.binomial.hypotheses <- function( # Function to compute Binomial-Beta model results (BL1 or BL2)
-  data,
+test.binomial.hypotheses <- function(
+  x,
+  success,
   null_par,
-  success = unique(data),
+  hyper_par = rep.int(1, length(null_par)),
   pi_null = .5,
-  a = 1,
-  b = 1,
-  log10 = TRUE,
+  transf = "level",
   bf_round = 2,
   probs_round = 3){
 
-  data <- data[!is.na(data)]
-  x <- as.numeric(table(data))
-  n <- length(data)
+  bfs <- mapply(FUN = bfactor_binomial, success, null_par, hyper_par, MoreArgs = list(x = x))
+  bfs_transf <- if(transf == "log"){log(bfs)} else if (transf == "log10") {log10(bfs)} else {bfs}
+  evidence <- sapply(FUN = bfactor_interpret, X =  bfs)
+  pp <- mapply(FUN = bfactor_to_prob, pi_null = pi_null, bf = bfs)
 
-    obs_prop <- as.numeric(table(data)[1])/n
-    z_stats <- (abs(obs_prop-null_par)-(1/(2*n)))/sqrt((null_par*(1-null_par))/n)
-    p_values <- 2 * (1-pnorm(abs(z_stats), 0, 1))
+  estimate <- vector(mode = "double", length = length(null_par))
+  pvalue <- vector(mode = "double", length = length(null_par))
 
-    digits <- 1:9
-
-    bf <- mapply(FUN = bfactor_binomial, null_par = null_par, success = success,  a = a, b = b,
-      MoreArgs = list(data = data))
-    pp <- mapply(FUN = bfactor_to_prob, pi_null = pi_null, bf = bf)
-
-  result <- data.frame(
-    "Digit" = digits,
-    "BayesFactors" = round(if(log10 == FALSE){bf} else{log10(bf)}, bf_round),
-    "Evidence" = ifelse(bf < 1, "Negative",
-      ifelse(bf < 3.2, "Weak",
-        ifelse(bf < 10, "Substantial",
-          ifelse(bf < 100, "Strong",
-            "Decisive")))
-    ),
-    "PostProb.H0" = round(pp, probs_round),
-    "P.value" = p_values
-  )
-
-  if(log10 == TRUE){names(result) <- gsub("BayesFactors", "log10(BayesFactors)", names(result))}
-  return(result)
-
+  for(par in seq_along(null_par)){
+    tst <- nigrini_z_test(x, success[par], null_par[par])
+    estimate[par] <- tst[["estimate"]]
+    pvalue[par] <- tst[["p.value"]]
   }
 
 
-# test.binomial.hypotheses(Austria.bl1, theta_benford(1))
+  result <- data.frame(
+    "BayesFactors" = round(bfs_transf, bf_round),
+    "Evidence" = evidence,
+    "PostProbH0" = round(pp, probs_round),
+    "ParEstimate" = round(estimate, probs_round),
+    "P.value" = round(pvalue, probs_round)
+  )
+
+  if(log10 == TRUE){names(result) <- gsub("BayesFactors", "log10(BayesFactors)", names(result))}
+  result
+
+  }
+
+#test.binomial.hypotheses(austria_bl1, 1:9, theta_benford(1), transf = "log10")
 
