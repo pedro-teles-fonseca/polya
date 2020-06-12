@@ -7,7 +7,7 @@ testthat::test_that("test bfactor_to_prob", {
       bfactor_to_prob(bfactor_multinomial(x = austria_bl1, categories = 1:9, null_par = theta_benford(1), transf = "log10")),
       3
     ),
-    c("P(H0|X)" = 1.477)
+    1.477
     )
 })
 
@@ -17,13 +17,13 @@ testthat::test_that("test bfactor_to_prob name", {
       bfactor_to_prob(bfactor_multinomial(x = austria_bl1, categories = 1:9, null_par = theta_benford(1), transf = "log10")),
       3
     ),
-    c("P(H0|X)" = 1.477)
+    1.477
   )
 })
 
 testthat::test_that("test bfactor_interpret 1", {
   expect_equal(
-    unname(sapply(round(
+    sapply(round(
       sapply(
         X = datalist_bl1,
         FUN = bfactor_multinomial,
@@ -33,7 +33,7 @@ testthat::test_that("test bfactor_interpret 1", {
       ),
       2
     )
-      , FUN = bfactor_interpret)),
+      , FUN = bfactor_interpret),
     c(
       "Negative",
       "Negative",
@@ -53,7 +53,7 @@ testthat::test_that("test bfactor_interpret 1", {
 
 testthat::test_that("test bfactor_interpret 2", {
   expect_equal(
-    unname(sapply(round(
+    sapply(round(
       sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
@@ -63,7 +63,7 @@ testthat::test_that("test bfactor_interpret 2", {
       ),
       2
     )
-      , FUN = bfactor_interpret)),
+      , FUN = bfactor_interpret),
     c(
       "Decisive",
       "Decisive",
@@ -83,7 +83,7 @@ testthat::test_that("test bfactor_interpret 2", {
 
 testthat::test_that("test bfactor_interpret 3", {
   expect_equal(
-    unname(sapply(round(
+    sapply(round(
       sapply(
         X = datalist_bl1,
         FUN = bfactor_multinomial,
@@ -93,7 +93,7 @@ testthat::test_that("test bfactor_interpret 3", {
       ),
       2
     )
-      , FUN = bfactor_interpret)),
+      , FUN = bfactor_interpret),
     c(
       "Strong",
       "Decisive",
@@ -113,7 +113,7 @@ testthat::test_that("test bfactor_interpret 3", {
 
 testthat::test_that("test bfactor_interpret 4", {
   expect_equal(
-    unname(sapply(round(
+    sapply(round(
       sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
@@ -123,7 +123,7 @@ testthat::test_that("test bfactor_interpret 4", {
       ),
       2
     )
-      , FUN = bfactor_interpret)),
+      , FUN = bfactor_interpret),
     c(
       "Decisive",
       "Decisive",
@@ -143,7 +143,7 @@ testthat::test_that("test bfactor_interpret 4", {
 
 testthat::test_that("test bfactor_log_interpret log", {
   expect_equal(
-    unname(sapply(round(
+    sapply(round(
       sapply(
         X = datalist_bl1,
         FUN = bfactor_multinomial,
@@ -154,7 +154,7 @@ testthat::test_that("test bfactor_log_interpret log", {
       ),
       2
     )
-      , FUN = bfactor_log_interpret)),
+      , FUN = bfactor_log_interpret),
     c(
       "Strong",
       "Decisive",
@@ -174,7 +174,7 @@ testthat::test_that("test bfactor_log_interpret log", {
 
 testthat::test_that("test bfactor_log_interpret log 10", {
   expect_equal(
-    unname(sapply(round(
+    sapply(round(
       sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
@@ -186,7 +186,7 @@ testthat::test_that("test bfactor_log_interpret log 10", {
       2
     )
       , FUN = bfactor_log_interpret,
-      base = 10)),
+      base = 10),
     c(
       "Decisive",
       "Decisive",

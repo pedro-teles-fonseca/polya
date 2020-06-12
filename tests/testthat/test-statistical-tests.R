@@ -91,211 +91,211 @@ testthat::test_that("Nigrini test portugal_bl1", {
     c(0.000, 0.000, 0.662, 0.000, 0.726, 0.848, 0.077, 0.591, 0.959))
 })
 
-aux_df_1 <-   data.frame(rbind(
-  test.null.binomial(austria_bl1, null_par = theta_benford(1)[1], success = 1, transf = "log10"),
-  test.null.binomial(austria_bl1, null_par = theta_benford(1)[2], success = 2, transf = "log10"),
-  test.null.binomial(austria_bl1, null_par = theta_benford(1)[3], success = 3, transf = "log10"),
-  test.null.binomial(austria_bl1, null_par = theta_benford(1)[4], success = 4, transf = "log10"),
-  test.null.binomial(austria_bl1, null_par = theta_benford(1)[5], success = 5, transf = "log10"),
-  test.null.binomial(austria_bl1, null_par = theta_benford(1)[6], success = 6, transf = "log10"),
-  test.null.binomial(austria_bl1, null_par = theta_benford(1)[7], success = 7, transf = "log10"),
-  test.null.binomial(austria_bl1, null_par = theta_benford(1)[8], success = 8, transf = "log10"),
-  test.null.binomial(austria_bl1, null_par = theta_benford(1)[9], success = 9, transf = "log10")
-), stringsAsFactors = FALSE)
-
-aux_df_1[[1]] <- as.character(aux_df_1[[1]])
-aux_df_1[[2]] <- as.numeric(aux_df_1[[2]])
-aux_df_1[[3]] <- as.character(aux_df_1[[3]])
-aux_df_1[[4]] <- as.numeric(aux_df_1[[4]])
-
-aux_df_2 <- data.frame(rbind(
-  c("austria_bl1",     0.07,       "Weak",    0.542),
-  c("austria_bl1",     1.29,       "Strong",        0.951),
-  c("austria_bl1",     1.32,       "Strong",        0.954),
-  c("austria_bl1",     -0.62,      "Negative",    0.194),
-  c("austria_bl1",     -1.78,      "Negative",    0.016),
-  c("austria_bl1",     1.55,       "Strong",        0.973),
-  c("austria_bl1",     -3.02,      "Negative",    0.001),
-  c("austria_bl1",     1.25,       "Strong",        0.947),
-  c("austria_bl1",     1.48,       "Strong",        0.968)
-), stringsAsFactors = FALSE)
-
-aux_df_2[[1]] <- as.character(aux_df_2[[1]])
-aux_df_2[[2]] <- as.numeric(aux_df_2[[2]])
-aux_df_2[[3]] <- as.character(aux_df_2[[3]])
-aux_df_2[[4]] <- as.numeric(aux_df_2[[4]])
-
 testthat::test_that("test.null.binomial test 1", {
-  expect_equal(unname(aux_df_1), unname(aux_df_2))})
+  df1 <-   data.frame(rbind(
+    test.null.binomial(austria_bl1, null_par = theta_benford(1)[1], success = 1, transf = "log10"),
+    test.null.binomial(austria_bl1, null_par = theta_benford(1)[2], success = 2, transf = "log10"),
+    test.null.binomial(austria_bl1, null_par = theta_benford(1)[3], success = 3, transf = "log10"),
+    test.null.binomial(austria_bl1, null_par = theta_benford(1)[4], success = 4, transf = "log10"),
+    test.null.binomial(austria_bl1, null_par = theta_benford(1)[5], success = 5, transf = "log10"),
+    test.null.binomial(austria_bl1, null_par = theta_benford(1)[6], success = 6, transf = "log10"),
+    test.null.binomial(austria_bl1, null_par = theta_benford(1)[7], success = 7, transf = "log10"),
+    test.null.binomial(austria_bl1, null_par = theta_benford(1)[8], success = 8, transf = "log10"),
+    test.null.binomial(austria_bl1, null_par = theta_benford(1)[9], success = 9, transf = "log10")
+  ), stringsAsFactors = FALSE)
 
-testthat::test_that("test.null.binomial test 2", {
+  df1[[1]] <- as.character(df1[[1]])
+  df1[[2]] <- as.numeric(df1[[2]])
+  df1[[3]] <- as.character(df1[[3]])
+  df1[[4]] <- as.numeric(df1[[4]])
+
+  df2 <- data.frame(rbind(
+    c("austria_bl1",     0.07,       "Weak",    0.542),
+    c("austria_bl1",     1.29,       "Strong",        0.951),
+    c("austria_bl1",     1.32,       "Strong",        0.954),
+    c("austria_bl1",     -0.62,      "Negative",    0.194),
+    c("austria_bl1",     -1.78,      "Negative",    0.016),
+    c("austria_bl1",     1.55,       "Strong",        0.973),
+    c("austria_bl1",     -3.02,      "Negative",    0.001),
+    c("austria_bl1",     1.25,       "Strong",        0.947),
+    c("austria_bl1",     1.48,       "Strong",        0.968)
+  ), stringsAsFactors = FALSE)
+
+  df2[[1]] <- as.character(df2[[1]])
+  df2[[2]] <- as.numeric(df2[[2]])
+  df2[[3]] <- as.character(df2[[3]])
+  df2[[4]] <- as.numeric(df2[[4]])
+
+  expect_equal(unname(df1), unname(df2))
+
   expect_equal(
-    unname(bfactor_interpret(10^(aux_df_2$X2))),
-    unname(aux_df_1[[3]]))
-})
+    unname(bfactor_interpret(10^(df2$X2))),
+    unname(df1[[3]]))
 
-aux_df_3 <-   data.frame(rbind(
-  test.null.binomial(portugal_bl1, null_par = theta_benford(1)[1], success = 1, hyper.par = c(22*theta_benford(1)[1], 22-22*theta_benford(1)[1]), transf = "log10"),
-  test.null.binomial(portugal_bl1, null_par = theta_benford(1)[2], success = 2, hyper.par = c(22*theta_benford(1)[2], 22-22*theta_benford(1)[2]), transf = "log10"),
-  test.null.binomial(portugal_bl1, null_par = theta_benford(1)[3], success = 3, hyper.par = c(22*theta_benford(1)[3], 22-22*theta_benford(1)[3]),transf = "log10"),
-  test.null.binomial(portugal_bl1, null_par = theta_benford(1)[4], success = 4, hyper.par = c(22*theta_benford(1)[4], 22-22*theta_benford(1)[4]),transf = "log10"),
-  test.null.binomial(portugal_bl1, null_par = theta_benford(1)[5], success = 5, hyper.par = c(22*theta_benford(1)[5], 22-22*theta_benford(1)[5]),transf = "log10"),
-  test.null.binomial(portugal_bl1, null_par = theta_benford(1)[6], success = 6, hyper.par = c(22*theta_benford(1)[6], 22-22*theta_benford(1)[6]),transf = "log10"),
-  test.null.binomial(portugal_bl1, null_par = theta_benford(1)[7], success = 7, hyper.par = c(22*theta_benford(1)[7], 22-22*theta_benford(1)[7]),transf = "log10"),
-  test.null.binomial(portugal_bl1, null_par = theta_benford(1)[8], success = 8, hyper.par = c(22*theta_benford(1)[8], 22-22*theta_benford(1)[8]),transf = "log10"),
-  test.null.binomial(portugal_bl1, null_par = theta_benford(1)[9], success = 9, hyper.par = c(22*theta_benford(1)[9], 22-22*theta_benford(1)[9]),transf = "log10")
-), stringsAsFactors = FALSE)
-
-aux_df_3[[2]] <- as.numeric(aux_df_3[[2]])
-aux_df_3[[3]] <- as.character(aux_df_3[[3]])
-aux_df_3[[4]] <- as.numeric(aux_df_3[[4]])
-
-aux_df_4 <- data.frame(
-rbind(
-c(12.12, "Decisive", 1),
-c(35.27, "Decisive", 1),
-c(45.96, "Decisive", 1),
-c(45.44, "Decisive", 1),
-c(51.89, "Decisive", 1),
-c(53.47, "Decisive", 1),
-c(53.95, "Decisive", 1),
-c(55.46, "Decisive", 1),
-c(56.28, "Decisive", 1)
-), stringsAsFactors = FALSE)
-
-aux_df_4[[1]] <- as.numeric(aux_df_4[[1]])
-aux_df_4[[2]] <- as.character(aux_df_4[[2]])
-aux_df_4[[3]] <- as.numeric(aux_df_4[[3]])
+  })
 
 testthat::test_that("test.null.binomial test 3", {
+  df1 <-   data.frame(rbind(
+    test.null.binomial(portugal_bl1, null_par = theta_benford(1)[1], success = 1, hyper.par = c(22*theta_benford(1)[1], 22-22*theta_benford(1)[1]), transf = "log10"),
+    test.null.binomial(portugal_bl1, null_par = theta_benford(1)[2], success = 2, hyper.par = c(22*theta_benford(1)[2], 22-22*theta_benford(1)[2]), transf = "log10"),
+    test.null.binomial(portugal_bl1, null_par = theta_benford(1)[3], success = 3, hyper.par = c(22*theta_benford(1)[3], 22-22*theta_benford(1)[3]),transf = "log10"),
+    test.null.binomial(portugal_bl1, null_par = theta_benford(1)[4], success = 4, hyper.par = c(22*theta_benford(1)[4], 22-22*theta_benford(1)[4]),transf = "log10"),
+    test.null.binomial(portugal_bl1, null_par = theta_benford(1)[5], success = 5, hyper.par = c(22*theta_benford(1)[5], 22-22*theta_benford(1)[5]),transf = "log10"),
+    test.null.binomial(portugal_bl1, null_par = theta_benford(1)[6], success = 6, hyper.par = c(22*theta_benford(1)[6], 22-22*theta_benford(1)[6]),transf = "log10"),
+    test.null.binomial(portugal_bl1, null_par = theta_benford(1)[7], success = 7, hyper.par = c(22*theta_benford(1)[7], 22-22*theta_benford(1)[7]),transf = "log10"),
+    test.null.binomial(portugal_bl1, null_par = theta_benford(1)[8], success = 8, hyper.par = c(22*theta_benford(1)[8], 22-22*theta_benford(1)[8]),transf = "log10"),
+    test.null.binomial(portugal_bl1, null_par = theta_benford(1)[9], success = 9, hyper.par = c(22*theta_benford(1)[9], 22-22*theta_benford(1)[9]),transf = "log10")
+  ), stringsAsFactors = FALSE)
+
+  df1[[2]] <- as.numeric(df1[[2]])
+  df1[[3]] <- as.character(df1[[3]])
+  df1[[4]] <- as.numeric(df1[[4]])
+
+  df2 <- data.frame(
+    rbind(
+      c(12.12, "Decisive", 1),
+      c(35.27, "Decisive", 1),
+      c(45.96, "Decisive", 1),
+      c(45.44, "Decisive", 1),
+      c(51.89, "Decisive", 1),
+      c(53.47, "Decisive", 1),
+      c(53.95, "Decisive", 1),
+      c(55.46, "Decisive", 1),
+      c(56.28, "Decisive", 1)
+    ), stringsAsFactors = FALSE)
+
+  df2[[1]] <- as.numeric(df2[[1]])
+  df2[[2]] <- as.character(df2[[2]])
+  df2[[3]] <- as.numeric(df2[[3]])
+
   expect_equal(
-    (unname(aux_df_3[2:4])),
-    (unname(aux_df_4)))
+    (unname(df1[2:4])),
+    (unname(df2)))
 })
 
-df1 <- data.frame(rbind(
-test.null.multinomial(datalist_bl1[[1]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[1]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl1[[2]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[2]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl1[[3]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[3]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl1[[4]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[4]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl1[[5]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[5]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl1[[6]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[6]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl1[[7]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[7]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl1[[8]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[8]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl1[[9]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[9]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl1[[10]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-test.null.multinomial(datalist_bl2[[10]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10")
-), row.names =  NULL)[, 2:5]
+testthat::test_that("test.null.multinomial unif prior", {
+  df1 <- data.frame(rbind(
+    test.null.multinomial(datalist_bl1[[1]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[1]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl1[[2]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[2]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl1[[3]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[3]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl1[[4]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[4]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl1[[5]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[5]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl1[[6]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[6]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl1[[7]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[7]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl1[[8]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[8]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl1[[9]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[9]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl1[[10]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
+    test.null.multinomial(datalist_bl2[[10]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10")
+  ), row.names =  NULL)[, 2:5]
 
-df1[1] <- as.double(df1[[1]])
-df1[2] <- as.character(df1[[2]])
-df1[3] <- as.double(df1[[3]])
-df1[4] <- as.double(df1[[4]])
+  df1[1] <- as.double(df1[[1]])
+  df1[2] <- as.character(df1[[2]])
+  df1[3] <- as.double(df1[[3]])
+  df1[4] <- as.double(df1[[4]])
 
-df2 <- data.frame(
-rbind(
-c(-3.10, "Negative", 0.001, 0.000),
-c(5.05, "Decisive", 1.000, 0.082),
-c(-1.78, "Negative", 0.016, 0.000),
-c(5.90, "Decisive", 1.000, 0.236),
-c(1.06, "Strong", 0.919, 0.000),
-c(4.79, "Decisive", 1.000, 0.068),
-c(-1.40, "Negative", 0.039, 0.000),
-c(3.51, "Decisive", 1.000, 0.005),
-c(1.21, "Strong", 0.942, 0.000),
-c(5.78, "Decisive", 1.000, 0.175),
-c(0.89, "Substantial", 0.885, 0.000),
-c(4.19, "Decisive", 1.000, 0.016),
-c(-2.37, "Negative", 0.004, 0.000),
-c(6.34, "Decisive", 1.000, 0.387),
-c(1.23, "Strong", 0.945, 0.000),
-c(5.12, "Decisive", 1.000, 0.075),
-c(-8.88, "Negative", 0.000, 0.000),
-c(3.39, "Decisive", 1.000, 0.007),
-c(3.81, "Decisive", 1.000, 0.009),
-c(4.89, "Decisive", 1.000, 0.060)
-), stringsAsFactors = FALSE, row.names =  NULL)
+  df2 <- data.frame(
+    rbind(
+      c(-3.10, "Negative", 0.001, 0.000),
+      c(5.05, "Decisive", 1.000, 0.082),
+      c(-1.78, "Negative", 0.016, 0.000),
+      c(5.90, "Decisive", 1.000, 0.236),
+      c(1.06, "Strong", 0.919, 0.000),
+      c(4.79, "Decisive", 1.000, 0.068),
+      c(-1.40, "Negative", 0.039, 0.000),
+      c(3.51, "Decisive", 1.000, 0.005),
+      c(1.21, "Strong", 0.942, 0.000),
+      c(5.78, "Decisive", 1.000, 0.175),
+      c(0.89, "Substantial", 0.885, 0.000),
+      c(4.19, "Decisive", 1.000, 0.016),
+      c(-2.37, "Negative", 0.004, 0.000),
+      c(6.34, "Decisive", 1.000, 0.387),
+      c(1.23, "Strong", 0.945, 0.000),
+      c(5.12, "Decisive", 1.000, 0.075),
+      c(-8.88, "Negative", 0.000, 0.000),
+      c(3.39, "Decisive", 1.000, 0.007),
+      c(3.81, "Decisive", 1.000, 0.009),
+      c(4.89, "Decisive", 1.000, 0.060)
+    ), stringsAsFactors = FALSE, row.names =  NULL)
 
-df2[1] <- as.double(df2[[1]])
-df2[2] <- as.character(df2[[2]])
-df2[3] <- as.double(df2[[3]])
-df2[4] <- as.double(df2[[4]])
+  df2[1] <- as.double(df2[[1]])
+  df2[2] <- as.character(df2[[2]])
+  df2[3] <- as.double(df2[[3]])
+  df2[4] <- as.double(df2[[4]])
 
-testthat::test_that("test.null.binomial test 4", {
   expect_equal(
     unname(df1),
     unname(df2))
 })
 
-df3 <- data.frame(rbind(
-  test.null.multinomial(datalist_bl1[[1]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[1]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
-  test.null.multinomial(datalist_bl1[[2]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[2]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
-  test.null.multinomial(datalist_bl1[[3]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[3]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
-  test.null.multinomial(datalist_bl1[[4]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[4]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
-  test.null.multinomial(datalist_bl1[[5]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[5]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
-  test.null.multinomial(datalist_bl1[[6]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[6]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
-  test.null.multinomial(datalist_bl1[[7]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[7]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
-  test.null.multinomial(datalist_bl1[[8]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[8]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
-  test.null.multinomial(datalist_bl1[[9]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[9]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
-  test.null.multinomial(datalist_bl1[[10]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
-  test.null.multinomial(datalist_bl2[[10]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10")
-), row.names =  NULL)[, 2:5]
+testthat::test_that("test.null.multinomial dir prior (c=1)", {
+  df1 <- data.frame(rbind(
+    test.null.multinomial(datalist_bl1[[1]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[1]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[2]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[2]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[3]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[3]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[4]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[4]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[5]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[5]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[6]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[6]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[7]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[7]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[8]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[8]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[9]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[9]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[10]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[10]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10")
+  ), row.names =  NULL)[, 2:5]
 
-df3[1] <- as.double(df3[[1]])
-df3[2] <- as.character(df3[[2]])
-df3[3] <- as.double(df3[[3]])
-df3[4] <- as.double(df3[[4]])
+  df1[1] <- as.double(df1[[1]])
+  df1[2] <- as.character(df1[[2]])
+  df1[3] <- as.double(df1[[3]])
+  df1[4] <- as.double(df1[[4]])
 
-df4 <- data.frame(
-  rbind(
-    c(1.93, "Strong", 0.988,  0.000),
-    c(11.27, "Decisive", 1.000,  0.082),
-    c(3.35, "Decisive", 1.000,  0.000),
-    c(12.20, "Decisive", 1.000,  0.236),
-    c(6.47, "Decisive", 1.000,  0.000),
-    c(11.11, "Decisive", 1.000,  0.068),
-    c(4.02, "Decisive", 1.000,  0.000),
-    c(9.74, "Decisive", 1.000,  0.005),
-    c(6.14, "Decisive", 1.000,  0.000),
-    c(12.03, "Decisive", 1.000,  0.175),
-    c(5.87, "Decisive", 1.000,  0.000),
-    c(10.44, "Decisive", 1.000,  0.016),
-    c(2.48, "Decisive", 0.997,  0.000),
-    c(12.64, "Decisive", 1.000,  0.387),
-    c(6.12, "Decisive", 1.000,  0.000),
-    c(11.39, "Decisive", 1.000,  0.075),
-    c(-4.33, "Negative", 0.000,  0.000),
-    c(9.61,"Decisive", 1.000,  0.007),
-    c(8.98, "Decisive", 1.000,  0.009),
-    c(11.13, "Decisive", 1.000,  0.060)
-  ), stringsAsFactors = FALSE, row.names =  NULL)
+  df2 <- data.frame(
+    rbind(
+      c(1.93, "Strong", 0.988,  0.000),
+      c(11.27, "Decisive", 1.000,  0.082),
+      c(3.35, "Decisive", 1.000,  0.000),
+      c(12.20, "Decisive", 1.000,  0.236),
+      c(6.47, "Decisive", 1.000,  0.000),
+      c(11.11, "Decisive", 1.000,  0.068),
+      c(4.02, "Decisive", 1.000,  0.000),
+      c(9.74, "Decisive", 1.000,  0.005),
+      c(6.14, "Decisive", 1.000,  0.000),
+      c(12.03, "Decisive", 1.000,  0.175),
+      c(5.87, "Decisive", 1.000,  0.000),
+      c(10.44, "Decisive", 1.000,  0.016),
+      c(2.48, "Decisive", 0.997,  0.000),
+      c(12.64, "Decisive", 1.000,  0.387),
+      c(6.12, "Decisive", 1.000,  0.000),
+      c(11.39, "Decisive", 1.000,  0.075),
+      c(-4.33, "Negative", 0.000,  0.000),
+      c(9.61,"Decisive", 1.000,  0.007),
+      c(8.98, "Decisive", 1.000,  0.009),
+      c(11.13, "Decisive", 1.000,  0.060)
+    ), stringsAsFactors = FALSE, row.names =  NULL)
 
-df4[1] <- as.double(df4[[1]])
-df4[2] <- as.character(df4[[2]])
-df4[3] <- as.double(df4[[3]])
-df4[4] <- as.double(df4[[4]])
+  df2[1] <- as.double(df2[[1]])
+  df2[2] <- as.character(df2[[2]])
+  df2[3] <- as.double(df2[[3]])
+  df2[4] <- as.double(df2[[4]])
 
-testthat::test_that("test.null.binomial test 4", {
   expect_equal(
-    unname(df3),
-    unname(df4))
+    unname(df1),
+    unname(df2))
 })
 

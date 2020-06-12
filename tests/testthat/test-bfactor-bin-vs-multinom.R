@@ -35,7 +35,7 @@ testthat::test_that("Austria log10(BF), unif prior", {
     ),
     2
   ),
-    c("log10(BF)" = 0.07))
+    0.07)
 })
 
 testthat::test_that("Austria log10(BF), unif prior", {
@@ -49,7 +49,7 @@ testthat::test_that("Austria log10(BF), unif prior", {
     ),
     2
   ),
-    c("log10(BF)" = 0.07))
+    0.07)
 })
 
 
@@ -63,7 +63,7 @@ testthat::test_that("Austria log10(BF), unif prior", {
       transf = "log10"),
     2
   ),
-    c("log10(BF)" = 0.07))
+    0.07)
 })
 
 testthat::test_that("Austria log10(BF), unif prior", {
@@ -76,7 +76,7 @@ testthat::test_that("Austria log10(BF), unif prior", {
       transf = "log10"),
     2
   ),
-    c("log10(BF)" = 0.07))
+    0.07)
 })
 
 testthat::test_that("Austria log10(BF), unif prior", {
@@ -89,7 +89,7 @@ testthat::test_that("Austria log10(BF), unif prior", {
       transf = "log10") ,
     2
   ),
-    c("log10(BF)" = 0.07))
+    0.07)
 })
 
 testthat::test_that("Austria log10(BF), unif prior", {
@@ -103,7 +103,7 @@ testthat::test_that("Austria log10(BF), unif prior", {
     ,
     2
   ),
-    c("log10(BF)" = 0.07))
+    0.07)
 })
 
 
