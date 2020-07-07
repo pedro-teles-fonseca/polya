@@ -27,7 +27,7 @@ msdigit <- function(x){
   return(x)
 }
 
-#' Teturns the second most significant digit for each element in the input vector
+#' Returns the second most significant digit for each element in the input vector
 
 smsdigit <- function(x){
 
@@ -45,5 +45,18 @@ theta_benford <- function(d){
   }
   return(theta_benford)
 }
+
+#' Multivariate Beta Function
+#' @export
+
+lmbeta <- function(x){
+
+  sum(lgamma(x)) - lgamma(sum(x))
+}
+
+
+
+
+
 
 
