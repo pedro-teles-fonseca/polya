@@ -134,8 +134,7 @@ bfactor_multinomial <- function(
 
   bfactor <- function(counts, null_par, hyper_par) {
 
-      log.bfactor <- sum(counts * log(null_par)) + sum(lgamma(hyper_par)) + lgamma(sum(hyper_par + counts)) -
-        lgamma(sum(hyper_par)) - sum(lgamma(hyper_par + counts))
+      log.bfactor <- sum(counts * log(null_par)) + multi_lbeta(hyper_par) - multi_lbeta(hyper_par + counts)
 
       exp(log.bfactor)
     }
