@@ -29,11 +29,16 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("pedro-teles-fonseca/polya")
 ```
 
-## Example
+## Usage
 
 This is a basic example which shows you how to solve a common problem:
 
-``` r
-library(polya)
-## basic example code
-```
+## Getting Help
+
+If you find a bug, please file an issue with a minimal reproducible
+example on
+[GitHub](https://github.com/pedro-teles-fonseca/polya/issues). Feature
+requests are also welcome. You can contact me at
+<pedro.teles.fonseca@outlook.com>.
+
+## References
