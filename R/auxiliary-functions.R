@@ -66,6 +66,3 @@ multi_lbeta <- function(a){
 
 
 
-
-
-
