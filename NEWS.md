@@ -1,3 +1,3 @@
 # polya 1.0.0
 
-* This is the first release of `pcal`.
+* This is the first CRAN release of `polya`.
