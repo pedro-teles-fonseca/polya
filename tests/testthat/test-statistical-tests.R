@@ -153,15 +153,15 @@ testthat::test_that("test.null.binomial test 3", {
 
   df2 <- data.frame(
     rbind(
-      c(12.12, "Decisive", 1),
-      c(35.27, "Decisive", 1),
-      c(45.96, "Decisive", 1),
-      c(45.44, "Decisive", 1),
-      c(51.89, "Decisive", 1),
-      c(53.47, "Decisive", 1),
-      c(53.95, "Decisive", 1),
-      c(55.46, "Decisive", 1),
-      c(56.28, "Decisive", 1)
+      c(-10.22, "Negative", 0.000),
+      c(-3.90, "Negative",  0.000),
+      c(0.68, "Substantial", 0.828),
+      c(-3.82,"Negative",  0.000),
+      c(0.70, "Substantial", 0.834),
+      c(0.75, "Substantial", 0.848),
+      c(-0.11, "Negative", 0.435),
+      c(0.70, "Substantial", 0.834),
+      c(0.76, "Substantial", 0.853)
     ), stringsAsFactors = FALSE)
 
   df2[[1]] <- as.numeric(df2[[1]])
