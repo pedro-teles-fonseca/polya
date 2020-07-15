@@ -62,13 +62,10 @@ bfactor_binomial <- function(
   a <- hyper_par[1]
   b <- hyper_par[2]
 
-  log.bfactor <- successes * log(null_par) + (n - successes) * log(1 - null_par) + lgamma(a) + lgamma(b) + lgamma(n + a + b) -
-      (lgamma(a + b) + lgamma(n + a - successes) + lgamma(successes + a))
-
-  bfactor <- exp(log.bfactor)
+  bfactor <- exp(successes * log(null_par) + (n - successes) * log(1 - null_par) + lbeta(a, b) - lbeta(successes + a, n + b - successes))
 
   if(transf == "log"){
-    log.bfactor
+    log(bfactor)
   } else if(transf == "log10"){
     log10(bfactor)
   } else {
@@ -132,19 +129,14 @@ bfactor_multinomial <- function(
   categories <- factor(categories, levels = categories)
   counts <- table(x[!is.na(x)])[levels(categories)]
 
-  bfactor <- function(counts, null_par, hyper_par) {
-
-      log.bfactor <- sum(counts * log(null_par)) + multi_lbeta(hyper_par) - multi_lbeta(hyper_par + counts)
-
-      exp(log.bfactor)
-    }
+  bfactor <- exp(sum(counts * log(null_par)) + lbeta_multi(hyper_par) - lbeta_multi(hyper_par + counts))
 
     if(transf == "log"){
-      log(bfactor(counts, null_par, hyper_par))
+      log(bfactor)
     } else if(transf == "log10"){
-      log10(bfactor(counts, null_par, hyper_par))
+      log10(bfactor)
     } else {
-      bfactor(counts, null_par, hyper_par)
+      bfactor
     }
 }
 
