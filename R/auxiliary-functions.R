@@ -49,7 +49,7 @@ theta_benford <- function(d){
 #' Multivariate Beta Function
 #' @export
 
-multi_beta <- function(a){
+beta_multi <- function(a){
 
   exp(sum(lgamma(a)) - lgamma(sum(a)))
 }
@@ -57,7 +57,7 @@ multi_beta <- function(a){
 #' Multivariate log Beta Function
 #' @export
 
-multi_lbeta <- function(a){
+lbeta_multi <- function(a){
 
   sum(lgamma(a)) - lgamma(sum(a))
 }
