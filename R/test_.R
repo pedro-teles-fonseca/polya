@@ -22,8 +22,8 @@ test.null.binomial <- function(
   results <- data.frame(
     deparse(substitute(x)),
     round(bf_transf, bf_round),
-    bfactor_interpret(bf),
-    round(bfactor_to_prob(bf), probs_round),
+    pcal::bfactor_interpret(bf),
+    round(pcal::bfactor_to_prob(bf), probs_round),
     row.names = NULL
   )
 
@@ -58,8 +58,8 @@ test.null.multinomial <- function(
   results <- data.frame(
     deparse(substitute(x)),
     round(bf_transf, bf_round),
-    bfactor_interpret(bf),
-    round(bfactor_to_prob(bf), probs_round),
+    pcal::bfactor_interpret(bf),
+    round(pcal::bfactor_to_prob(bf), probs_round),
     row.names = NULL,
     round(chisq[["p.value"]], probs_round)
   )
@@ -90,8 +90,8 @@ test.binomial.hypotheses <- function(
 
   bfs <- mapply(FUN = bfactor_binomial, success, null_par, hyper_par, MoreArgs = list(x = x))
   bfs_transf <- if(transf == "log"){log(bfs)} else if (transf == "log10") {log10(bfs)} else {bfs}
-  evidence <- sapply(FUN = bfactor_interpret, X =  bfs)
-  pp <- mapply(FUN = bfactor_to_prob, pi_null = pi_null, bf = bfs)
+  evidence <- sapply(FUN = pcal::bfactor_interpret, X =  bfs)
+  pp <- mapply(FUN = pcal::bfactor_to_prob, pi_null = pi_null, bf = bfs)
 
   estimate <- vector(mode = "double", length = length(null_par))
   pvalue <- vector(mode = "double", length = length(null_par))
