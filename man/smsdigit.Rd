@@ -2,10 +2,10 @@
 % Please edit documentation in R/auxiliary-functions.R
 \name{smsdigit}
 \alias{smsdigit}
-\title{Teturns the second most significant digit for each element in the input vector}
+\title{Returns the second most significant digit for each element in the input vector}
 \usage{
 smsdigit(x)
 }
 \description{
-Teturns the second most significant digit for each element in the input vector
+Returns the second most significant digit for each element in the input vector
 }

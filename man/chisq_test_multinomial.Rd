@@ -4,7 +4,7 @@
 \alias{chisq_test_multinomial}
 \title{Pearson's Chi-Squared Test for Multinomial Proportions}
 \usage{
-chisq_test_multinomial(x, null.par, categories)
+chisq_test_multinomial(x, categories, null_par)
 }
 \description{
 Pearson's Chi-Squared Test for Multinomial Proportions

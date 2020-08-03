@@ -4,17 +4,22 @@
 \alias{bfactor_binomial}
 \title{Bayes Factors for Binomial point null hypotheses}
 \usage{
-bfactor_binomial(x, success, null.par, a = 1, b = 1, transf = "level")
+bfactor_binomial(x, success, null_par, hyper_par = c(1, 1), transf = "level")
 }
 \arguments{
 \item{x}{Atomic vector of the type integer, double or character.}
 
 \item{success}{Number or character indicating which level of \code{x} corresponds to a success.}
 
-\item{null.par}{The parameter of the Binomial distribution under the null hipothesis.}
+\item{null_par}{The parameter of the Binomial distribution under the null hipothesis.}
 
 \item{a, }{b Shape parameters of the Beta prior. Both must be greater than zero}
 }
 \description{
 Computes Bayes factors in favour of a point null hypothesis in the context of a Binomial statistical model with a Beta prior.
+}
+\examples{
+
+bfactor_binomial(austria_bl1, 1, theta_benford(1)[1])
+
 }

@@ -4,7 +4,7 @@
 \alias{nigrini_z_test}
 \title{Nigrini's Z-test for Binomial Proportions with Continuity Correction}
 \usage{
-nigrini_z_test(x, success, null.par)
+nigrini_z_test(x, success, null_par)
 }
 \description{
 Nigrini's Z-test for Binomial Proportions with Continuity Correction

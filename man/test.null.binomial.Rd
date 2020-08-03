@@ -6,10 +6,9 @@
 \usage{
 test.null.binomial(
   x,
-  null.par,
   success,
-  a = 1,
-  b = 1,
+  null_par,
+  hyper.par = c(1, 1),
   pi_null = 0.5,
   transf = "level",
   bf_round = 2,
@@ -21,5 +20,5 @@ Bayes Factors, Strength of Evidence, Posterior probabilities and Chi-Squared tes
 }
 \examples{
 
-test.null.binomial(austria_bl1, null.par = theta_benford(1)[1], success = 1, transf = "log10")
+test.null.binomial(austria_bl1, success = 1, null_par = theta_benford(1)[1])
 }
