@@ -129,7 +129,7 @@ bfactor_multinomial <- function(
   categories <- factor(categories, levels = categories)
   counts <- table(x[!is.na(x)])[levels(categories)]
 
-  bfactor <- exp(sum(counts * log(null_par)) + lbeta_multi(hyper_par) - lbeta_multi(hyper_par + counts))
+  bfactor <- exp(sum(counts * log(null_par)) + lmbeta(hyper_par) - lmbeta(hyper_par + counts))
 
     if(transf == "log"){
       log(bfactor)
@@ -140,62 +140,6 @@ bfactor_multinomial <- function(
     }
 }
 
-#' @export
 
-bfactor_interpret <- function(bf) {
-
-  bf <- unname(bf)
-
-  ifelse(bf < 1, "Negative",
-         ifelse(bf < 3.2, "Weak",
-                ifelse(bf < 10, "Substantial",
-                       ifelse(bf < 100, "Strong",
-                              "Decisive")
-      )
-    )
-  )
-}
-
-bfactor_log_interpret <- function(l_bf, base = exp(1)) {
-
-  l_bf <- unname(l_bf)
-
-  ifelse(l_bf < log(1, base = base), "Negative",
-    ifelse(l_bf < log(3.2, base = base), "Weak",
-      ifelse(l_bf < log(10, base = base), "Substantial",
-        ifelse(l_bf < log(100, base = base), "Strong",
-          "Decisive")
-      )
-    )
-  )
-}
-
-
-#' Use Bayes factors to Update Prior Probabilities to Posterior Probabilities
-#'
-#' @param bf a Bayes factor
-#' @param pi_null The prior probability of the null hypothesis.
-
-
-#' @export
-
-bfactor_to_prob <- function(bf, pi_null = .5) {
-
-  if(any(!is.atomic(bf), !is.vector(bf) && !is.matrix(bf))){
-    stop("Invalid argument: 'x' must be an atomic vector or matrix.")
-  }
-  if(isFALSE(typeof(bf) %in% c("double", "integer"))){
-    stop("Invalid argument: typeof(bf) must be 'integer', 'double'.")
-  }
-  if(isFALSE(length(pi_null) == 1)){
-    stop("Error: 'pi_null' must be of length 1. ")
-  }
-  if(any(pi_null < 0, pi_null > 1, isFALSE(typeof(pi_null) %in% c("double", "integer")), is.null(pi_null), is.na(pi_null))){
-    stop("Error: 'pi_null' must be between zero and one.")
-  }
-
-  ((1 + ((1 - pi_null) / pi_null) * (1 / bf))) ^ (-1)
-
-}
 
 
