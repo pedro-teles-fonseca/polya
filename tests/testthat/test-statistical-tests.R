@@ -115,7 +115,7 @@ testthat::test_that("test.null.binomial test 1", {
     c("austria_bl1",     1.32,       "Strong",        0.954),
     c("austria_bl1",     -0.62,      "Negative",    0.194),
     c("austria_bl1",     -1.78,      "Negative",    0.016),
-    c("austria_bl1",     1.55,       "Strong",        0.973),
+    c("austria_bl1",     1.55,       "Very Strong",        0.973),
     c("austria_bl1",     -3.02,      "Negative",    0.001),
     c("austria_bl1",     1.25,       "Strong",        0.947),
     c("austria_bl1",     1.48,       "Strong",        0.968)
@@ -129,7 +129,7 @@ testthat::test_that("test.null.binomial test 1", {
   expect_equal(unname(df1), unname(df2))
 
   expect_equal(
-    unname(bfactor_interpret(10^(df2$X2))),
+    unname(pcal::bfactor_interpret(10^(df2$X2))),
     unname(df1[[3]]))
 
   })
@@ -267,7 +267,7 @@ testthat::test_that("test.null.multinomial dir prior (c=1)", {
 
   df2 <- data.frame(
     rbind(
-      c(1.93, "Strong", 0.988,  0.000),
+      c(1.93, "Very Strong", 0.988,  0.000),
       c(11.27, "Decisive", 1.000,  0.082),
       c(3.35, "Decisive", 1.000,  0.000),
       c(12.20, "Decisive", 1.000,  0.236),

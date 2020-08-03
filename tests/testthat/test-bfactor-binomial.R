@@ -44,7 +44,7 @@ testthat::test_that("Austria PP, unif prior", {
           x = austria_bl1,
           hyper_par = c(1, 1))
       ),
-      FUN = bfactor_to_prob),
+      FUN = pcal::bfactor_to_prob),
       3
     )),
     c(0.542, 0.951, 0.954, 0.194, 0.016, 0.973, 0.001, 0.947, 0.968)
@@ -71,7 +71,7 @@ testthat::test_that("Austria log10(BF), Dir prior c=1", {
 testthat::test_that("Austria PP, Dir prior c=1", {
   expect_equal(
     round(
-        bfactor_to_prob(
+        pcal::bfactor_to_prob(
           c(
             bfactor_binomial(x = austria_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(theta_benford(1)[1], 1 - theta_benford(1)[1])),
             bfactor_binomial(x = austria_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(theta_benford(1)[2], 1 - theta_benford(1)[2])),
@@ -107,7 +107,7 @@ testthat::test_that("Austria log10(BF), Dir prior c=22", {
 
 testthat::test_that("Austria PP, Dir prior c=22", {
   expect_equal(
-    round(bfactor_to_prob(c(
+    round(pcal::bfactor_to_prob(c(
       bfactor_binomial(x = austria_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(22*theta_benford(1)[1], 22 - 22*theta_benford(1)[1])),
       bfactor_binomial(x = austria_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(22*theta_benford(1)[2], 22 - 22*theta_benford(1)[2])),
       bfactor_binomial(x = austria_bl1, success = 3, null_par = theta_benford(1)[3], hyper_par = c(22*theta_benford(1)[3], 22 - 22*theta_benford(1)[3])),
@@ -157,7 +157,7 @@ testthat::test_that("Belgium PP, unif prior", {
           hyper_par = c(1, 1)
         )
       ),
-      FUN = bfactor_to_prob),
+      FUN = pcal::bfactor_to_prob),
       3
     )),
     c(0.003, 0.028, 0.008, 0.963, 0.940, 0.960, 0.977, 0.957, 0.920)
@@ -182,7 +182,7 @@ testthat::test_that("Belgium log10(BF), Dir prior c=1", {
 })
 
 testthat::test_that("Belgium PP, Dir prior c=1", {
-  expect_equal(round(bfactor_to_prob(
+  expect_equal(round(pcal::bfactor_to_prob(
     c(
       bfactor_binomial(x = belgium_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(theta_benford(1)[1], 1 - theta_benford(1)[1])),
       bfactor_binomial(x = belgium_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(theta_benford(1)[2], 1 - theta_benford(1)[2])),
@@ -233,7 +233,7 @@ testthat::test_that("Belgium BF, Dir prior c=22", {
 })
 
 testthat::test_that("Belgium PP, Dir prior c=22", {
-  expect_equal(round(bfactor_to_prob(
+  expect_equal(round(pcal::bfactor_to_prob(
     c(
       bfactor_binomial(x = belgium_bl1, success = 1, null_par = theta_benford(1)[1], hyper_par = c(22*theta_benford(1)[1], 22 - 22*theta_benford(1)[1])),
       bfactor_binomial(x = belgium_bl1, success = 2, null_par = theta_benford(1)[2], hyper_par = c(22*theta_benford(1)[2], 22 - 22*theta_benford(1)[2])),

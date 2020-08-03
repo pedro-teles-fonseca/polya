@@ -39,7 +39,7 @@ testthat::test_that("PPs, uniform prior", {
   expect_equal(
     round(as.numeric(
       mapply(
-        FUN = bfactor_to_prob,
+        FUN = pcal::bfactor_to_prob,
         bf = sapply(
           X = datalist_bl1,
           FUN = bfactor_multinomial,
@@ -100,7 +100,7 @@ testthat::test_that("PPs, centred Dir prior c=1", {
   expect_equal(
     round(as.numeric(
       mapply(
-        FUN = bfactor_to_prob,
+        FUN = pcal::bfactor_to_prob,
         bf = sapply(
           X = datalist_bl1,
           FUN = bfactor_multinomial,
@@ -161,7 +161,7 @@ testthat::test_that("PPs, centred Dir prior c=22", {
   expect_equal(
     round(as.numeric(
       mapply(
-        FUN = bfactor_to_prob,
+        FUN = pcal::bfactor_to_prob,
         bf = sapply(
           X = datalist_bl1,
           FUN = bfactor_multinomial,
@@ -226,7 +226,7 @@ testthat::test_that("log10(BF), uniform prior", {
 testthat::test_that("PPs, uniform prior", {
   expect_equal(round(as.numeric(
     mapply(
-      FUN = bfactor_to_prob,
+      FUN = pcal::bfactor_to_prob,
       bf = sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
@@ -272,7 +272,7 @@ testthat::test_that("log10(BF), centred Dir prior c=1", {
 testthat::test_that("PPs, centred Dir prior c=1", {
   expect_equal(round(as.numeric(
     mapply(
-      FUN = bfactor_to_prob,
+      FUN = pcal::bfactor_to_prob,
       bf = sapply(
         X = datalist_bl2,
         FUN = bfactor_multinomial,
@@ -319,7 +319,7 @@ testthat::test_that("PPs, centred Dir prior c=12", {
   expect_equal(
     round(as.numeric(
       mapply(
-        FUN = bfactor_to_prob,
+        FUN = pcal::bfactor_to_prob,
         bf = sapply(
           X = datalist_bl2,
           FUN = bfactor_multinomial,
