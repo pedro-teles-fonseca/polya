@@ -4,7 +4,14 @@
 \alias{bfactor_multinomial}
 \title{Bayes Factors for Multinomial point null hypotheses}
 \usage{
-bfactor_multinomial(x, categories, null_par, hyper_par = 1, transf = "level")
+bfactor_multinomial(
+  x,
+  categories,
+  null_par,
+  hyper_par = 1,
+  transf = "level",
+  in_favour = "H0"
+)
 }
 \description{
 Computes Bayes factors in favour of a point null hypothesis in the context of a Multinomial statistical model with a Dirichlet prior.

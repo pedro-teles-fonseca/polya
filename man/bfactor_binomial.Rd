@@ -4,7 +4,7 @@
 \alias{bfactor_binomial}
 \title{Bayes Factors for Binomial point null hypotheses}
 \usage{
-bfactor_binomial(x, success, null_par, hyper_par = c(1, 1), transf = "level")
+bfactor_binomial(x, success, null_par, hyper_par = c(1, 1), in_favour = "H0")
 }
 \arguments{
 \item{x}{Atomic vector of the type integer, double or character.}
