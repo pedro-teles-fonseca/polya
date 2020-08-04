@@ -18,7 +18,7 @@ bfactor_binomial <- function(
   success,
   null_par,
   hyper_par = c(1, 1),
-  transf = "level") {
+  in_favour = "H0") {
 
   if(any(!is.atomic(x), !is.vector(x), is.null(x))){
     stop("Invalid argument: 'x' must be an atomic vector.")
@@ -50,26 +50,24 @@ bfactor_binomial <- function(
   if(any(isFALSE(length(hyper_par) %in% c(1, 2)))){
     stop("Invalid argument: 'hyper_par' must be of length 1 or 2.")
   }
-  if(isFALSE(transf %in% c("level", "log", "log10"))){
-    stop("Invalid argument: 'transf' must be either 'level', 'log' or 'log10'.")
+  if(isFALSE(tolower(in_favour) %in% c("h0", "h1", "null", "alternative"))){
+    stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1' Alternatively, you can use either 'null' or 'alternative'.")
   }
 
   if(length(hyper_par == 1)){hyper_par <- rep.int(hyper_par, 2)}
 
   x <- x[!is.na(x)]
-  successes <- as.numeric(table(x == success)["TRUE"])
   n <- length(x)
+  s <- as.numeric(table(x == success)["TRUE"])
   a <- hyper_par[1]
   b <- hyper_par[2]
 
-  bfactor <- exp(successes * log(null_par) + (n - successes) * log(1 - null_par) + lbeta(a, b) - lbeta(successes + a, n + b - successes))
+  bfactor <- exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a, b) - lbeta(s + a, n + b - s))
 
-  if(transf == "log"){
-    log(bfactor)
-  } else if(transf == "log10"){
-    log10(bfactor)
-  } else {
+  if(tolower(in_favour) %in% c("null", "h0")){
     bfactor
+  } else {
+    1/bfactor
   }
 }
 
@@ -84,7 +82,7 @@ bfactor_multinomial <- function(
   categories,
   null_par,
   hyper_par = 1,
-  transf = "level") {
+  in_favour = "H0") {
 
   if(any(!is.atomic(x), !is.vector(x))){
     stop("Invalid argument: 'x' must be an atomic vector.")
@@ -113,31 +111,27 @@ bfactor_multinomial <- function(
   if(any(!is.numeric(hyper_par), hyper_par < 0, is.na(hyper_par), is.null(hyper_par))){
     stop("Invalid argument: 'hyper_par' must be non-negative.")
   }
-  if(isFALSE(transf %in% c("level", "log", "log10"))){
-    stop("Invalid argument: 'transf' must be either 'level', 'log' or 'log10'.")
-  }
   if (length(null_par) < length(hyper_par)) {
       stop("Invalid model specification: more hyper-parameters than null parameter values.")
     } else if (length(hyper_par) == 1){
           hyper_par <- rep.int(hyper_par, length(null_par))
     } else if(length(null_par) > length(hyper_par)) {
-      stop(
-          "Invalid specification: more null parameter values than hyper parameters."
-        )
+      stop("Invalid specification: more null parameter values than hyper parameters.")
     }
+  if(isFALSE(tolower(in_favour) %in% c("h0", "h1", "null", "alternative"))){
+    stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1' Alternatively, you can use either 'null' or 'alternative'.")
+  }
 
   categories <- factor(categories, levels = categories)
   counts <- table(x[!is.na(x)])[levels(categories)]
 
   bfactor <- exp(sum(counts * log(null_par)) + lmbeta(hyper_par) - lmbeta(hyper_par + counts))
 
-    if(transf == "log"){
-      log(bfactor)
-    } else if(transf == "log10"){
-      log10(bfactor)
-    } else {
-      bfactor
-    }
+  if(tolower(in_favour) %in% c("null", "h0")){
+    bfactor
+  } else {
+    1/bfactor
+  }
 }
 
 
