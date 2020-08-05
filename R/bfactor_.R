@@ -30,7 +30,10 @@ bfactor_binomial <- function(
     stop("Invalid argument: 'success'  cant be missing nor null")
   }
   if(isFALSE(success %in% unique(x))){
-    stop("Invalid argument: 'success %in% unique(x)' must be TRUE.")
+    warning("Level corresponding to 'success' not observed in the data 'x'.")
+    sucess_is_observed <- FALSE
+  } else{
+    sucess_is_observed <- TRUE
   }
   if(any(isFALSE(length(null_par) == 1), isFALSE(length(success) == 1))){
     stop("Invalid argument: 'null_par' and 'success' must be of length 1")
@@ -58,11 +61,16 @@ bfactor_binomial <- function(
 
   x <- x[!is.na(x)]
   n <- length(x)
-  s <- as.numeric(table(x == success)["TRUE"])
+
+  if(sucess_is_observed){
+    s <- as.numeric(table(x == success)["TRUE"])} else{
+    s <- 0
+  }
+
   a <- hyper_par[1]
   b <- hyper_par[2]
 
-  bfactor <- exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a, b) - lbeta(s + a, n + b - s))
+  bfactor <- exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a, b) - lbeta(a + s, b + n - s))
 
   if(tolower(in_favour) %in% c("null", "h0")){
     bfactor
