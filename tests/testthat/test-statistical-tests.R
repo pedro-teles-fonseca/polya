@@ -1,94 +1,112 @@
 
-context("statistical tests")
+
+context("Classical tests")
 
 testthat::test_that("Chisq tests BL1", {
   expect_equal(
-round(
-  c(
-chisq_test_multinomial(austria_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(belgium_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(finland_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(france_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(germany_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(greece_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(ireland_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(italy_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(luxembourg_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(netherlands_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(portugal_bl1, 1:9, theta_benford(1))[["p.value"]],
-chisq_test_multinomial(spain_bl1, 1:9, theta_benford(1))[["p.value"]]),
-  3),
-    c(0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.009, 0.000, 0.000)
-)})
+    round(
+      c(
+        chisq_test_multinomial(austria_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(belgium_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(finland_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(france_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(germany_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(greece_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(ireland_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(italy_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(luxembourg_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(netherlands_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(portugal_bl1, 1:9, theta_benford(1))[["p.value"]],
+        chisq_test_multinomial(spain_bl1, 1:9, theta_benford(1))[["p.value"]]
+      ),
+      3
+    ),
+    c(0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.009, 0.000, 0.000
+    )
+  )
+})
 
-testthat::test_that("Chisc tests BL1", {
+
+testthat::test_that("Chisq tests BL2", {
   expect_equal(
     round(
       c(
         chisq_test_multinomial(austria_bl2, 0:9, theta_benford(2))[["p.value"]],
         chisq_test_multinomial(belgium_bl2, 0:9, theta_benford(2))[["p.value"]],
         chisq_test_multinomial(finland_bl2, 0:9, theta_benford(2))[["p.value"]],
-        chisq_test_multinomial(france_bl2, 0:9,theta_benford(2))[["p.value"]],
-        chisq_test_multinomial(germany_bl2, 0:9,theta_benford(2))[["p.value"]],
-        chisq_test_multinomial(greece_bl2, 0:9,theta_benford(2))[["p.value"]],
-        chisq_test_multinomial(ireland_bl2, 0:9,theta_benford(2))[["p.value"]],
-        chisq_test_multinomial(italy_bl2, 0:9,theta_benford(2))[["p.value"]],
-        chisq_test_multinomial(luxembourg_bl2, 0:9,theta_benford(2))[["p.value"]],
-        chisq_test_multinomial(netherlands_bl2, 0:9,theta_benford(2))[["p.value"]],
-        chisq_test_multinomial(portugal_bl2, 0:9,theta_benford(2))[["p.value"]],
-        chisq_test_multinomial(spain_bl2, 0:9,theta_benford(2))[["p.value"]]),
-      3),
-    c(0.082, 0.236, 0.068, 0.005, 0.175, 0.016, 0.387, 0.075, 0.007, 0.060, 0.189, 0.855)
-  )})
+        chisq_test_multinomial(france_bl2, 0:9, theta_benford(2))[["p.value"]],
+        chisq_test_multinomial(germany_bl2, 0:9, theta_benford(2))[["p.value"]],
+        chisq_test_multinomial(greece_bl2, 0:9, theta_benford(2))[["p.value"]],
+        chisq_test_multinomial(ireland_bl2, 0:9, theta_benford(2))[["p.value"]],
+        chisq_test_multinomial(italy_bl2, 0:9, theta_benford(2))[["p.value"]],
+        chisq_test_multinomial(luxembourg_bl2, 0:9, theta_benford(2))[["p.value"]],
+        chisq_test_multinomial(netherlands_bl2, 0:9, theta_benford(2))[["p.value"]],
+        chisq_test_multinomial(portugal_bl2, 0:9, theta_benford(2))[["p.value"]],
+        chisq_test_multinomial(spain_bl2, 0:9, theta_benford(2))[["p.value"]]
+      ),
+      3
+    ),
+    c(0.082, 0.236, 0.068, 0.005, 0.175, 0.016, 0.387, 0.075, 0.007, 0.060, 0.189,0.855
+    )
+  )
+})
 
-testthat::test_that("Chisc categories order test 1", {
+testthat::test_that("Chisq categories order test 1", {
   expect_equal(
     chisq_test_multinomial(spain_bl2, 0:9, theta_benford(2))[["p.value"]],
     0.8549962)
 })
 
-testthat::test_that("Chisc categories order test 2", {
+testthat::test_that("Chisq categories order test 2", {
   expect_equal(
     chisq_test_multinomial(spain_bl2, 0:9, theta_benford(2))[["p.value"]],
-    chisq_test_multinomial(spain_bl2, 9:0, rev(theta_benford(2)))[["p.value"]])
+    chisq_test_multinomial(spain_bl2, 9:0, rev(theta_benford(2)))[["p.value"]]
+  )
 })
 
-testthat::test_that("Chisc categories order test 3", {
+testthat::test_that("Chisq categories order test 3", {
   expect_equal(
     chisq_test_multinomial(spain_bl2, 0:9, theta_benford(2))[["p.value"]],
-    chisq_test_multinomial(spain_bl2, c(1:4, 0, 6:9, 5), theta_benford(2)[c(2:5, 1, 7:10, 6)])[["p.value"]])
+    chisq_test_multinomial(spain_bl2, c(1:4, 0, 6:9, 5), theta_benford(2)[c(2:5, 1, 7:10, 6)])[["p.value"]]
+  )
 })
 
 testthat::test_that("Nigrini test austria_bl1", {
   expect_equal(
-    c(
-      round(nigrini_z_test(austria_bl1, success = 1, null_par = theta_benford(1)[1])[["p.value"]], 3),
-      round(nigrini_z_test(austria_bl1, success = 2, null_par = theta_benford(1)[2])[["p.value"]], 3),
-      round(nigrini_z_test(austria_bl1, success = 3, null_par = theta_benford(1)[3])[["p.value"]], 3),
-      round(nigrini_z_test(austria_bl1, success = 4, null_par = theta_benford(1)[4])[["p.value"]], 3),
-      round(nigrini_z_test(austria_bl1, success = 5, null_par = theta_benford(1)[5])[["p.value"]], 3),
-      round(nigrini_z_test(austria_bl1, success = 6, null_par = theta_benford(1)[6])[["p.value"]], 3),
-      round(nigrini_z_test(austria_bl1, success = 7, null_par = theta_benford(1)[7])[["p.value"]], 3),
-      round(nigrini_z_test(austria_bl1, success = 8, null_par = theta_benford(1)[8])[["p.value"]], 3),
-      round(nigrini_z_test(austria_bl1, success = 9, null_par = theta_benford(1)[9])[["p.value"]], 3)
-    ),
-    c(0.019, 0.493, 0.406, 0.001, 0.000, 0.740, 0.000, 0.191, 0.422))
+    round(
+      c(
+        nigrini_z_test(austria_bl1, success = 1, null_par = theta_benford(1)[1])[["p.value"]],
+        nigrini_z_test(austria_bl1, success = 2, null_par = theta_benford(1)[2])[["p.value"]],
+        nigrini_z_test(austria_bl1, success = 3, null_par = theta_benford(1)[3])[["p.value"]],
+        nigrini_z_test(austria_bl1, success = 4, null_par = theta_benford(1)[4])[["p.value"]],
+        nigrini_z_test(austria_bl1, success = 5, null_par = theta_benford(1)[5])[["p.value"]],
+        nigrini_z_test(austria_bl1, success = 6, null_par = theta_benford(1)[6])[["p.value"]],
+        nigrini_z_test(austria_bl1, success = 7, null_par = theta_benford(1)[7])[["p.value"]],
+        nigrini_z_test(austria_bl1, success = 8, null_par = theta_benford(1)[8])[["p.value"]],
+        nigrini_z_test(austria_bl1, success = 9, null_par = theta_benford(1)[9])[["p.value"]]
+        ),
+      3),
+    c(0.019, 0.493, 0.406, 0.001, 0.000, 0.740, 0.000, 0.191, 0.422)
+  )
 })
 
 testthat::test_that("Nigrini test portugal_bl1", {
   expect_equal(
-    c(
-      round(nigrini_z_test(portugal_bl1, success = 1, null_par = theta_benford(1)[1])[["p.value"]], 3),
-      round(nigrini_z_test(portugal_bl1, success = 2, null_par = theta_benford(1)[2])[["p.value"]], 3),
-      round(nigrini_z_test(portugal_bl1, success = 3, null_par = theta_benford(1)[3])[["p.value"]], 3),
-      round(nigrini_z_test(portugal_bl1, success = 4, null_par = theta_benford(1)[4])[["p.value"]], 3),
-      round(nigrini_z_test(portugal_bl1, success = 5, null_par = theta_benford(1)[5])[["p.value"]], 3),
-      round(nigrini_z_test(portugal_bl1, success = 6, null_par = theta_benford(1)[6])[["p.value"]], 3),
-      round(nigrini_z_test(portugal_bl1, success = 7, null_par = theta_benford(1)[7])[["p.value"]], 3),
-      round(nigrini_z_test(portugal_bl1, success = 8, null_par = theta_benford(1)[8])[["p.value"]], 3),
-      round(nigrini_z_test(portugal_bl1, success = 9, null_par = theta_benford(1)[9])[["p.value"]], 3)
-    ),
-    c(0.000, 0.000, 0.662, 0.000, 0.726, 0.848, 0.077, 0.591, 0.959))
+    round(
+      c(
+        nigrini_z_test(portugal_bl1, success = 1, null_par = theta_benford(1)[1])[["p.value"]],
+        nigrini_z_test(portugal_bl1, success = 2, null_par = theta_benford(1)[2])[["p.value"]],
+        nigrini_z_test(portugal_bl1, success = 3, null_par = theta_benford(1)[3])[["p.value"]],
+        nigrini_z_test(portugal_bl1, success = 4, null_par = theta_benford(1)[4])[["p.value"]],
+        nigrini_z_test(portugal_bl1, success = 5, null_par = theta_benford(1)[5])[["p.value"]],
+        nigrini_z_test(portugal_bl1, success = 6, null_par = theta_benford(1)[6])[["p.value"]],
+        nigrini_z_test(portugal_bl1, success = 7, null_par = theta_benford(1)[7])[["p.value"]],
+        nigrini_z_test(portugal_bl1, success = 8, null_par = theta_benford(1)[8])[["p.value"]],
+        nigrini_z_test(portugal_bl1, success = 9, null_par = theta_benford(1)[9])[["p.value"]]
+        ),
+      3),
+    c(0.000, 0.000, 0.662, 0.000, 0.726, 0.848, 0.077, 0.591, 0.959)
+  )
 })
 
 testthat::test_that("test.null.binomial test 1", {
@@ -132,9 +150,9 @@ testthat::test_that("test.null.binomial test 1", {
     unname(pcal::bfactor_interpret(10^(df2$X2))),
     unname(df1[[3]]))
 
-  })
+})
 
-testthat::test_that("test.null.binomial test 3", {
+testthat::test_that("test.null.binomial test 2", {
   df1 <-   data.frame(rbind(
     test.null.binomial(portugal_bl1, null_par = theta_benford(1)[1], success = 1, hyper.par = c(22*theta_benford(1)[1], 22-22*theta_benford(1)[1]), transf = "log10"),
     test.null.binomial(portugal_bl1, null_par = theta_benford(1)[2], success = 2, hyper.par = c(22*theta_benford(1)[2], 22-22*theta_benford(1)[2]), transf = "log10"),
@@ -298,4 +316,3 @@ testthat::test_that("test.null.multinomial dir prior (c=1)", {
     unname(df1),
     unname(df2))
 })
-

@@ -1,5 +1,5 @@
 
-context("generate poster table")
+context("Generate poster tables")
 
 testthat::test_that("Luxembourg BL1", {
   expect_equal(

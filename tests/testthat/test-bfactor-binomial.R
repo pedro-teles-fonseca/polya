@@ -252,7 +252,7 @@ testthat::test_that("Belgium PP, Dir prior c=22", {
 
 context("Bin-Beta - test in_favor H1")
 
-testthat::test_that("Bin-Beta model - BF in_favor H1, level", {
+testthat::test_that("Bin-Beta model - BF in_favor H1, test 1", {
   expect_equal(
     as.numeric(
       round(
@@ -279,7 +279,34 @@ testthat::test_that("Bin-Beta model - BF in_favor H1, level", {
   )
 })
 
-testthat::test_that("Bin-Beta model - BF in_favor H1, log10", {
+testthat::test_that("Bin-Beta model - BF in_favor H1, test 2", {
+  expect_equal(
+    as.numeric(
+      round(
+        mapply(
+          bfactor_binomial,
+          null_par = theta_benford(1),
+          success = 1:9,
+          MoreArgs = list(x = belgium_bl1, hyper_par = c(1, 1), in_favour = "Alternative")
+        )
+        ,
+        2)
+    ),
+    as.numeric(
+      round(
+        1/mapply(
+          bfactor_binomial,
+          null_par = theta_benford(1),
+          success = 1:9,
+          MoreArgs = list(x = belgium_bl1, hyper_par = c(1, 1), in_favour = "null")
+        )
+        ,
+        2)
+    )
+  )
+})
+
+testthat::test_that("Bin-Beta model - BF in_favor H1, with log10", {
   expect_equal(
     as.numeric(
       round(
@@ -307,4 +334,88 @@ testthat::test_that("Bin-Beta model - BF in_favor H1, log10", {
       )
     )
 })
+
+testthat::test_that("Bin-Beta BF in_favor H1, with log10", {
+  expect_equal(
+    as.numeric(
+      round(
+        log10(
+          mapply(
+            bfactor_binomial,
+            null_par = theta_benford(1),
+            success = 1:9,
+            MoreArgs = list(x = belgium_bl1, hyper_par = c(1, 1), in_favour = "alternative")
+          )
+        ),
+        2)
+    ),
+    as.numeric(
+      round(
+        log10(
+          1/mapply(
+            bfactor_binomial,
+            null_par = theta_benford(1),
+            success = 1:9,
+            MoreArgs = list(x = belgium_bl1, hyper_par = c(1, 1), in_favour = "Null")
+          )
+        ),
+        2)
+    )
+  )
+})
+
+context("Bin-Beta Error messages")
+
+testthat::test_that("H0 - H1 error messages", {
+  expect_error(
+    bfactor_binomial(x = belgium_bl1, success = 1, null_par = .5, in_favour = "h01")
+  )}
+)
+
+testthat::test_that("H0 - H1 error messages", {
+  expect_error(
+    bfactor_binomial(x = belgium_bl1, success = 1, null_par = .5, in_favour = "h")
+  )}
+)
+
+testthat::test_that("H0 - H1 error messages", {
+  expect_error(
+    bfactor_binomial(x = belgium_bl1, success = 1, null_par = .5, in_favour = "alternativee")
+  )}
+)
+
+testthat::test_that("H0 - H1 error messages", {
+  expect_error(
+    bfactor_binomial(x = belgium_bl1, success = 1, null_par = .5, in_favour = "altern")
+  )}
+)
+
+context("Bin-Beta - only one observed level")
+
+testthat::test_that("Only successes observed", {
+  expect_equal(
+    bfactor_binomial(x = c(1,1,1,1), success = 1, null_par = .2, hyper_par = c(1, 1)),
+    bfactor_binomial(x = c(0,0,0,0), success = 0, null_par = .2, hyper_par = c(1, 1))
+  )
+})
+
+testthat::test_that("Sucess level not observed test 1", {
+  expect_equal(
+    suppressWarnings(bfactor_binomial(x = c(1,1,1,1), success = 0, null_par = .2, hyper_par = c(1, 1))),
+    suppressWarnings(bfactor_binomial(x = c(0,0,0,0), success = 1, null_par = .2, hyper_par = c(1, 1)))
+  )
+})
+
+testthat::test_that("Sucess level not observed test 2", {
+  expect_warning(
+    bfactor_binomial(x = c(1,1,1,1), success = 0, null_par = .2, hyper_par = c(1, 1))
+  )
+})
+
+testthat::test_that("Sucess level not observed test 3", {
+  expect_warning(
+    bfactor_binomial(x = c(0,0,0,0), success = 1, null_par = .2, hyper_par = c(1, 1))
+  )
+})
+
 
