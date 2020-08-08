@@ -55,7 +55,7 @@ nigrini_z_test <- function(x, success, null_par){
 #' Pearson's Chi-Squared Test for Multinomial Proportions
 #'
 
-chisq_test_multinomial <- function(x, categories, null_par){
+chisq_test_multinomial <- function(x, categories, null_par, simulate.p.value = FALSE){
 
   if(any(!is.atomic(x), !is.vector(x))){
     stop("Invalid argument: 'x' must be an atomic vector.")
@@ -70,21 +70,18 @@ chisq_test_multinomial <- function(x, categories, null_par){
     stop("Invalid argument: all 'null_par' values must be between 0 and 1.")
   }
   if(any(is.na(categories), is.null(categories))){
-    stop("Invalid argument: 'categories' must be a vector of the same lenght as 'x'")
+    stop("Invalid argument: missing 'categories'")
   }
   if(isFALSE(typeof(categories) %in% c("double", "integer", "character"))){
     stop("Invalid argument: typeof(categories) must be 'integer', 'double' or 'character'.")
   }
-  if(any(sort(unique(x)) != sort(unique(categories)))){
-    stop("Invalid argument: the unique values of 'x' and 'categories' must be the same.")
-  }
 
   data.name <- deparse(substitute(x))
-  x <- x[!is.na(x)]
-  categories <- factor(categories, levels = categories)
-  counts <- table(x[!is.na(x)])[levels(categories)]
 
-  tst <- chisq.test(counts,  p = null_par)
+  x <- factor(x[!is.na(x)], levels = categories)
+  counts <- table(x)
+
+  tst <- chisq.test(x = counts,  p = null_par, simulate.p.value = simulate.p.value)
 
   results <- list(
     method = "Pearson's Chi-Squared Test for Multinomial Proportions",

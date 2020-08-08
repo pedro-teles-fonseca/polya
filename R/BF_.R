@@ -1,5 +1,6 @@
 
-#' Bayes Factors for Binomial point null hypotheses
+#' Bayes Factors for Binomial point null hypotheses039114
+#'
 #'
 #' Computes Bayes factors in favour of a point null hypothesis in the context of a Binomial statistical model with a Beta prior.
 #' @param x Atomic vector of the type integer, double or character.
@@ -9,11 +10,8 @@
 #'
 #' @examples
 #'
-#' bfactor_binomial(austria_bl1, 1, theta_benford(1)[1])
-#'
-#' @export
 
-bfactor_binomial <- function(
+BF_binomial <- function(
   x,
   success,
   null_par,
@@ -70,22 +68,20 @@ bfactor_binomial <- function(
   a <- hyper_par[1]
   b <- hyper_par[2]
 
-  bfactor <- exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a, b) - lbeta(a + s, b + n - s))
+  BF <- exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a, b) - lbeta(a + s, b + n - s))
 
   if(tolower(in_favour) %in% c("null", "h0")){
-    bfactor
+    BF
   } else {
-    1/bfactor
+    1/BF
   }
 }
 
 #' Bayes Factors for Multinomial point null hypotheses
 #'
 #' Computes Bayes factors in favour of a point null hypothesis in the context of a Multinomial statistical model with a Dirichlet prior.
-#'
-#' @export
 
-bfactor_multinomial <- function(
+BF_multinomial <- function(
   x,
   categories,
   null_par,
@@ -110,9 +106,6 @@ bfactor_multinomial <- function(
   if(isFALSE(typeof(categories) %in% c("double", "integer", "character"))){
     stop("Invalid argument: typeof(categories) must be 'integer', 'double' or 'character'.")
   }
-  if(any(sort(unique(x)) != sort(unique(categories)))){
-      stop("Invalid argument: the unique values of 'x' and 'categories' must be the same.")
-  }
   if(any(!is.atomic(hyper_par), !is.vector(hyper_par))){
     stop("Invalid argument: 'hyper_par' must be an atomic vector.")
   }
@@ -131,16 +124,55 @@ bfactor_multinomial <- function(
   }
 
   categories <- factor(categories, levels = categories)
-  counts <- table(x[!is.na(x)])[levels(categories)]
+  counts <- table(factor(x[!is.na(x)], levels = categories))
 
-  bfactor <- exp(sum(counts * log(null_par)) + lmbeta(hyper_par) - lmbeta(hyper_par + counts))
+  BF <- exp(sum(counts * log(null_par)) + lmbeta(hyper_par) - lmbeta(hyper_par + counts))
 
   if(tolower(in_favour) %in% c("null", "h0")){
-    bfactor
+    BF
   } else {
-    1/bfactor
+    1/BF
   }
 }
+
+
+BF_binomial_haldane <- function(
+  x,
+  success,
+  null_par,
+  in_favour = "H0") {
+
+  x <- x[!is.na(x)]
+  n <- length(x)
+  s <- as.numeric(table(x == success)["TRUE"])
+
+  BF <- exp(s * log(null_par) + (n - s) * log(1 - null_par) - lbeta(s, n - s))
+
+  if(tolower(in_favour) %in% c("null", "h0")){
+    BF
+  } else {
+    1/BF
+  }
+}
+
+BF_multinomial_haldane <- function(
+  x,
+  categories,
+  null_par,
+  in_favour = "H0") {
+
+  categories <- factor(categories, levels = categories)
+  counts <- table(x[!is.na(x)])[levels(categories)]
+
+  BF <- exp(sum(counts * log(null_par))  - lmbeta(counts))
+
+  if(tolower(in_favour) %in% c("null", "h0")){
+    BF
+  } else {
+    1/BF
+  }
+}
+
 
 
 

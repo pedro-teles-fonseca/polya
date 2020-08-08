@@ -1,5 +1,5 @@
 
-bfractional_binomial <- function(
+FBF_binomial <- function(
   x,
   success,
   null_par,
@@ -21,9 +21,9 @@ bfractional_binomial <- function(
 
   if(sucess_is_observed){
     s <- as.numeric(table(x == success)["TRUE"])
-    } else{
+  } else{
     s <- 0
-    }
+  }
 
   a <- hyper_par[1]
   b <- hyper_par[2]
@@ -37,28 +37,42 @@ bfractional_binomial <- function(
   }
 }
 
-bfractional_multinomial <- function(
+FBF_multinomial <- function(
   x,
   categories,
   null_par,
   hyper_par = 1,
-  frac = length(categories)/length(x[!is.na(x)]),
-  in_favour = "H0") {
+  b = 0.1,
+  m = length(categories),
+  robust = NULL,
+  in_favour = "H0"){
+
+  x <- x[!is.na(x)]
+
+  if(!is.null(robust)){
+
+    n <- length(x)
+
+    if(robust == "minimal"){
+      b <- m / n
+    }
+    if(robust == "intermediate"){
+      b <- (m * log(n)) / (n * log(m))
+    }
+    if(robust == "yes"){
+      b <- sqrt(m/n)
+    }
+  }
 
   categories <- factor(categories, levels = categories)
-  counts <- table(x[!is.na(x)])[levels(categories)]
+  counts <- table(factor(x, levels = categories))
 
-  bfactor <- exp((1 - frac) * sum(counts * log(null_par)) + lmbeta(hyper_par + frac * counts) - lmbeta(hyper_par + counts))
+  bfactor <- exp((1 - b) * sum(counts * log(null_par)) + lmbeta(hyper_par + b * counts) - lmbeta(hyper_par + counts))
 
-  if(tolower(in_favour) %in% c("null", "h0")){
+  if (tolower(in_favour) %in% c("null", "h0")) {
     bfactor
   } else {
-    1/bfactor
+    1 / bfactor
   }
 }
-
-
-
-
-
 
