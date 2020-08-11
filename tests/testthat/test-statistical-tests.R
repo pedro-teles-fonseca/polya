@@ -1,8 +1,7 @@
 
-
 context("Classical tests")
 
-testthat::test_that("Chisq tests BL1", {
+test_that("Chisq tests BL1", {
   expect_equal(
     round(
       c(
@@ -27,7 +26,7 @@ testthat::test_that("Chisq tests BL1", {
 })
 
 
-testthat::test_that("Chisq tests BL2", {
+test_that("Chisq tests BL2", {
   expect_equal(
     round(
       c(
@@ -51,27 +50,27 @@ testthat::test_that("Chisq tests BL2", {
   )
 })
 
-testthat::test_that("Chisq categories order test 1", {
+test_that("Chisq categories order test 1", {
   expect_equal(
     chisq_test_multinomial(spain_bl2, 0:9, theta_benford(2))[["p.value"]],
     0.8549962)
 })
 
-testthat::test_that("Chisq categories order test 2", {
+test_that("Chisq categories order test 2", {
   expect_equal(
     chisq_test_multinomial(spain_bl2, 0:9, theta_benford(2))[["p.value"]],
     chisq_test_multinomial(spain_bl2, 9:0, rev(theta_benford(2)))[["p.value"]]
   )
 })
 
-testthat::test_that("Chisq categories order test 3", {
+test_that("Chisq categories order test 3", {
   expect_equal(
     chisq_test_multinomial(spain_bl2, 0:9, theta_benford(2))[["p.value"]],
     chisq_test_multinomial(spain_bl2, c(1:4, 0, 6:9, 5), theta_benford(2)[c(2:5, 1, 7:10, 6)])[["p.value"]]
   )
 })
 
-testthat::test_that("Nigrini test austria_bl1", {
+test_that("Nigrini test austria_bl1", {
   expect_equal(
     round(
       c(
@@ -90,7 +89,7 @@ testthat::test_that("Nigrini test austria_bl1", {
   )
 })
 
-testthat::test_that("Nigrini test portugal_bl1", {
+test_that("Nigrini test portugal_bl1", {
   expect_equal(
     round(
       c(
@@ -109,7 +108,7 @@ testthat::test_that("Nigrini test portugal_bl1", {
   )
 })
 
-testthat::test_that("test.null.binomial test 1", {
+test_that("test.null.binomial test 1", {
   df1 <-   data.frame(rbind(
     test.null.binomial(austria_bl1, null_par = theta_benford(1)[1], success = 1, transf = "log10"),
     test.null.binomial(austria_bl1, null_par = theta_benford(1)[2], success = 2, transf = "log10"),
@@ -152,7 +151,7 @@ testthat::test_that("test.null.binomial test 1", {
 
 })
 
-testthat::test_that("test.null.binomial test 2", {
+test_that("test.null.binomial test 2", {
   df1 <-   data.frame(rbind(
     test.null.binomial(portugal_bl1, null_par = theta_benford(1)[1], success = 1, hyper.par = c(22*theta_benford(1)[1], 22-22*theta_benford(1)[1]), transf = "log10"),
     test.null.binomial(portugal_bl1, null_par = theta_benford(1)[2], success = 2, hyper.par = c(22*theta_benford(1)[2], 22-22*theta_benford(1)[2]), transf = "log10"),
@@ -191,7 +190,7 @@ testthat::test_that("test.null.binomial test 2", {
     (unname(df2)))
 })
 
-testthat::test_that("test.null.multinomial unif prior", {
+test_that("test.null.multinomial unif prior", {
   df1 <- data.frame(rbind(
     test.null.multinomial(datalist_bl1[[1]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
     test.null.multinomial(datalist_bl2[[1]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
@@ -254,7 +253,7 @@ testthat::test_that("test.null.multinomial unif prior", {
     unname(df2))
 })
 
-testthat::test_that("test.null.multinomial dir prior (c=1)", {
+test_that("test.null.multinomial dir prior (c=1)", {
   df1 <- data.frame(rbind(
     test.null.multinomial(datalist_bl1[[1]], null_par = theta_benford(1), categories = 1:9, hyper_par=theta_benford(1), transf = "log10"),
     test.null.multinomial(datalist_bl2[[1]], null_par = theta_benford(2), categories = 0:9, hyper_par=theta_benford(2), transf = "log10"),

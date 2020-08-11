@@ -1,5 +1,5 @@
 
-FBF_binomial <- function(
+Fbfactor_binomial <- function(
   x,
   success,
   null_par,
@@ -37,7 +37,7 @@ FBF_binomial <- function(
   }
 }
 
-FBF_multinomial <- function(
+Fbfactor_multinomial <- function(
   x,
   categories,
   null_par,

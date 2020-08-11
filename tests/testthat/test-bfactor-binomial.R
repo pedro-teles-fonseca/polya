@@ -1,7 +1,7 @@
 
 context("Bin-Beta model - Bayes factors and posterior probabilities")
 
-testthat::test_that("Austria log10(BF), unif prior", {
+test_that("Austria log10(BF), unif prior", {
   expect_equal(
     round(
       log10(
@@ -16,7 +16,7 @@ testthat::test_that("Austria log10(BF), unif prior", {
     c(0.07, 1.29, 1.32, -0.62, -1.78, 1.55, -3.02, 1.25, 1.48))
   })
 
-testthat::test_that("Austria PP, unif prior", {
+test_that("Austria PP, unif prior", {
   expect_equal(
     as.numeric(
       round(
@@ -34,7 +34,7 @@ testthat::test_that("Austria PP, unif prior", {
   )
 })
 
-testthat::test_that("Austria log10(BF), Dir prior c=1", {
+test_that("Austria log10(BF), Dir prior c=1", {
   expect_equal(
     round(
       log10(
@@ -55,7 +55,7 @@ testthat::test_that("Austria log10(BF), Dir prior c=1", {
   )
 })
 
-testthat::test_that("Austria PP, Dir prior c=1", {
+test_that("Austria PP, Dir prior c=1", {
   expect_equal(
     round(
         pcal::bfactor_to_prob(
@@ -75,7 +75,7 @@ testthat::test_that("Austria PP, Dir prior c=1", {
   )
 })
 
-testthat::test_that("Austria log10(BF), Dir prior c=22", {
+test_that("Austria log10(BF), Dir prior c=22", {
   expect_equal(
     round(
       log10(
@@ -96,7 +96,7 @@ testthat::test_that("Austria log10(BF), Dir prior c=22", {
   )
 })
 
-testthat::test_that("Austria PP, Dir prior c=22", {
+test_that("Austria PP, Dir prior c=22", {
   expect_equal(
     round(
       pcal::bfactor_to_prob(
@@ -116,7 +116,7 @@ testthat::test_that("Austria PP, Dir prior c=22", {
   )
 })
 
-testthat::test_that("Belgium log10(BF), unif prior", {
+test_that("Belgium log10(BF), unif prior", {
   expect_equal(
     as.numeric(
       round(
@@ -134,7 +134,7 @@ testthat::test_that("Belgium log10(BF), unif prior", {
   )
 })
 
-testthat::test_that("Belgium PP, unif prior", {
+test_that("Belgium PP, unif prior", {
   expect_equal(
     as.numeric(
       round(
@@ -152,7 +152,7 @@ testthat::test_that("Belgium PP, unif prior", {
   )
 })
 
-testthat::test_that("Belgium log10(BF), Dir prior c=1", {
+test_that("Belgium log10(BF), Dir prior c=1", {
   expect_equal(
     round(
       log10(
@@ -172,7 +172,7 @@ testthat::test_that("Belgium log10(BF), Dir prior c=1", {
   )
 })
 
-testthat::test_that("Belgium PP, Dir prior c=1", {
+test_that("Belgium PP, Dir prior c=1", {
   expect_equal(
     round(
       pcal::bfactor_to_prob(
@@ -192,7 +192,7 @@ testthat::test_that("Belgium PP, Dir prior c=1", {
   )
 })
 
-testthat::test_that("Belgium log10(BF), Dir prior c=22", {
+test_that("Belgium log10(BF), Dir prior c=22", {
   expect_equal(
    round(
      log10(
@@ -212,7 +212,7 @@ testthat::test_that("Belgium log10(BF), Dir prior c=22", {
   )
 })
 
-testthat::test_that("Belgium BF, Dir prior c=22", {
+test_that("Belgium BF, Dir prior c=22", {
   expect_equal(
     round(
       c(
@@ -231,7 +231,7 @@ testthat::test_that("Belgium BF, Dir prior c=22", {
   )
 })
 
-testthat::test_that("Belgium PP, Dir prior c=22", {
+test_that("Belgium PP, Dir prior c=22", {
   expect_equal(
     round(
       pcal::bfactor_to_prob(
@@ -252,7 +252,7 @@ testthat::test_that("Belgium PP, Dir prior c=22", {
 
 context("Bin-Beta - test in_favor H1")
 
-testthat::test_that("Bin-Beta model - BF in_favor H1, test 1", {
+test_that("Bin-Beta model - BF in_favor H1, test 1", {
   expect_equal(
     as.numeric(
       round(
@@ -279,7 +279,7 @@ testthat::test_that("Bin-Beta model - BF in_favor H1, test 1", {
   )
 })
 
-testthat::test_that("Bin-Beta model - BF in_favor H1, test 2", {
+test_that("Bin-Beta model - BF in_favor H1, test 2", {
   expect_equal(
     as.numeric(
       round(
@@ -306,7 +306,7 @@ testthat::test_that("Bin-Beta model - BF in_favor H1, test 2", {
   )
 })
 
-testthat::test_that("Bin-Beta model - BF in_favor H1, with log10", {
+test_that("Bin-Beta model - BF in_favor H1, with log10", {
   expect_equal(
     as.numeric(
       round(
@@ -335,7 +335,7 @@ testthat::test_that("Bin-Beta model - BF in_favor H1, with log10", {
     )
 })
 
-testthat::test_that("Bin-Beta BF in_favor H1, with log10", {
+test_that("Bin-Beta BF in_favor H1, with log10", {
   expect_equal(
     as.numeric(
       round(
@@ -366,25 +366,25 @@ testthat::test_that("Bin-Beta BF in_favor H1, with log10", {
 
 context("Bin-Beta Error messages")
 
-testthat::test_that("H0 - H1 error messages", {
+test_that("H0 - H1 error messages", {
   expect_error(
     bfactor_binomial(x = belgium_bl1, success = 1, null_par = .5, in_favour = "h01")
   )}
 )
 
-testthat::test_that("H0 - H1 error messages", {
+test_that("H0 - H1 error messages", {
   expect_error(
     bfactor_binomial(x = belgium_bl1, success = 1, null_par = .5, in_favour = "h")
   )}
 )
 
-testthat::test_that("H0 - H1 error messages", {
+test_that("H0 - H1 error messages", {
   expect_error(
     bfactor_binomial(x = belgium_bl1, success = 1, null_par = .5, in_favour = "alternativee")
   )}
 )
 
-testthat::test_that("H0 - H1 error messages", {
+test_that("H0 - H1 error messages", {
   expect_error(
     bfactor_binomial(x = belgium_bl1, success = 1, null_par = .5, in_favour = "altern")
   )}
@@ -392,27 +392,27 @@ testthat::test_that("H0 - H1 error messages", {
 
 context("Bin-Beta - only one observed level")
 
-testthat::test_that("Only successes observed", {
+test_that("Only successes observed", {
   expect_equal(
     bfactor_binomial(x = c(1,1,1,1), success = 1, null_par = .2, hyper_par = c(1, 1)),
     bfactor_binomial(x = c(0,0,0,0), success = 0, null_par = .2, hyper_par = c(1, 1))
   )
 })
 
-testthat::test_that("Sucess level not observed test 1", {
+test_that("Sucess level not observed test 1", {
   expect_equal(
     suppressWarnings(bfactor_binomial(x = c(1,1,1,1), success = 0, null_par = .2, hyper_par = c(1, 1))),
     suppressWarnings(bfactor_binomial(x = c(0,0,0,0), success = 1, null_par = .2, hyper_par = c(1, 1)))
   )
 })
 
-testthat::test_that("Sucess level not observed test 2", {
+test_that("Sucess level not observed test 2", {
   expect_warning(
     bfactor_binomial(x = c(1,1,1,1), success = 0, null_par = .2, hyper_par = c(1, 1))
   )
 })
 
-testthat::test_that("Sucess level not observed test 3", {
+test_that("Sucess level not observed test 3", {
   expect_warning(
     bfactor_binomial(x = c(0,0,0,0), success = 1, null_par = .2, hyper_par = c(1, 1))
   )

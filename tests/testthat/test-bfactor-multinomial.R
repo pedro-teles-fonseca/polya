@@ -1,15 +1,7 @@
 
 context("Mu-Dir Bayes factors - basic checks")
 
-testthat::test_that("test1", {
-  expect_equal(
-    round(
-      bfactor_multinomial(x = austria_bl1, categories = c(1:9),  null_par = theta_benford(1)),
-      3),
-    0.001)
-})
-
-testthat::test_that("test2", {
+test_that("test1", {
   expect_equal(
     round(
       bfactor_multinomial(x = austria_bl1, categories = c(1:9), null_par = theta_benford(1)),
@@ -17,7 +9,7 @@ testthat::test_that("test2", {
     0.001)
 })
 
-testthat::test_that("log10 BF", {
+test_that("log10 BF", {
   expect_equal(
     round(
       log10(
@@ -27,7 +19,7 @@ testthat::test_that("log10 BF", {
     -3.098)
 })
 
-testthat::test_that("log BF", {
+test_that("log BF", {
   expect_equal(
     round(
       log(
@@ -37,7 +29,7 @@ testthat::test_that("log BF", {
     -7.133)
 })
 
-testthat::test_that("BF strength of evidence", {
+test_that("BF strength of evidence", {
   expect_equal(
     pcal::bfactor_interpret(
       bfactor_multinomial(x = austria_bl1, categories = c(1:9), null_par = theta_benford(1))
@@ -48,7 +40,7 @@ testthat::test_that("BF strength of evidence", {
 
 context("Mu-Dir BL1 - Bayes factors and posterior probabilities")
 
-testthat::test_that("log10(BF), uniform prior", {
+test_that("log10(BF), uniform prior", {
   expect_equal(
     round(
       log10(
@@ -65,7 +57,7 @@ testthat::test_that("log10(BF), uniform prior", {
   )
 })
 
-testthat::test_that("PPs, uniform prior", {
+test_that("PPs, uniform prior", {
   expect_equal(
     round(
       as.numeric(
@@ -84,7 +76,7 @@ testthat::test_that("PPs, uniform prior", {
   )
 })
 
-testthat::test_that("log10(BF), centred Dir prior c=1", {
+test_that("log10(BF), centred Dir prior c=1", {
   expect_equal(
     round(
       log10(
@@ -101,7 +93,7 @@ testthat::test_that("log10(BF), centred Dir prior c=1", {
   )
 })
 
-testthat::test_that("PPs, centred Dir prior c=1", {
+test_that("PPs, centred Dir prior c=1", {
   expect_equal(
     round(
       as.numeric(
@@ -121,7 +113,7 @@ testthat::test_that("PPs, centred Dir prior c=1", {
   )
 })
 
-testthat::test_that("log10(BF), centred Dir prior c=22", {
+test_that("log10(BF), centred Dir prior c=22", {
   expect_equal(
     round(
       log10(
@@ -138,7 +130,7 @@ testthat::test_that("log10(BF), centred Dir prior c=22", {
   )
 })
 
-testthat::test_that("PPs, centred Dir prior c=22", {
+test_that("PPs, centred Dir prior c=22", {
   expect_equal(
     round(
       as.numeric(
@@ -161,7 +153,7 @@ testthat::test_that("PPs, centred Dir prior c=22", {
 
 context("Mu-Dir BL2 - Bayes factors and posterior probabilities")
 
-testthat::test_that("log10(BF), uniform prior", {
+test_that("log10(BF), uniform prior", {
   expect_equal(
     round(
       log10(
@@ -177,7 +169,7 @@ testthat::test_that("log10(BF), uniform prior", {
   )
 })
 
-testthat::test_that("PPs, uniform prior", {
+test_that("PPs, uniform prior", {
   expect_equal(
     round(
       as.numeric(
@@ -196,7 +188,7 @@ testthat::test_that("PPs, uniform prior", {
     c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
 })
 
-testthat::test_that("log10(BF), centred Dir prior c=1", {
+test_that("log10(BF), centred Dir prior c=1", {
   expect_equal(
     round(
       log10(
@@ -213,7 +205,7 @@ testthat::test_that("log10(BF), centred Dir prior c=1", {
   )
 })
 
-testthat::test_that("PPs, centred Dir prior c=1", {
+test_that("PPs, centred Dir prior c=1", {
   expect_equal(
     round(
       as.numeric(
@@ -232,7 +224,7 @@ testthat::test_that("PPs, centred Dir prior c=1", {
     c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
 })
 
-testthat::test_that("log10(BF), centred Dir prior c=12", {
+test_that("log10(BF), centred Dir prior c=12", {
   expect_equal(
     round(
       log10(
@@ -250,7 +242,7 @@ testthat::test_that("log10(BF), centred Dir prior c=12", {
   )
 })
 
-testthat::test_that("PPs, centred Dir prior c=12", {
+test_that("PPs, centred Dir prior c=12", {
   expect_equal(
     round(
       as.numeric(
@@ -272,7 +264,7 @@ testthat::test_that("PPs, centred Dir prior c=12", {
 
 context("Mu-Dir - test in_favor H1")
 
-testthat::test_that("Mu-Dir - BF in_favor H1, test 1", {
+test_that("Mu-Dir - BF in_favor H1, test 1", {
   expect_equal(
     round(
        log10(
@@ -301,7 +293,7 @@ testthat::test_that("Mu-Dir - BF in_favor H1, test 1", {
   )
 })
 
-testthat::test_that("Mu-Dir - BF in_favor H1, test 2", {
+test_that("Mu-Dir - BF in_favor H1, test 2", {
   expect_equal(
     round(
       log10(
