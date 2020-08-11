@@ -9,13 +9,14 @@ test.null.binomial <- function(
   x,
   success,
   null_par,
+  prior = "beta",
   hyper.par = c(1, 1),
   pi_null = 0.5,
   transf = "level",
   bf_round = 2,
   probs_round = 3){
 
-  bf <- unname(bfactor_binomial(x, success, null_par, hyper.par))
+  bf <- bfactor_binomial(x, success, null_par, prior, hyper.par)
   bf_transf <- if(transf == "log"){log(bf)} else if (transf == "log10") {log10(bf)} else {bf}
   p <- nigrini_z_test(x, success, null_par)[["p.value"]]
 
@@ -45,13 +46,14 @@ test.null.multinomial <- function(
   x,
   categories,
   null_par,
+  prior = "dirichlet",
   hyper_par = 1,
   pi_null = 0.5,
   transf = "level",
   bf_round = 2,
   probs_round = 3){
 
-  bf <- bfactor_multinomial(x, categories, null_par, hyper_par)
+  bf <- bfactor_multinomial(x, categories, null_par, prior, hyper_par)
   bf_transf <- if(transf == "log"){log(bf)} else if (transf == "log10") {log10(bf)} else {bf}
   chisq <- chisq_test_multinomial(x, categories, null_par)
 
