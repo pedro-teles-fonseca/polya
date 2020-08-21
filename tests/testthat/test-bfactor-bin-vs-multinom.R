@@ -19,7 +19,7 @@ test_that("Austria log10(BF), unif prior", {
           x = ifelse(austria_bl1 == 1, "aa", "bb"),
           categories = c("aa", "bb"),
           null_par = c(theta_benford(1)[1], 1 - theta_benford(1)[1]),
-          hyper_par = 1
+          hyper_par = c(1, 1)
           )
         ),
       2)
@@ -75,7 +75,7 @@ test_that("Austria log10(BF), unif prior", {
           x = ifelse(austria_bl1==1, "bb", "aa"),
           categories = c("bb", "aa"),
           null_par = c(theta_benford(1)[1], 1-theta_benford(1)[1]),
-          hyper_par = 1)),
+          hyper_par = c(1, 1))),
       2),
     0.07)
 })

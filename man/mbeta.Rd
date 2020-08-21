@@ -4,7 +4,7 @@
 \alias{mbeta}
 \title{Multivariate Beta Function}
 \usage{
-mbeta(a)
+mbeta(x)
 }
 \description{
 Multivariate Beta Function

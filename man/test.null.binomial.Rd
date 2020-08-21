@@ -8,6 +8,7 @@ test.null.binomial(
   x,
   success,
   null_par,
+  prior = "beta",
   hyper.par = c(1, 1),
   pi_null = 0.5,
   transf = "level",

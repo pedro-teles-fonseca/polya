@@ -45,7 +45,7 @@ mu_dir_estimate <- function( # parameter estimation - Dirichlet prior and Multin
     bl2 = results_bl2
   )
 
-  return(results)
+  results
 
 }
 

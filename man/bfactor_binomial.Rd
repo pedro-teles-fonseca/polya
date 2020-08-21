@@ -9,7 +9,7 @@ bfactor_binomial(
   success,
   null_par = 0.5,
   prior = "beta",
-  hyper_par = 1,
+  hyper_par = c(1, 1),
   in_favour = "H0"
 )
 }

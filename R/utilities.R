@@ -43,23 +43,24 @@ theta_benford <- function(d){
   } else if (d == 2){
     theta_benford <- sapply(0:9, function(x){sum(log10(1+1/(10*(1:9)+x)))})
   }
-  return(theta_benford)
+
+  theta_benford
 }
 
 #' Multivariate Beta Function
 #' @export
 
-mbeta <- function(a){
+mbeta <- function(x){
 
-  exp(sum(lgamma(a)) - lgamma(sum(a)))
+  exp(sum(lgamma(x)) - lgamma(sum(x)))
 }
 
 #' Multivariate log Beta Function
 #' @export
 
-lmbeta <- function(a){
+lmbeta <- function(x){
 
-  sum(lgamma(a)) - lgamma(sum(a))
+  sum(lgamma(x)) - lgamma(sum(x))
 }
 
 

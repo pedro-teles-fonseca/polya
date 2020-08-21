@@ -49,7 +49,7 @@ test_that("log10(BF), uniform prior", {
           FUN = bfactor_multinomial,
           categories = 1:9,
           null_par = theta_benford(1),
-          hyper_par = 1
+          hyper_par = rep(1, 9)
           )
         ),
       2),
@@ -68,7 +68,7 @@ test_that("PPs, uniform prior", {
             FUN = bfactor_multinomial,
             categories = 1:9,
             null_par = theta_benford(1),
-            hyper_par = 1)
+            hyper_par = rep(1, 9))
           )
         ),
       3),
@@ -162,7 +162,7 @@ test_that("log10(BF), uniform prior", {
           FUN = bfactor_multinomial,
           categories = 0:9,
           null_par = theta_benford(2),
-          hyper_par = 1)
+          hyper_par = rep(1, 10))
         ),
       2),
     c(5.05, 5.90, 4.79, 3.51, 5.78, 4.19, 6.34, 5.12, 3.39, 4.89, 5.76, 7.13)
@@ -180,7 +180,7 @@ test_that("PPs, uniform prior", {
             FUN = bfactor_multinomial,
             categories = 0:9,
             null_par = theta_benford(2),
-            hyper_par = 1
+            hyper_par = rep(1, 10)
             )
           )
         ),
@@ -273,7 +273,7 @@ test_that("Mu-Dir - BF in_favor H1, test 1", {
           FUN = bfactor_multinomial,
           categories = 1:9,
           null_par = theta_benford(1),
-          hyper_par = 1,
+          hyper_par = rep(1, 9),
           in_favour = "H0"
         )
       ),
@@ -285,7 +285,7 @@ test_that("Mu-Dir - BF in_favor H1, test 1", {
           FUN = bfactor_multinomial,
           categories = 1:9,
           null_par = theta_benford(1),
-          hyper_par = 1,
+          hyper_par = rep(1, 9),
           in_favour = "H1"
         )
       ),
@@ -302,7 +302,7 @@ test_that("Mu-Dir - BF in_favor H1, test 2", {
           FUN = bfactor_multinomial,
           categories = 1:9,
           null_par = theta_benford(1),
-          hyper_par = 1,
+          hyper_par = rep(1, 9),
           in_favour = "H0"
         )
       ),
@@ -314,10 +314,11 @@ test_that("Mu-Dir - BF in_favor H1, test 2", {
           FUN = bfactor_multinomial,
           categories = 1:9,
           null_par = theta_benford(1),
-          hyper_par = 1,
+          hyper_par = rep(1, 9),
           in_favour = "H1"
         )
       ),
       2)
   )
 })
+

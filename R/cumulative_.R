@@ -19,7 +19,7 @@ cumulative_bfactor_multinomial <- function(
 
 }
 
-cumulative_Fbfactor_multinomial <- function(
+cumulative_fbf_multinomial <- function(
   samples,
   categories,
   null_par = 1/length(categories),
@@ -31,7 +31,8 @@ cumulative_Fbfactor_multinomial <- function(
 
   sapply(
     X = samples,
-    FUN = Fbfactor_multinomial, categories = categories,
+    FUN = fbf_multinomial,
+    categories = categories,
     null_par = null_par,
     hyper_par = hyper_par,
     b = b,
@@ -41,9 +42,29 @@ cumulative_Fbfactor_multinomial <- function(
 
 }
 
+cumulative_ibf_multnomial <- function(
+  samples,
+  categories,
+  null_par,
+  prior = "haldane",
+  hyper_par = 1,
+  type = "arithmetic",
+  method = "smts",
+  k = 2,
+  in_favour = "H1"){
 
-
-
+  sapply(
+    X = samples,
+    FUN = ibf,
+    categories = categories,
+    null_par = null_par,
+    prior =  prior,
+    hyper_par = hyper_par,
+    type = type,
+    method = method,
+    k = k,
+    in_favour = in_favour)
+}
 
 
 

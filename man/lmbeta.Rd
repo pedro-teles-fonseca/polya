@@ -4,7 +4,7 @@
 \alias{lmbeta}
 \title{Multivariate log Beta Function}
 \usage{
-lmbeta(a)
+lmbeta(x)
 }
 \description{
 Multivariate log Beta Function

@@ -13,7 +13,7 @@ bfactor_binomial <- function(
   success,
   null_par = 0.5,
   prior = "beta",
-  hyper_par = 1,
+  hyper_par = c(1, 1),
   in_favour = "H0") {
 
   check_args_binomial(x, success, null_par, prior, hyper_par, in_favour)
@@ -27,62 +27,46 @@ bfactor_binomial <- function(
     s <- 0
   }
 
-  if(length(hyper_par == 1)){
-    hyper_par <- rep.int(hyper_par, 2)
-    }
-
   a <- hyper_par[1]
   b <- hyper_par[2]
 
-  bf <- switch(
-    tolower(prior),
-    "beta" = exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a, b) - lbeta(a + s, b + n - s)),
-    "haldane" = exp(s * log(null_par) + (n - s) * log(1 - null_par) - lbeta(s, n - s))
-  )
+  if(prior == "haldane"){
+    bf <- exp(s * log(null_par) + (n - s) * log(1 - null_par) - lbeta(s, n - s))
+  } else {
+    bf <- exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a, b) - lbeta(a + s, b + n - s))
+  }
 
-  switch(
-    tolower(in_favour),
-    "h0" = , "null" = bf,
-    "h1" = , "alternative" = 1/bf)
+  if(tolower(in_favour) %in% c("h1", "alternative")){
+    1/bf
+  } else{
+    bf
+  }
 }
 
 bfactor_multinomial <- function(
   x,
-  categories,
+  categories = sort(unique(x)),
   null_par = 1 / length(categories),
   prior = "dirichlet",
-  hyper_par = 1,
+  hyper_par = rep(1, length(categories)),
   in_favour = "H0") {
 
-  check_args_multinomial(
-    x,
-    categories,
-    null_par,
-    prior,
-    hyper_par,
-    in_favour)
-
-  if (length(null_par) < length(hyper_par)) {
-    stop("Invalid model specification: more hyper-parameters than null parameter values.")
-  } else if (length(hyper_par) == 1){
-    hyper_par <- rep.int(hyper_par, length(null_par))
-  } else if(length(null_par) > length(hyper_par)) {
-    stop("Invalid specification: more null parameter values than hyper parameters.")
-  }
+  check_args_multinomial(x, categories, null_par, prior, hyper_par, in_favour)
 
   categories <- factor(categories, levels = categories)
   counts <- table(factor(x[!is.na(x)], levels = categories))
 
-  bf <- switch(
-    prior,
-    "dirichlet" = exp(sum(counts * log(null_par)) + lmbeta(hyper_par) - lmbeta(hyper_par + counts)),
-    "haldane" = exp(sum(counts * log(null_par))  - lmbeta(counts))
-    )
+  if(prior == "haldane"){
+    bf <- exp(sum(counts * log(null_par))  - lmbeta(counts))
+  } else {
+    bf <- exp(sum(counts * log(null_par)) + lmbeta(hyper_par) - lmbeta(hyper_par + counts))
+  }
 
-  switch(
-    tolower(in_favour),
-    "h0" = , "null" = bf,
-    "h1" = , "alternative" = 1/bf)
+  if(tolower(in_favour) %in% c("h1", "alternative")){
+    1/bf
+  } else{
+    bf
+  }
 }
 
 

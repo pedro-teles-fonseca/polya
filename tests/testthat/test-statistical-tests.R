@@ -192,26 +192,26 @@ test_that("test.null.binomial test 2", {
 
 test_that("test.null.multinomial unif prior", {
   df1 <- data.frame(rbind(
-    test.null.multinomial(datalist_bl1[[1]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[1]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl1[[2]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[2]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl1[[3]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[3]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl1[[4]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[4]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl1[[5]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[5]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl1[[6]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[6]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl1[[7]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[7]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl1[[8]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[8]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl1[[9]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[9]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl1[[10]], null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10"),
-    test.null.multinomial(datalist_bl2[[10]], null_par = theta_benford(2), categories = 0:9, hyper_par=1, transf = "log10")
+    test.null.multinomial(datalist_bl1[[1]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[1]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[2]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[2]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[3]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[3]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[4]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[4]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[5]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[5]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[6]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[6]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[7]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[7]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[8]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[8]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[9]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[9]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10"),
+    test.null.multinomial(datalist_bl1[[10]], null_par = theta_benford(1), categories = 1:9, hyper_par = rep(1, 9), transf = "log10"),
+    test.null.multinomial(datalist_bl2[[10]], null_par = theta_benford(2), categories = 0:9, hyper_par = rep(1, 10), transf = "log10")
   ), row.names =  NULL)[, 2:5]
 
   df1[1] <- as.double(df1[[1]])

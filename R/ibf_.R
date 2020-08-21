@@ -4,7 +4,7 @@ ibf <- function(
   categories,
   null_par,
   prior = "haldane",
-  hyper_par = 1,
+  hyper_par = rep(1, length(categories)),
   type = "arithmetic",
   method = "smts",
   k = 2,
@@ -14,28 +14,28 @@ ibf <- function(
   n <- length(data)
   l <- k * n
 
-  b10 <- bfactor_multinomial(x = data, categories = categories, null_par = null_par, prior = prior, in_favour = "H1")
+  b10 <- bfactor_multinomial(x = data, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H1")
 
   if(method == "smts"){
 
     x_l <- list()
-    l_len <- vector(mode = "numeric")
 
     for (i in seq_len(l)){
 
       x_l[[i]] <- vector(mode = "numeric")
 
       while (length(table(x_l[[i]])) < length(categories)) {
-        x_l[[i]] <- c(x_l[[i]], sample(data, size = 1, replace = TRUE))
+        x_l[[i]] <- c(x_l[[i]], sample(data, size = 1, replace = FALSE))
       }
     }
 
-    b01 <- sapply(X = x_l, FUN = bfactor_multinomial, categories = categories, prior = prior, in_favour = "H0")
+    b01 <- mapply(FUN = bfactor_multinomial, x = x_l,
+                  MoreArgs = list(categories = categories, prior = prior, in_favour = "H0"))
   }
 
   if(method == "mts"){
 
-    b01 <- bfactor_multinomial(x = categories, categories = categories, null_par = null_par, prior = prior , in_favour = "H0")
+    b01 <- bfactor_multinomial(x = categories, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H0")
 
   }
 
