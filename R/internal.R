@@ -16,11 +16,11 @@ check_args_binomial <- function(
   hyper_par,
   in_favour){
 
-  inspector::inspect_data_categorical_as_bernoulli(x, success)
+  inspector::inspect_data_cat_as_dichotomous(x, success)
   inspector::inspect_par_bernoulli(null_par)
-  inspector::inspect_character(prior, c("Haldane", "haldane", "Beta", "beta"))
+  inspector::inspect_character_match(prior, c("Haldane", "haldane", "Beta", "beta"))
   inspector::inspect_par_beta(hyper_par)
-  inspector::inspect_character(in_favour, c("H0", "H1", "h0", "h1", "null", "alternative"))
+  inspector::inspect_character_match(in_favour, c("H0", "H1", "h0", "h1", "null", "alternative"))
 }
 
 check_args_multinomial <- function(
@@ -31,11 +31,11 @@ check_args_multinomial <- function(
   hyper_par,
   in_favour){
 
-  inspector::inspect_data_multinomial(x)
+  inspector::inspect_data_categorical(x)
   inspector::inspect_categories(categories)
   inspector::inspect_par_multinomial(null_par)
-  inspector::inspect_character(prior, c("Haldane", "haldane", "Dirichlet", "dirichlet"))
-  inspector::inspect_character(in_favour, c("H0", "H1", "h0", "h1", "null", "alternative"))
+  inspector::inspect_character_match(prior, c("Haldane", "haldane", "Dirichlet", "dirichlet"))
+  inspector::inspect_character_match(in_favour, c("H0", "H1", "h0", "h1", "null", "alternative"))
 
   if(tolower(prior) == "dirichlet"){
     inspector::inspect_par_dirichlet(hyper_par)
