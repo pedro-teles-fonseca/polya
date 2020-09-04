@@ -45,7 +45,7 @@ fbf_binomial <- function(
 fbf_multinomial <- function(
   x,
   categories,
-  null_par,
+  null_par = 1 / length(categories),
   hyper_par = rep(1, length(categories)),
   frac = 0.1,
   m = length(categories),
@@ -54,6 +54,7 @@ fbf_multinomial <- function(
 
   x <- x[!is.na(x)]
   n <- length(x)
+
   categories <- factor(categories, levels = categories)
   counts <- table(factor(x, levels = categories))
 
