@@ -1,4 +1,47 @@
 
+na_rm <- function(x) {
+  x[!is.na(x)]
+}
+
+getmode <- function(v) {
+  uniqv <- unique(v)
+
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+mantissa <- function(x) {
+
+  x <- abs(x)
+  e <- ifelse(x == 0, 0, floor(log10(x)))
+  m <- x / 10^e
+  round(m, 10)
+}
+
+msdigit <- function(x) {
+
+  x <- x[x != 0]
+  x <- floor(mantissa(x))
+  return(x)
+}
+
+smsdigit <- function(x) {
+
+  x <- x[x != 0 & (x %% 10 == 0 | mantissa(x) != floor(mantissa(x)))]
+  x <- floor((mantissa(x)*10)) %% 10
+  return(x)
+}
+
+theta_benford <- function(d) {
+
+  if (d == 1){
+    log10(1 + 1/1:9)
+  } else if (d == 2){
+    sapply(0:9, function(x){sum(log10(1+1/(10*(1:9)+x)))})
+  } else {
+    stop("Invalid argument: 'd' must be either 1 or 2.")
+  }
+}
+
 any_success <- function(x, success){
 
   if(isFALSE(success %in% unique(x))){
