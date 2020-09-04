@@ -2,7 +2,7 @@
 fbf_binomial <- function(
   x,
   success,
-  null_par,
+  null_par = 0.5,
   hyper_par = c(1, 1),
   frac = 2/length(x[!is.na(x)]),
   in_favour = "H0") {
