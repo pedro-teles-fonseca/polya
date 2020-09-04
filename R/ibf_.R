@@ -12,6 +12,7 @@ ibf <- function(
 
   data <- x[!is.na(x)]
   n <- length(data)
+  ncat <- length(categories)
   l <- k * n
 
   b10 <- bf_multinomial(x = data, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H1")
@@ -24,7 +25,7 @@ ibf <- function(
 
       x_l[[i]] <- vector()
 
-      while (length(table(x_l[[i]])) < length(categories)) {
+      while (length(table(x_l[[i]])) < ncat) {
         x_l[[i]] <- c(x_l[[i]], sample(data, size = 1, replace = FALSE))
       }
     }
