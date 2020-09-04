@@ -3,10 +3,10 @@ ibf <- function(
   x,
   categories,
   null_par,
-  prior = "haldane",
+  prior = "dirichlet",
   hyper_par = rep(1, length(categories)),
   type = "arithmetic",
-  method = "smts",
+  method = "mts",
   k = 2,
   in_favour = "H1") {
 
