@@ -5,28 +5,6 @@ getmode <- function(v) {
   uniqv[which.max(tabulate(match(v, uniqv)))]
 }
 
-mantissa <- function(x) {
-
-  x <- abs(x)
-  e <- ifelse(x == 0, 0, floor(log10(x)))
-  m <- x / 10^e
-  round(m, 10)
-}
-
-msdigit <- function(x) {
-
-  x <- x[x != 0]
-  x <- floor(mantissa(x))
-  return(x)
-}
-
-smsdigit <- function(x) {
-
-  x <- x[x != 0 & (x %% 10 == 0 | mantissa(x) != floor(mantissa(x)))]
-  x <- floor((mantissa(x)*10)) %% 10
-  return(x)
-}
-
 theta_benford <- function(d) {
 
   if (d == 1){
@@ -37,6 +15,11 @@ theta_benford <- function(d) {
     stop("Invalid argument: 'd' must be either 1 or 2.")
   }
 }
+
+# ver se tenho alguma função/condição a garantir que null_par tem a length certa.
+# no FBF se frac==0 os hyper-par podem ser igual a zero? posso deixar o resultado ser INF ou é supsoto ser indefinido?
+# e no full bf, hyper par = c(0,0) deve dar Inf, NaN ou erro?
+#
 
 # check_args_binomial <- function(
 #   x,
@@ -75,10 +58,6 @@ theta_benford <- function(d) {
 #     }
 # }
 #
-#
-# ver se tenho alguma função/condição a garantir que null_par tem a length certa.
-# no FBF se frac==0 os hyper-par podem ser igual a zero? posso deixar o resultado ser INF ou é supsoto ser indefinido?
-# e no full bf, hyper par = c(0,0) deve dar Inf, NaN ou erro?
 #
 
 
