@@ -22,7 +22,7 @@ ibf <- function(
 
     for (i in seq_len(l)) {
 
-      x_l[[i]] <- vector(mode = "numeric")
+      x_l[[i]] <- vector()
 
       while (length(table(x_l[[i]])) < length(categories)) {
         x_l[[i]] <- c(x_l[[i]], sample(data, size = 1, replace = FALSE))
