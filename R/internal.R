@@ -1,8 +1,4 @@
 
-na_rm <- function(x) {
-  x[!is.na(x)]
-}
-
 getmode <- function(v) {
   uniqv <- unique(v)
 
@@ -39,15 +35,6 @@ theta_benford <- function(d) {
     sapply(0:9, function(x){sum(log10(1+1/(10*(1:9)+x)))})
   } else {
     stop("Invalid argument: 'd' must be either 1 or 2.")
-  }
-}
-
-any_success <- function(x, success){
-
-  if(isFALSE(success %in% unique(x))){
-    FALSE
-  } else{
-    TRUE
   }
 }
 
@@ -89,8 +76,9 @@ any_success <- function(x, success){
 # }
 #
 #
-#
-#
+# ver se tenho alguma função/condição a garantir que null_par tem a length certa.
+# no FBF se frac==0 os hyper-par podem ser igual a zero? posso deixar o resultado ser INF ou é supsoto ser indefinido?
+# e no full bf, hyper par = c(0,0) deve dar Inf, NaN ou erro?
 #
 
 
