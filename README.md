@@ -14,33 +14,3 @@ v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/li
 <!-- badges: end -->
 
 The goal of polya is to …
-
-## Installation
-
-You can install the released version of polya from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("polya")
-```
-
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("pedro-teles-fonseca/polya")
-```
-
-## Usage
-
-This is a basic example which shows you how to solve a common problem:
-
-## Getting Help
-
-If you find a bug, please file an issue with a minimal reproducible
-example on
-[GitHub](https://github.com/pedro-teles-fonseca/polya/issues). Feature
-requests are also welcome. You can contact me at
-<pedro.teles.fonseca@outlook.com>.
-
-## References
