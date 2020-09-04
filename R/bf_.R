@@ -26,10 +26,9 @@ bf_binomial <- function(
     bf <- exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a, b) - lbeta(a + s, b + n - s))
   }
 
-  switch(
-    tolower(in_favour),
+  switch(tolower(in_favour),
     "h0" = , "null" = bf,
-    "h1" = , "alternative" = 1/bf,
+    "h1" = , "alternative" = 1 / bf,
     stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1'. Alternatively, you can use 'Null' or 'Alternative'."))
 }
 
@@ -50,16 +49,8 @@ bf_multinomial <- function(
     bf <- exp(sum(counts * log(null_par)) + lmbeta(hyper_par) - lmbeta(hyper_par + counts))
   }
 
-  switch(
-    tolower(in_favour),
+  switch(tolower(in_favour),
     "h0" = , "null" = bf,
-    "h1" = , "alternative" = 1/bf,
+    "h1" = , "alternative" = 1 / bf,
     stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1'. Alternatively, you can use 'Null' or 'Alternative'."))
 }
-
-
-
-
-
-
-

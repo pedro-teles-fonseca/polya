@@ -16,11 +16,11 @@ ibf <- function(
 
   b10 <- bf_multinomial(x = data, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H1")
 
-  if(method == "smts"){
+  if(method == "smts") {
 
     x_l <- list()
 
-    for (i in seq_len(l)){
+    for (i in seq_len(l)) {
 
       x_l[[i]] <- vector(mode = "numeric")
 
@@ -44,10 +44,10 @@ ibf <- function(
     "geometric" = , "g" = b10 * exp(mean(log(b01)))
   )
 
-  switch(
-    tolower(in_favour),
-    "h0" = , "null" = 1/ibf,
-    "h1" = , "alternative" = ibf)
+  switch(tolower(in_favour),
+         "h0" = , "null" = 1/ibf,
+         "h1" = , "alternative" = ibf,
+         stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1'. Alternatively, you can use 'Null' or 'Alternative'."))
 }
 
 

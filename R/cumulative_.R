@@ -1,10 +1,10 @@
 
-cumulative_bf_multinomial <- function(
+sapply_bf_multinomial <- function(
   samples,
-  categories,
-  null_par = 1/length(categories),
+  categories = sort(unique(x)),
+  null_par = 1 / length(categories),
   prior = "dirichlet",
-  hyper_par = 1,
+  hyper_par = rep(1, length(categories)),
   in_favour = "H0") {
 
   sapply(
@@ -16,18 +16,17 @@ cumulative_bf_multinomial <- function(
     hyper_par = hyper_par,
     in_favour = in_favour
   )
-
 }
 
-cumulative_fbf_multinomial <- function(
+sapply_fbf_multinomial <- function(
   samples,
-  categories,
-  null_par = 1/length(categories),
-  hyper_par,
+  categories = sort(unique(x)),
+  null_par = 1 / length(categories),
+  hyper_par = rep(1, length(categories)),
   frac = 0.1,
   m = length(categories),
-  robust = NULL,
-  in_favour = "H0"){
+  robust = "no",
+  in_favour = "H0") {
 
   sapply(
     X = samples,
@@ -42,16 +41,15 @@ cumulative_fbf_multinomial <- function(
 
 }
 
-cumulative_ibf_multnomial <- function(
+sapply_pbf_multnomial <- function(
   samples,
-  categories,
-  null_par,
-  prior = "haldane",
-  hyper_par = 1,
-  type = "arithmetic",
-  method = "smts",
-  k = 2,
-  in_favour = "H1"){
+  categories = sort(unique(x)),
+  null_par = 1 / length(categories),
+  hyper_par = rep(1, length(categories)),
+  frac = 0.1,
+  m = length(categories),
+  robust = "no",
+  in_favour = "H0") {
 
   sapply(
     X = samples,
@@ -66,7 +64,26 @@ cumulative_ibf_multnomial <- function(
     in_favour = in_favour)
 }
 
+sapply_ibf_multinomial <- function(
+  samples,
+  categories = sort(unique(x)),
+  null_par = 1 / length(categories),
+  prior = "dirichlet",
+  hyper_par = rep(1, length(categories)),
+  type = "arithmetic",
+  method = "mts",
+  k = 2,
+  in_favour = "H0") {
 
-
-
-
+  sapply(
+    X = samples,
+    FUN = ibf,
+    categories = categories,
+    null_par = null_par,
+    prior =  prior,
+    hyper_par = hyper_par,
+    type = type,
+    method = method,
+    k = k,
+    in_favour = in_favour)
+}

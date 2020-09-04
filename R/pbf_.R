@@ -21,16 +21,15 @@ pbf_binomial <- function(
 
   bf <- exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a + s, b + n - s) - lbeta(a + 2 * s, b + 2 * (n - s)))
 
-  if (tolower(in_favour) %in% c("null", "h0")) {
-    bf
-  } else {
-    1 / bf
-  }
+  switch(tolower(in_favour),
+         "h0" = , "null" = bf,
+         "h1" = , "alternative" = 1 / bf,
+         stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1'. Alternatively, you can use 'Null' or 'Alternative'."))
 }
 
 pbf_multinomial <- function(
   x,
-  categories,
+  categories = sort(unique(x)),
   null_par = 1 / length(categories),
   hyper_par = rep(1, length(categories)),
   in_favour = "H0"){
@@ -42,17 +41,8 @@ pbf_multinomial <- function(
 
   bf <- exp(sum(counts * log(null_par)) + lmbeta(hyper_par + counts) - lmbeta(hyper_par + 2 * counts))
 
-  if (tolower(in_favour) %in% c("null", "h0")) {
-    bf
-  } else {
-    1 / bf
-  }
+  switch(tolower(in_favour),
+         "h0" = , "null" = bf,
+         "h1" = , "alternative" = 1 / bf,
+         stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1'. Alternatively, you can use 'Null' or 'Alternative'."))
 }
-
-
-
-
-
-
-
-

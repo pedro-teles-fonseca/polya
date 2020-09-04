@@ -35,16 +35,15 @@ fbf_binomial <- function(
 
   bf <- exp(s * (1 - frac) * log(null_par) + (n - s) * (1 - frac) * log(1 - null_par) + lmbeta(c(a + s * frac, b + (n - s) * frac)) - lmbeta(c(a + s, b + n - s)))
 
-  if (tolower(in_favour) %in% c("null", "h0")) {
-    bf
-  } else {
-    1 / bf
-  }
+  switch(tolower(in_favour),
+    "h0" = , "null" = bf,
+    "h1" = , "alternative" = 1 / bf,
+    stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1'. Alternatively, you can use 'Null' or 'Alternative'."))
 }
 
 fbf_multinomial <- function(
   x,
-  categories,
+  categories = sort(unique(x)),
   null_par = 1 / length(categories),
   hyper_par = rep(1, length(categories)),
   frac = 0.1,
@@ -72,11 +71,10 @@ fbf_multinomial <- function(
 
   bf <- exp((1 - frac) * sum(counts * log(null_par)) + lmbeta(hyper_par + frac * counts) - lmbeta(hyper_par + counts))
 
-  if (tolower(in_favour) %in% c("null", "h0")) {
-    bf
-  } else {
-    1 / bf
-  }
+  switch(tolower(in_favour),
+    "h0" = , "null" = bf,
+    "h1" = , "alternative" = 1 / bf,
+    stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1'. Alternatively, you can use 'Null' or 'Alternative'."))
 }
 
 
