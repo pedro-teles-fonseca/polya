@@ -5,40 +5,29 @@ fbf_binomial <- function(
   null_par = 0.5,
   hyper_par = c(1, 1),
   frac = 0.1,
-  robust = NULL,
+  robust = "no",
   in_favour = "H0") {
-
-  if (isFALSE(success %in% unique(x))) {
-    warning("Level corresponding to 'success' not observed in the data 'x'.")
-    sucess_is_observed <- FALSE
-  } else{
-    sucess_is_observed <- TRUE
-  }
-
-  if (length(hyper_par == 1)) {
-     hyper_par <- rep.int(hyper_par, 2)
-     }
 
   x <- x[!is.na(x)]
   n <- length(x)
 
-  if(!is.null(robust)) {
-
-    if (robust == "minimal") {
-      frac <- 2 / n
-    }
-    if (robust == "intermediate") {
-      frac <- (2 * log(n)) / (n * log(2))
-    }
-    if (robust == "yes") {
-      frac <- sqrt(2 / n)
-    }
-  }
-
-  if (sucess_is_observed) {
+  if (success %in% unique(x)) {
     s <- as.numeric(table(x == success)["TRUE"])
   } else{
+    warning("Level corresponding to 'success' not observed in the data 'x'.")
     s <- 0
+  }
+
+  if(isFALSE(tolower(robust) == "no")) {
+    if (tolower(robust) == "minimal") {
+      frac <- 2 / n
+    } else if (tolower(robust) == "intermediate") {
+      frac <- (2 * log(n)) / (n * log(2))
+    } else if (tolower(robust) == "yes") {
+      frac <- sqrt(2 / n)
+    } else {
+      stop("Invalid argument: Admissible values of 'robust': 'no', 'minimal', 'intermediate' or 'yes'.")
+    }
   }
 
   a <- hyper_par[1]
@@ -60,34 +49,34 @@ fbf_multinomial <- function(
   hyper_par = rep(1, length(categories)),
   frac = 0.1,
   m = length(categories),
-  robust = NULL,
+  robust = "no",
   in_favour = "H0") {
 
   x <- x[!is.na(x)]
-
-  if(!is.null(robust)) {
-
-    n <- length(x)
-
-    if (robust == "minimal") {
-      frac <- m / n
-    }
-    if (robust == "intermediate") {
-      frac <- (m * log(n)) / (n * log(m))
-    }
-    if (robust == "yes") {
-      frac <- sqrt(m / n)
-    }
-  }
-
+  n <- length(x)
   categories <- factor(categories, levels = categories)
   counts <- table(factor(x, levels = categories))
 
-  bfactor <- exp((1 - frac) * sum(counts * log(null_par)) + lmbeta(hyper_par + frac * counts) - lmbeta(hyper_par + counts))
+  if(isFALSE(tolower(robust) == "no")) {
+    if (tolower(robust) == "minimal") {
+      frac <- m / n
+    } else if (tolower(robust) == "intermediate") {
+      frac <- (m * log(n)) / (n * log(m))
+    } else if (tolower(robust) == "yes") {
+      frac <- sqrt(m / n)
+    } else {
+      stop("Invalid argument: Admissible values of 'robust': 'no', 'minimal', 'intermediate' or 'yes'.")
+    }
+  }
+
+  bf <- exp((1 - frac) * sum(counts * log(null_par)) + lmbeta(hyper_par + frac * counts) - lmbeta(hyper_par + counts))
 
   if (tolower(in_favour) %in% c("null", "h0")) {
-    bfactor
+    bf
   } else {
-    1 / bfactor
+    1 / bf
   }
 }
+
+
+
