@@ -14,7 +14,7 @@ ibf <- function(
   n <- length(data)
   l <- k * n
 
-  b10 <- bfactor_multinomial(x = data, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H1")
+  b10 <- bf_multinomial(x = data, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H1")
 
   if(method == "smts"){
 
@@ -29,13 +29,13 @@ ibf <- function(
       }
     }
 
-    b01 <- mapply(FUN = bfactor_multinomial, x = x_l,
+    b01 <- mapply(FUN = bf_multinomial, x = x_l,
                   MoreArgs = list(categories = categories, prior = prior, in_favour = "H0"))
   }
 
   if(method == "mts"){
 
-    b01 <- bfactor_multinomial(x = categories, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H0")
+    b01 <- bf_multinomial(x = categories, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H0")
 
   }
 

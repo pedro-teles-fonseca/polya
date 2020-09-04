@@ -1,5 +1,5 @@
 
-cumulative_bfactor_multinomial <- function(
+cumulative_bf_multinomial <- function(
   samples,
   categories,
   null_par = 1/length(categories),
@@ -9,7 +9,7 @@ cumulative_bfactor_multinomial <- function(
 
   sapply(
     X = samples,
-    FUN = bfactor_multinomial,
+    FUN = bf_multinomial,
     categories = categories,
     null_par = null_par,
     prior = prior,
@@ -24,7 +24,7 @@ cumulative_fbf_multinomial <- function(
   categories,
   null_par = 1/length(categories),
   hyper_par,
-  b = 0.1,
+  frac = 0.1,
   m = length(categories),
   robust = NULL,
   in_favour = "H0"){
@@ -35,7 +35,7 @@ cumulative_fbf_multinomial <- function(
     categories = categories,
     null_par = null_par,
     hyper_par = hyper_par,
-    b = b,
+    frac = frac,
     m = m,
     robust = robust,
     in_favour = in_favour)
