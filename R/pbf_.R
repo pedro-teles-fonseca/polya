@@ -6,19 +6,13 @@ pbf_binomial <- function(
   hyper_par = c(1, 1),
   in_favour = "H0") {
 
-  if(isFALSE(success %in% unique(x))){
-    warning("Level corresponding to 'success' not observed in the data 'x'.")
-    sucess_is_observed <- FALSE
-  } else{
-    sucess_is_observed <- TRUE
-  }
-
   x <- x[!is.na(x)]
   n <- length(x)
 
-  if(sucess_is_observed){
+  if (success %in% unique(x)) {
     s <- as.numeric(table(x == success)["TRUE"])
   } else{
+    warning("Level corresponding to 'success' not observed in the data 'x'.")
     s <- 0
   }
 
@@ -27,10 +21,10 @@ pbf_binomial <- function(
 
   bf <- exp(s * log(null_par) + (n - s) * log(1 - null_par) + lbeta(a + s, b + n - s) - lbeta(a + 2 * s, b + 2 * (n - s)))
 
-  if(tolower(in_favour) %in% c("null", "h0")){
+  if (tolower(in_favour) %in% c("null", "h0")) {
     bf
   } else {
-    1/bf
+    1 / bf
   }
 }
 
