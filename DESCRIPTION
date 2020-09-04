@@ -14,14 +14,17 @@ Encoding: UTF-8
 LazyData: true
 Depends: 
     R (>= 2.10)
-Imports: Rdpack (>= 0.7),
-         pcal (>= 1.0.0)
+Imports: pcal (>= 1.0.0)
 Suggests: 
     covr (>= 3.5.0),
     testthat (>= 2.3.2),
     knitr (>= 1.28),
-    rmarkdown (>= 2.1)
-RdMacros: Rdpack
+    rmarkdown (>= 2.1),
+    Rdpack (>= 0.7),
+    mathjaxr (>= 1.0.1)
+RdMacros: 
+  Rdpack, 
+  mathjaxr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 ByteCompile: true
