@@ -1,5 +1,5 @@
 
-#' Bayes Factors, Strength of Evidence, Posterior probabilities and Chi-Squared test for Binomial Proportions
+#' @title Bayes Factors, Strength of Evidence, Posterior probabilities and Chi-Squared test for Binomial Proportions
 
 #' @examples
 #'
@@ -38,6 +38,7 @@ test.null.binomial <- function(
   results
 }
 
+#'@title teafdf
 #' @examples
 #'
 #' test.null.multinomial(austria_bl1, null_par = theta_benford(1), categories = 1:9, hyper_par=1, transf = "log10")
