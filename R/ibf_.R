@@ -1,4 +1,6 @@
 
+#' @export
+
 ibf <- function(
   x,
   categories,
@@ -10,12 +12,12 @@ ibf <- function(
   k = 2,
   in_favour = "H1") {
 
-  data <- x[!is.na(x)]
-  n <- length(data)
+  x <- x[!is.na(x)]
+  n <- length(x)
   ncat <- length(categories)
   l <- k * n
 
-  b10 <- bf_multinomial(x = data, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H1")
+  b10 <- bf_multinomial(x = x, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H1")
 
   if(method == "smts") {
 
@@ -26,7 +28,7 @@ ibf <- function(
       x_l[[i]] <- vector()
 
       while (length(unique(x_l[[i]])) < ncat) {
-        x_l[[i]] <- c(x_l[[i]], sample(data, size = 1, replace = FALSE))
+        x_l[[i]] <- c(x_l[[i]], sample(x, size = 1, replace = FALSE))
       }
     }
 
