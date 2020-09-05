@@ -25,7 +25,7 @@ ibf <- function(
 
       x_l[[i]] <- vector()
 
-      while (length(table(x_l[[i]])) < ncat) {
+      while (length(unique(x_l[[i]])) < ncat) {
         x_l[[i]] <- c(x_l[[i]], sample(data, size = 1, replace = FALSE))
       }
     }
