@@ -47,7 +47,7 @@ sapply_fbf_multinomial <- function(
 
 #' @export
 
-sapply_pbf_multnomial <- function(
+sapply_pbf_multinomial <- function(
   samples,
   categories = sort(unique(x)),
   null_par = 1 / length(categories),
