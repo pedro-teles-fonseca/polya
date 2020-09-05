@@ -85,5 +85,54 @@ lmbeta <- function(x) {
   sum(lgamma(x)) - lgamma(sum(x))
 }
 
+#' @title Sequential Minimal Training Samples
+#'
+#' @description \loadmathjax Generate sequential minimal training samples for Binomial and Multinomial models as described in \insertCite{berger2004training;textual}{polya}.
+#'
+#' @param x Atomic vector of an eligible data type (\code{\link[base]{logical}}, \code{\link[base]{integer}}, \code{\link[base]{double}} and \code{\link[base]{character}}).
+#' @param n Numeric vector of \code{\link[base]{length}} 1 indicating the number of samples to generate.
+#'
+#' @details Proper training samples for For Binomial and Multinomial models must include o... INCOMPLETE
+#'
+#' Sequential minimal training samples (SMTS) are obtained by randomly drawing from `x` (without replacement for a given SMTS), stopping when the subset is a proper traiing sample.
+#'
+#' @return Returns a \code{\link[base]{list}} with \code{\link[base]{length}} `n`. Each element of this list contains a minimal training sample with data of the same type as `x`.
+#'
+#' @references
+#' \insertAllCited{}
+#'
+#' @seealso
+#' * \code{\link[polya]{ibf}}, \code{\link[polya]{aibf}} and \code{\link[polya]{gibf}} for the implementation of intrinsic Bayes factors that use sequential minimal training samples.
+#'
+#' @examples
+#' set.seed(10)
+#'
+#' data_1 <- sample(letters[1:3], size = 5, replace = TRUE)
+#' generate_smts(data_1, 3)
+#'
+#' data_2 <- sample(1:10, size = 3, replace = TRUE)
+#' generate_smts(data_2, 5)
+#'
+#' @export
+
+generate_smts <- function(x, n = 2 * length(x[!is.na(x)])) {
+
+  x <- x[!is.na(x)]
+  n <- length(x)
+  ncat <- length(unique(x))
+
+  x_l <- list()
+
+  for (i in seq_len(n)) {
+    x_l[[i]] <- vector()
+
+    while (length(unique(x_l[[i]])) < ncat) {
+      x_l[[i]] <- c(x_l[[i]], sample(x, size = 1, replace = FALSE))
+    }
+  }
+  x_l
+}
+
+
 
 
