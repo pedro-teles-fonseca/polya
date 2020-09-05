@@ -56,7 +56,7 @@ sapply_pbf_multinomial <- function(
 
   sapply(
     X = samples,
-    FUN = pbf_multnomial,
+    FUN = pbf_multinomial,
     categories = categories,
     null_par = null_par,
     hyper_par = hyper_par,
