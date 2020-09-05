@@ -53,8 +53,59 @@ ibf <- function(
          stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1'. Alternatively, you can use 'Null' or 'Alternative'."))
 }
 
+#' @export
 
+aibf <- function(
+  x,
+  categories,
+  null_par,
+  prior = "dirichlet",
+  hyper_par = rep(1, length(categories)),
+  type = "arithmetic",
+  method = "mts",
+  k = 2,
+  in_favour = "H1") {
 
+  ibf(
+    x = x,
+    categories = categories,
+    null_par = null_par,
+    prior = prior,
+    hyper_par = hyper_par,
+    type = "arithmetic",
+    method = method,
+    k = k,
+    in_favour = in_favour
+
+  )
+}
+
+#' @export
+
+gibf <- function(
+  x,
+  categories,
+  null_par,
+  prior = "dirichlet",
+  hyper_par = rep(1, length(categories)),
+  type = "arithmetic",
+  method = "mts",
+  k = 2,
+  in_favour = "H1") {
+
+  ibf(
+    x = x,
+    categories = categories,
+    null_par = null_par,
+    prior = prior,
+    hyper_par = hyper_par,
+    type = "arithmetic",
+    method = method,
+    k = k,
+    in_favour = in_favour
+
+  )
+}
 
 
 
