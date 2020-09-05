@@ -52,21 +52,14 @@ sapply_pbf_multnomial <- function(
   categories = sort(unique(x)),
   null_par = 1 / length(categories),
   hyper_par = rep(1, length(categories)),
-  frac = 0.1,
-  m = length(categories),
-  robust = "no",
   in_favour = "H0") {
 
   sapply(
     X = samples,
-    FUN = ibf,
+    FUN = pbf_multnomial,
     categories = categories,
     null_par = null_par,
-    prior =  prior,
     hyper_par = hyper_par,
-    type = type,
-    method = method,
-    k = k,
     in_favour = in_favour)
 }
 
