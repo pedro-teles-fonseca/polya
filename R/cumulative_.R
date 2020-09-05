@@ -1,4 +1,6 @@
 
+#' @export
+
 sapply_bf_multinomial <- function(
   samples,
   categories = sort(unique(x)),
@@ -17,6 +19,8 @@ sapply_bf_multinomial <- function(
     in_favour = in_favour
   )
 }
+
+#' @export
 
 sapply_fbf_multinomial <- function(
   samples,
@@ -41,6 +45,8 @@ sapply_fbf_multinomial <- function(
 
 }
 
+#' @export
+
 sapply_pbf_multnomial <- function(
   samples,
   categories = sort(unique(x)),
@@ -63,6 +69,8 @@ sapply_pbf_multnomial <- function(
     k = k,
     in_favour = in_favour)
 }
+
+#' @export
 
 sapply_ibf_multinomial <- function(
   samples,

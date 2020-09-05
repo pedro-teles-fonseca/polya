@@ -1,4 +1,6 @@
 
+#' @export
+
 bf_binomial <- function(
   x,
   success,
@@ -31,6 +33,8 @@ bf_binomial <- function(
     "h1" = , "alternative" = 1 / bf,
     stop("Invalid argument: 'in_favour' must be either 'H0' or 'H1'. Alternatively, you can use 'Null' or 'Alternative'."))
 }
+
+#' @export
 
 bf_multinomial <- function(
   x,
