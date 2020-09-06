@@ -3,8 +3,8 @@
 
 ibf <- function(
   x,
-  categories,
-  null_par,
+  categories = sort(unique(x)),
+  null_par = rep(),
   prior = "dirichlet",
   hyper_par = rep(1, length(categories)),
   type = "arithmetic",
@@ -13,8 +13,16 @@ ibf <- function(
   in_favour = "H1") {
 
   x <- x[!is.na(x)]
-  n <- length(x)
   ncat <- length(categories)
+
+  if (length(unique(x)) < ncat ) {
+    stop("The data 'x' must containg at least one observation of each category. ")
+  }
+  if (length(unique(x)) > ncat ) {
+    stop("More levels in the data 'x' than in 'categories'.")
+  }
+
+  n <- length(x)
   l <- k * n
 
   b10 <- bf_multinomial(x = x, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H1")
