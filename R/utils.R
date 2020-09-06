@@ -85,14 +85,14 @@ lmbeta <- function(x) {
   sum(lgamma(x)) - lgamma(sum(x))
 }
 
-#' @title Sequential Minimal Training Samples
+#' @title Sequential Minimal Training Samples for Categorical Data
 #'
 #' @description \loadmathjax Generate sequential minimal training samples for Binomial and Multinomial models as described in \insertCite{berger2004training;textual}{polya}.
 #'
 #' @param x Atomic vector of an eligible data type (\code{\link[base]{logical}}, \code{\link[base]{integer}}, \code{\link[base]{double}} and \code{\link[base]{character}}).
 #' @param n Numeric vector of \code{\link[base]{length}} 1 indicating the number of samples to generate.
 #'
-#' @details Proper training samples for For Binomial and Multinomial models must include o... INCOMPLETE
+#' @details Training samples play a central role in a variety of statistical methodologies and are particularly usefull to
 #'
 #' Sequential minimal training samples (SMTS) are obtained by randomly drawing from `x` (without replacement for a given SMTS), stopping when the subset is a proper traiing sample.
 #'
