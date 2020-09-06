@@ -1,9 +1,9 @@
 Package: polya
 Type: Package
-Title: Bayesian Hypothesis Testing for Binomial and Multinomial Goodness-Of-Fit
+Title: Bayesian Hypothesis Testing for Categorical Data
 Version: 1.0.0
 Authors@R: c(
-  person("Pedro", "Fonseca", email = "pedro.teles.fonseca@outlook.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-5708-081X")),
+  person("Pedro", "Fonseca", email = "pedro.teles.fonseca@phd.iseg.ulisboa.pt", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-5708-081X")),
   person("Rui", "Paulo", role = c("ctb", "ths"), comment = c(ORCID = "0000-0002-5708-081X")),
   person(given = "FCT", role = "fnd"))
 Description: Computes Bayes factors and posterior probabilities in the context of the Multinomial-Dirichlet and Binomial-Beta models.
@@ -13,14 +13,15 @@ BugReports: https://github.com/pedro-teles-fonseca/polya/issues
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 2.10)
-Imports: pcal (>= 1.0.0)
+Imports: 
+    mathjaxr (>= 1.0.1),
+    pcal (>= 1.0.0),
+    Rdpack (>= 0.7)
 Suggests: 
     covr (>= 3.5.0),
-    testthat (>= 2.3.2),
     knitr (>= 1.28),
     rmarkdown (>= 2.1),
-    Rdpack (>= 0.7),
-    mathjaxr (>= 1.0.1)
+    testthat (>= 2.3.2)
 RdMacros: 
   Rdpack, 
   mathjaxr
