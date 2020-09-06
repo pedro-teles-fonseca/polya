@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# polya: Bayesian Hypothesis Testing for Binomial and Multinomial Goodness-Of-Fit
+# polya: Bayesian Hypothesis Testing for Categorical Data
 
 <!-- badges: start -->
 
