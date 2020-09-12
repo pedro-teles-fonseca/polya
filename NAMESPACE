@@ -3,6 +3,8 @@
 export(aibf)
 export(bf_binomial)
 export(bf_multinomial)
+export(bfactor_interpret)
+export(bfactor_log_interpret)
 export(fbf_binomial)
 export(fbf_multinomial)
 export(generate_smts)
