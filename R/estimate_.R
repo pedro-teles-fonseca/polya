@@ -4,7 +4,7 @@ mu_dir_estimate <- function( # parameter estimation - Dirichlet prior and Multin
   data,
   hyper.par = list(rep(1, times = 9), rep(1, times = 10)),
   stat = "mode",
-  par.round = 3){
+  par.round = 3) {
 
   hyper.par_bl1 <- hyper.par[[1]]
   hyper.par_bl2 <- hyper.par[[2]]
@@ -18,7 +18,7 @@ mu_dir_estimate <- function( # parameter estimation - Dirichlet prior and Multin
   posterior_mean_bl2 <- (hyper.par_bl2 + x_bl2)/sum(hyper.par_bl2 + x_bl2)
   posterior_mode_bl2 <- (hyper.par_bl2 + x_bl2 - 1)/(sum(hyper.par_bl2 + x_bl2) - 10)
 
-  if(stat == "mode"){
+  if(stat == "mode") {
 
     results_bl1 <- round(t(rbind(1:9, theta_benford(1), posterior_mode_bl1)), par.round)
     colnames(results_bl1) <- c("Digit", "Benford", "Estimate")
@@ -26,7 +26,7 @@ mu_dir_estimate <- function( # parameter estimation - Dirichlet prior and Multin
     results_bl2 <- round(t(rbind(0:9, theta_benford(2), posterior_mode_bl2)), par.round)
     colnames(results_bl2) <- c("Digit", "Benford", "Estimate")
 
-  } else if(stat == "mean"){
+  } else if(stat == "mean") {
 
     results_bl1 <- round(t(rbind(1:9, theta_benford(1), posterior_mean_bl1)), par.round)
     colnames(results_bl1) <- c("Digit","Benford", "Estimate")
@@ -65,7 +65,7 @@ bin_beta_estimate <- function(
   b = list(rep(1, times = 9), rep(1, times = 10)),
   stat = "mode",
   cred = 0.05,
-  par.round = 3){
+  par.round = 3) {
 
   a_bl1 <- a[[1]]
   b_bl1 <- b[[1]]
@@ -93,7 +93,7 @@ bin_beta_estimate <- function(
   ci_bl2_left <- qbeta(q, a_bl2 + x_bl2, b_bl2 + n_bl2 - x_bl2, lower.tail = TRUE)
   ci_bl2_right <- qbeta(q, a_bl2 + x_bl2, b_bl2 + n_bl2 - x_bl2, lower.tail = FALSE)
 
-  if(stat == "mode"){
+  if(stat == "mode") {
 
     results_bl1 <- round(t(rbind(1:9, theta_benford(1), posterior_mode_bl1, ci_bl1_left, ci_bl1_right)), par.round)
     colnames(results_bl1) <- c("Digit", "Benford", "Estimate", paste0("q", as.character(q)), paste0("q", as.character(round(1-q,3))))
@@ -101,7 +101,7 @@ bin_beta_estimate <- function(
     results_bl2 <- round(t(rbind(0:9, theta_benford(2), posterior_mode_bl2, ci_bl2_left, ci_bl2_right)), par.round)
     colnames(results_bl2) <- c("Digit", "Benford", "Estimate", paste0("q", as.character(q)), paste0("q", as.character(round(1-q,3))))
 
-  } else if(stat == "mean"){
+  } else if(stat == "mean") {
 
     results_bl1 <- round(t(rbind(1:9, theta_benford(1), posterior_mean_bl1, ci_bl1_left, ci_bl1_right)), par.round)
     colnames(results_bl1) <- c("Digit", "Benford", "Estimate", paste0("q", as.character(q)), paste0("q", as.character(round(1-q,3))))

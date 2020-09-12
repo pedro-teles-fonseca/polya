@@ -1,7 +1,7 @@
 
 data <- read.delim("data.txt")
 
-mantissa <- function(x){
+mantissa <- function(x) {
 
   x <- abs(x)
   e <- ifelse(x == 0, 0, floor(log10(x)))
@@ -9,14 +9,14 @@ mantissa <- function(x){
   round(m, 10)
 }
 
-msdigit <- function(x){
+msdigit <- function(x) {
 
   x <- x[x != 0]
   x <- floor(mantissa(x))
   return(x)
 }
 
-smsdigit <- function(x){
+smsdigit <- function(x) {
 
   x <- x[x != 0 & (x %% 10 == 0 | mantissa(x) != floor(mantissa(x)))]
   x <- floor((mantissa(x)*10)) %% 10

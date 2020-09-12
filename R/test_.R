@@ -14,10 +14,10 @@ test.null.binomial <- function(
   pi_null = 0.5,
   transf = "level",
   bf_round = 2,
-  probs_round = 3){
+  probs_round = 3) {
 
   bf <- bf_binomial(x, success, null_par, prior, hyper.par)
-  bf_transf <- if(transf == "log"){log(bf)} else if (transf == "log10") {log10(bf)} else {bf}
+  bf_transf <- if(transf == "log") {log(bf)} else if (transf == "log10") {log10(bf)} else {bf}
   p <- nigrini_z_test(x, success, null_par)[["p.value"]]
 
   results <- data.frame(
@@ -30,7 +30,7 @@ test.null.binomial <- function(
 
   names(results) <- c(
     "Data",
-    "BF" = if(isTRUE(transf == "log")){"log(BF)"} else if(isTRUE(transf == "log10")){"log10(BF)"} else {"BF"},
+    "BF" = if(isTRUE(transf == "log")) {"log(BF)"} else if(isTRUE(transf == "log10")) {"log10(BF)"} else {"BF"},
     "Evidence",
     "P(H0|X)"
   )
@@ -52,10 +52,10 @@ test.null.multinomial <- function(
   pi_null = 0.5,
   transf = "level",
   bf_round = 2,
-  probs_round = 3){
+  probs_round = 3) {
 
   bf <- bf_multinomial(x, categories, null_par, prior, hyper_par)
-  bf_transf <- if(transf == "log"){log(bf)} else if (transf == "log10") {log10(bf)} else {bf}
+  bf_transf <- if(transf == "log") {log(bf)} else if (transf == "log10") {log10(bf)} else {bf}
   chisq <- chisq_test_multinomial(x, categories, null_par)
 
   results <- data.frame(
@@ -69,7 +69,7 @@ test.null.multinomial <- function(
 
   names(results) <- c(
     "Data",
-    "BF" = if(isTRUE(transf == "log")){"log(BF)"} else if(isTRUE(transf == "log10")){"log10(BF)"} else {"BF"},
+    "BF" = if(isTRUE(transf == "log")) {"log(BF)"} else if(isTRUE(transf == "log10")) {"log10(BF)"} else {"BF"},
     "Evidence",
     "P(H0|X)",
     "p_value"
@@ -89,17 +89,17 @@ test.binomial.hypotheses <- function(
   pi_null = .5,
   transf = "level",
   bf_round = 2,
-  probs_round = 3){
+  probs_round = 3) {
 
   bfs <- mapply(FUN = bf_binomial, success, null_par, hyper_par, MoreArgs = list(x = x))
-  bfs_transf <- if(transf == "log"){log(bfs)} else if (transf == "log10") {log10(bfs)} else {bfs}
+  bfs_transf <- if(transf == "log") {log(bfs)} else if (transf == "log10") {log10(bfs)} else {bfs}
   evidence <- sapply(FUN = pcal::bfactor_interpret, X =  bfs)
   pp <- mapply(FUN = pcal::bfactor_to_prob, pi_null = pi_null, bf = bfs)
 
   estimate <- vector(mode = "double", length = length(null_par))
   pvalue <- vector(mode = "double", length = length(null_par))
 
-  for(par in seq_along(null_par)){
+  for (par in seq_along(null_par)) {
     tst <- nigrini_z_test(x, success[par], null_par[par])
     estimate[par] <- tst[["estimate"]]
     pvalue[par] <- tst[["p.value"]]
@@ -114,7 +114,7 @@ test.binomial.hypotheses <- function(
     "P.value" = round(pvalue, probs_round)
   )
 
-  if(log10 == TRUE){names(result) <- gsub("BayesFactors", "log10(BayesFactors)", names(result))}
+  if(log10 == TRUE) {names(result) <- gsub("BayesFactors", "log10(BayesFactors)", names(result))}
   result
 
   }

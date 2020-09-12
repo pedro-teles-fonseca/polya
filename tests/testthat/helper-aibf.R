@@ -1,5 +1,5 @@
 
-aibf_multinomial_mts <- function(x, categories, null_par){
+aibf_multinomial_mts <- function(x, categories, null_par) {
 
   x <- x[!is.na(x)]
   n <- length(x)
@@ -10,7 +10,7 @@ aibf_multinomial_mts <- function(x, categories, null_par){
 
 }
 
-aibf_multinomial_mts_2 <- function(x, categories, null_par){
+aibf_multinomial_mts_2 <- function(x, categories, null_par) {
 
   x <- x[!is.na(x)]
   n <- length(x)

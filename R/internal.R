@@ -16,7 +16,7 @@ getmode <- function(v) {
 #   null_par,
 #   prior,
 #   hyper_par,
-#   in_favour){
+#   in_favour) {
 #
 #   inspector::inspect_data_cat_as_dichotomous(x, success)
 #   inspector::inspect_par_bernoulli(null_par)
@@ -31,7 +31,7 @@ getmode <- function(v) {
 #   null_par,
 #   prior,
 #   hyper_par,
-#   in_favour){
+#   in_favour) {
 #
 #   inspector::inspect_data_categorical(x)
 #   inspector::inspect_categories(categories)
@@ -39,7 +39,7 @@ getmode <- function(v) {
 #   inspector::inspect_character_match(prior, c("Haldane", "haldane", "Dirichlet", "dirichlet"))
 #   inspector::inspect_character_match(in_favour, c("H0", "H1", "h0", "h1", "null", "alternative"))
 #
-#   if(tolower(prior) == "dirichlet"){
+#   if(tolower(prior) == "dirichlet") {
 #     inspector::inspect_par_dirichlet(hyper_par)
 #     }
 #   if (length(null_par) != length(hyper_par)) {
@@ -49,7 +49,15 @@ getmode <- function(v) {
 #
 #
 
+release_questions <- function() {
 
+  c(
+    "Have you updated the version number in inst/CITATION (two fields)?",
+    "Have you run all the tests listed in cran-comments.md?",
+    "Have you evaluated the impact on downstream dependencies?",
+    "Have you updated the 'downstream dependencies' section of cran-comments?"
+  )
+}
 
 
 

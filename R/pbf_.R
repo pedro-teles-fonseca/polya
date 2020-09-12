@@ -36,7 +36,7 @@ pbf_multinomial <- function(
   categories = sort(unique(x)),
   null_par = 1 / length(categories),
   hyper_par = rep(1, length(categories)),
-  in_favour = "H0"){
+  in_favour = "H0") {
 
   x <- x[!is.na(x)]
 

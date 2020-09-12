@@ -44,7 +44,7 @@ ibf <- function(
                   MoreArgs = list(categories = categories, prior = prior, in_favour = "H0"))
   }
 
-  if(method == "mts"){
+  if(method == "mts") {
 
     b01 <- bf_multinomial(x = categories, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H0")
 
@@ -114,7 +114,6 @@ gibf <- function(
 
   )
 }
-
 
 
 
