@@ -9,21 +9,21 @@ test.null.binomial <- function(
   x,
   success,
   null_par,
-  prior = "beta",
   hyper.par = c(1, 1),
+  haldane = FALSE,
   pi_null = 0.5,
   transf = "level",
   bf_round = 2,
   probs_round = 3) {
 
-  bf <- bf_binomial(x, success, null_par, prior, hyper.par)
+  bf <- bf_binomial(x, success, null_par, hyper.par, haldane)
   bf_transf <- if(transf == "log") {log(bf)} else if (transf == "log10") {log10(bf)} else {bf}
   p <- nigrini_z_test(x, success, null_par)[["p.value"]]
 
   results <- data.frame(
     deparse(substitute(x)),
     round(bf_transf, bf_round),
-    pcal::bfactor_interpret(bf),
+    bfactor_interpret(bf),
     round(pcal::bfactor_to_prob(bf), probs_round),
     row.names = NULL
   )
@@ -47,21 +47,21 @@ test.null.multinomial <- function(
   x,
   categories,
   null_par,
-  prior = "dirichlet",
   hyper_par = 1,
+  haldane = FALSE,
   pi_null = 0.5,
   transf = "level",
   bf_round = 2,
   probs_round = 3) {
 
-  bf <- bf_multinomial(x, categories, null_par, prior, hyper_par)
+  bf <- bf_multinomial(x, categories, null_par, hyper_par, haldane)
   bf_transf <- if(transf == "log") {log(bf)} else if (transf == "log10") {log10(bf)} else {bf}
   chisq <- chisq_test_multinomial(x, categories, null_par)
 
   results <- data.frame(
     deparse(substitute(x)),
     round(bf_transf, bf_round),
-    pcal::bfactor_interpret(bf),
+    bfactor_interpret(bf),
     round(pcal::bfactor_to_prob(bf), probs_round),
     row.names = NULL,
     round(chisq[["p.value"]], probs_round)
@@ -93,7 +93,7 @@ test.binomial.hypotheses <- function(
 
   bfs <- mapply(FUN = bf_binomial, success, null_par, hyper_par, MoreArgs = list(x = x))
   bfs_transf <- if(transf == "log") {log(bfs)} else if (transf == "log10") {log10(bfs)} else {bfs}
-  evidence <- sapply(FUN = pcal::bfactor_interpret, X =  bfs)
+  evidence <- sapply(FUN = bfactor_interpret, X =  bfs)
   pp <- mapply(FUN = pcal::bfactor_to_prob, pi_null = pi_null, bf = bfs)
 
   estimate <- vector(mode = "double", length = length(null_par))

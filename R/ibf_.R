@@ -5,8 +5,8 @@ ibf <- function(
   x,
   categories = sort(unique(x)),
   null_par = rep(),
-  prior = "dirichlet",
   hyper_par = rep(1, length(categories)),
+  haldane = FALSE,
   type = "arithmetic",
   method = "mts",
   k = 2,
@@ -25,7 +25,7 @@ ibf <- function(
   n <- length(x)
   l <- k * n
 
-  b10 <- bf_multinomial(x = x, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H1")
+  b10 <- bf_multinomial(x = x, categories = categories, null_par = null_par, hyper_par = hyper_par, haldane = haldane, in_favour = "H1")
 
   if(method == "smts") {
 
@@ -41,12 +41,12 @@ ibf <- function(
     }
 
     b01 <- mapply(FUN = bf_multinomial, x = x_l,
-                  MoreArgs = list(categories = categories, prior = prior, in_favour = "H0"))
+                  MoreArgs = list(categories = categories, haldane = haldane, in_favour = "H0"))
   }
 
   if(method == "mts") {
 
-    b01 <- bf_multinomial(x = categories, categories = categories, null_par = null_par, prior = prior, hyper_par = hyper_par, in_favour = "H0")
+    b01 <- bf_multinomial(x = categories, categories = categories, null_par = null_par, hyper_par = hyper_par, haldane = haldane, in_favour = "H0")
 
   }
 
@@ -67,8 +67,8 @@ aibf <- function(
   x,
   categories,
   null_par,
-  prior = "dirichlet",
   hyper_par = rep(1, length(categories)),
+  haldane = FALSE,
   type = "arithmetic",
   method = "mts",
   k = 2,
@@ -78,8 +78,8 @@ aibf <- function(
     x = x,
     categories = categories,
     null_par = null_par,
-    prior = prior,
     hyper_par = hyper_par,
+    haldane = haldane,
     type = "arithmetic",
     method = method,
     k = k,
@@ -94,8 +94,8 @@ gibf <- function(
   x,
   categories,
   null_par,
-  prior = "dirichlet",
   hyper_par = rep(1, length(categories)),
+  haldane = FALSE,
   type = "arithmetic",
   method = "mts",
   k = 2,
@@ -105,8 +105,8 @@ gibf <- function(
     x = x,
     categories = categories,
     null_par = null_par,
-    prior = prior,
     hyper_par = hyper_par,
+    haldane = haldane,
     type = "arithmetic",
     method = method,
     k = k,

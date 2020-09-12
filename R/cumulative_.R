@@ -5,7 +5,7 @@ sapply_bf_multinomial <- function(
   samples,
   categories = sort(unique(x)),
   null_par = 1 / length(categories),
-  prior = "dirichlet",
+  haldane = FALSE,
   hyper_par = rep(1, length(categories)),
   in_favour = "H0") {
 
@@ -14,7 +14,7 @@ sapply_bf_multinomial <- function(
     FUN = bf_multinomial,
     categories = categories,
     null_par = null_par,
-    prior = prior,
+    haldane =  haldane,
     hyper_par = hyper_par,
     in_favour = in_favour
   )
@@ -69,7 +69,7 @@ sapply_ibf_multinomial <- function(
   samples,
   categories = sort(unique(x)),
   null_par = 1 / length(categories),
-  prior = "dirichlet",
+  haldane = FALSE,
   hyper_par = rep(1, length(categories)),
   type = "arithmetic",
   method = "mts",
@@ -81,7 +81,7 @@ sapply_ibf_multinomial <- function(
     FUN = ibf,
     categories = categories,
     null_par = null_par,
-    prior =  prior,
+    haldane =  haldane,
     hyper_par = hyper_par,
     type = type,
     method = method,
