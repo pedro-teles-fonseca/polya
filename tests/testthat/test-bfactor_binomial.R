@@ -34,7 +34,7 @@ test_that("Austria PP, unif prior", {
   )
 })
 
-test_that("Austria log10(BF), Dir prior c=1", {
+test_that("Austria log10(BF), Dir prior c = 1", {
   expect_equal(
     round(
       log10(
@@ -55,7 +55,7 @@ test_that("Austria log10(BF), Dir prior c=1", {
   )
 })
 
-test_that("Austria PP, Dir prior c=1", {
+test_that("Austria PP, Dir prior c = 1", {
   expect_equal(
     round(
         pcal::bfactor_to_prob(
@@ -75,7 +75,7 @@ test_that("Austria PP, Dir prior c=1", {
   )
 })
 
-test_that("Austria log10(BF), Dir prior c=22", {
+test_that("Austria log10(BF), Dir prior c = 22", {
   expect_equal(
     round(
       log10(
@@ -96,7 +96,7 @@ test_that("Austria log10(BF), Dir prior c=22", {
   )
 })
 
-test_that("Austria PP, Dir prior c=22", {
+test_that("Austria PP, Dir prior c = 22", {
   expect_equal(
     round(
       pcal::bfactor_to_prob(
@@ -152,7 +152,7 @@ test_that("Belgium PP, unif prior", {
   )
 })
 
-test_that("Belgium log10(BF), Dir prior c=1", {
+test_that("Belgium log10(BF), Dir prior c = 1", {
   expect_equal(
     round(
       log10(
@@ -172,7 +172,7 @@ test_that("Belgium log10(BF), Dir prior c=1", {
   )
 })
 
-test_that("Belgium PP, Dir prior c=1", {
+test_that("Belgium PP, Dir prior c = 1", {
   expect_equal(
     round(
       pcal::bfactor_to_prob(
@@ -192,7 +192,7 @@ test_that("Belgium PP, Dir prior c=1", {
   )
 })
 
-test_that("Belgium log10(BF), Dir prior c=22", {
+test_that("Belgium log10(BF), Dir prior c = 22", {
   expect_equal(
    round(
      log10(
@@ -212,7 +212,7 @@ test_that("Belgium log10(BF), Dir prior c=22", {
   )
 })
 
-test_that("Belgium BF, Dir prior c=22", {
+test_that("Belgium BF, Dir prior c = 22", {
   expect_equal(
     round(
       c(
@@ -231,7 +231,7 @@ test_that("Belgium BF, Dir prior c=22", {
   )
 })
 
-test_that("Belgium PP, Dir prior c=22", {
+test_that("Belgium PP, Dir prior c = 22", {
   expect_equal(
     round(
       pcal::bfactor_to_prob(
@@ -252,7 +252,7 @@ test_that("Belgium PP, Dir prior c=22", {
 
 context("Bin-Beta - test in_favor H1")
 
-test_that("Bin-Beta model - BF in_favor H1, test 1", {
+test_that("B-B model - BF in_favor H1, test 1", {
   expect_equal(
     as.numeric(
       round(
@@ -279,7 +279,7 @@ test_that("Bin-Beta model - BF in_favor H1, test 1", {
   )
 })
 
-test_that("Bin-Beta model - BF in_favor H1, test 2", {
+test_that("B-B model - BF in_favor H1, test 2", {
   expect_equal(
     as.numeric(
       round(
@@ -306,7 +306,7 @@ test_that("Bin-Beta model - BF in_favor H1, test 2", {
   )
 })
 
-test_that("Bin-Beta model - BF in_favor H1, with log10", {
+test_that("B-B model - BF in_favor H1, test 3", {
   expect_equal(
     as.numeric(
       round(
@@ -335,7 +335,7 @@ test_that("Bin-Beta model - BF in_favor H1, with log10", {
     )
 })
 
-test_that("Bin-Beta BF in_favor H1, with log10", {
+test_that("B-B model - BF in_favor H1, test 4", {
   expect_equal(
     as.numeric(
       round(
@@ -363,7 +363,7 @@ test_that("Bin-Beta BF in_favor H1, with log10", {
     )
   )
 })
-#
+
 # context("Bin-Beta Error messages")
 #
 # test_that("H0 - H1 error messages", {

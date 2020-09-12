@@ -28,11 +28,11 @@ test_that("2 samples", {
       samples = list(austria_bl1, finland_bl1),
       categories = 1:9,
       null_par = theta_benford(1),
-      prior = "dirichlet",
+      haldane = FALSE,
       hyper_par = rep(1, 9)),
     c(
-      bf_multinomial(x = austria_bl1, categories = 1:9, null_par = theta_benford(1), prior = "dirichlet", hyper_par = rep(1, 9)),
-      bf_multinomial(x = finland_bl1, categories = 1:9, null_par = theta_benford(1), prior = "dirichlet", hyper_par = rep(1, 9))
+      bf_multinomial(x = austria_bl1, categories = 1:9, null_par = theta_benford(1), hyper_par = rep(1, 9), haldane = FALSE),
+      bf_multinomial(x = finland_bl1, categories = 1:9, null_par = theta_benford(1), hyper_par = rep(1, 9), haldane = FALSE)
       )
   )
 })

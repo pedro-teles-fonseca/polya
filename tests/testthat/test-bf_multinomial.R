@@ -31,7 +31,7 @@ test_that("log BF", {
 
 test_that("BF strength of evidence", {
   expect_equal(
-    pcal::bfactor_interpret(
+    bfactor_interpret(
       bf_multinomial(x = austria_bl1, categories = c(1:9), null_par = theta_benford(1))
       ),
     "Negative"

@@ -146,7 +146,7 @@ test_that("test.null.binomial test 1", {
   expect_equal(unname(df1), unname(df2))
 
   expect_equal(
-    unname(pcal::bfactor_interpret(10^(df2$X2))),
+    unname(bfactor_interpret(10^(df2$X2))),
     unname(df1[[3]]))
 
 })

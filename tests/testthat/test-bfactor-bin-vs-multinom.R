@@ -112,7 +112,7 @@ test_that("Austria log10(BF), Haldane prior", {
         bf_binomial(
           x = austria_bl1,
           success = 1,
-          prior = "haldane",
+          haldane = TRUE,
           null_par = theta_benford(1)[1]
         )
       ),
@@ -122,7 +122,7 @@ test_that("Austria log10(BF), Haldane prior", {
         bf_multinomial(
           x = ifelse(austria_bl1 == 1, "aa", "bb"),
           categories = c("aa", "bb"),
-          prior = "haldane",
+          haldane = TRUE,
           null_par = c(theta_benford(1)[1], 1 - theta_benford(1)[1])
         )
       ),
