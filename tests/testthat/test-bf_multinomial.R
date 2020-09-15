@@ -4,7 +4,7 @@ context("Mu-Dir Bayes factors - basic checks")
 test_that("test1", {
   expect_equal(
     round(
-      bf_multinomial(x = austria_bl1, categories = c(1:9), null_par = theta_benford(1)),
+      bf_multinomial(data = austria_bl1, categories = c(1:9), null_par = theta_benford(1)),
       3),
     0.001)
 })
@@ -13,7 +13,7 @@ test_that("log10 BF", {
   expect_equal(
     round(
       log10(
-        bf_multinomial(x = austria_bl1, categories = c(1:9), null_par = theta_benford(1))
+        bf_multinomial(data = austria_bl1, categories = c(1:9), null_par = theta_benford(1))
         ),
       3),
     -3.098)
@@ -23,7 +23,7 @@ test_that("log BF", {
   expect_equal(
     round(
       log(
-        bf_multinomial(x = austria_bl1, categories = c(1:9), null_par = theta_benford(1))
+        bf_multinomial(data = austria_bl1, categories = c(1:9), null_par = theta_benford(1))
         ),
       3),
     -7.133)
@@ -32,7 +32,7 @@ test_that("log BF", {
 test_that("BF strength of evidence", {
   expect_equal(
     bfactor_interpret(
-      bf_multinomial(x = austria_bl1, categories = c(1:9), null_par = theta_benford(1))
+      bf_multinomial(data = austria_bl1, categories = c(1:9), null_par = theta_benford(1))
       ),
     "Negative"
   )
