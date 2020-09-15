@@ -2,19 +2,19 @@
 #' @export
 
 pbf_binomial <- function(
-  x,
+  data,
   success,
   null_par = 0.5,
   hyper_par = c(1, 1),
   in_favour = "H0") {
 
-  x <- x[!is.na(x)]
-  n <- length(x)
+  data <- data[!is.na(data)]
+  n <- length(data)
 
-  if (success %in% unique(x)) {
-    s <- as.numeric(table(x == success)["TRUE"])
+  if (success %in% unique(data)) {
+    s <- as.numeric(table(data == success)["TRUE"])
   } else{
-    warning("Level corresponding to 'success' not observed in the data 'x'.")
+    warning("Level corresponding to 'success' not observed in `data`.")
     s <- 0
   }
 
@@ -32,16 +32,16 @@ pbf_binomial <- function(
 #' @export
 
 pbf_multinomial <- function(
-  x,
-  categories = sort(unique(x)),
+  data,
+  categories = sort(unique(data)),
   null_par = 1 / length(categories),
   hyper_par = rep(1, length(categories)),
   in_favour = "H0") {
 
-  x <- x[!is.na(x)]
+  data <- data[!is.na(data)]
 
   categories <- factor(categories, levels = categories)
-  counts <- table(factor(x, levels = categories))
+  counts <- table(factor(data, levels = categories))
 
   bf <- exp(sum(counts * log(null_par)) + lmbeta(hyper_par + counts) - lmbeta(hyper_par + 2 * counts))
 

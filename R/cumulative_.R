@@ -3,10 +3,10 @@
 
 sapply_bf_multinomial <- function(
   samples,
-  categories = sort(unique(x)),
+  categories,
   null_par = 1 / length(categories),
-  haldane = FALSE,
   hyper_par = rep(1, length(categories)),
+  haldane = FALSE,
   in_favour = "H0") {
 
   sapply(
@@ -14,8 +14,8 @@ sapply_bf_multinomial <- function(
     FUN = bf_multinomial,
     categories = categories,
     null_par = null_par,
-    haldane =  haldane,
     hyper_par = hyper_par,
+    haldane =  haldane,
     in_favour = in_favour
   )
 }
@@ -24,9 +24,10 @@ sapply_bf_multinomial <- function(
 
 sapply_fbf_multinomial <- function(
   samples,
-  categories = sort(unique(x)),
+  categories,
   null_par = 1 / length(categories),
   hyper_par = rep(1, length(categories)),
+  haldane = FALSE,
   frac = 0.1,
   m = length(categories),
   robust = "no",
@@ -38,6 +39,7 @@ sapply_fbf_multinomial <- function(
     categories = categories,
     null_par = null_par,
     hyper_par = hyper_par,
+    haldane = haldane,
     frac = frac,
     m = m,
     robust = robust,
@@ -49,7 +51,7 @@ sapply_fbf_multinomial <- function(
 
 sapply_pbf_multinomial <- function(
   samples,
-  categories = sort(unique(x)),
+  categories,
   null_par = 1 / length(categories),
   hyper_par = rep(1, length(categories)),
   in_favour = "H0") {
@@ -67,7 +69,7 @@ sapply_pbf_multinomial <- function(
 
 sapply_ibf_multinomial <- function(
   samples,
-  categories = sort(unique(x)),
+  categories,
   null_par = 1 / length(categories),
   haldane = FALSE,
   hyper_par = rep(1, length(categories)),
