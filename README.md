@@ -13,4 +13,12 @@ coverage](https://codecov.io/gh/pedro-teles-fonseca/polya/branch/master/graph/ba
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <!-- badges: end -->
 
-The goal of `polya` is to …
+## Installation
+
+The development version of `polya` can be installed from
+[GitHub](https://github.com/) using the `devtools` package:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ptfonseca/polya")
+```
