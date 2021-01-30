@@ -43,7 +43,11 @@ pbf_multinomial <- function(
   categories <- factor(categories, levels = categories)
   counts <- table(factor(data, levels = categories))
 
-  bf <- exp(sum(counts * log(null_par)) + lmbeta(hyper_par + counts) - lmbeta(hyper_par + 2 * counts))
+  bf <- exp(
+    sum(counts * log(null_par)) +
+    lmbeta(hyper_par + counts) -
+    lmbeta(hyper_par + 2 * counts)
+    )
 
   switch(tolower(in_favour),
          "h0" = , "null" = bf,
